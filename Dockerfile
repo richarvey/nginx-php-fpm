@@ -25,6 +25,7 @@ RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools
 RUN apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
 # tweak nginx config
+RUN sed -i -e"s/worker_processes 1/worker_processes 5/" /etc/nginx/nginx.conf
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
 RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
@@ -38,10 +39,12 @@ RUN sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
+RUN rm -Rf /etc/nginx/conf.d/*
+ADD ./nginx-site.conf /etc/nginx/conf.d/default.conf
 
 # add test PHP file
-ADD ./inde.php /usr/share/nginx/www/index.php
+ADD ./index.php /usr/share/nginx/html/index.php
+RUN chown -Rf nginx.nginx /usr/share/nginx/html/
 
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
