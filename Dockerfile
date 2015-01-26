@@ -11,8 +11,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # Add sources for latest nginx
 RUN apt-get install -y wget
 RUN wget -q http://nginx.org/keys/nginx_signing.key -O- | sudo apt-key add -
-RUN echo deb http://nginx.org/packages/debian/ trusty nginx >> /etc/apt/sources.list
-RUN echo deb-src http://nginx.org/packages/debian/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb http://nginx.org/packages/ubuntu/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb-src http://nginx.org/packages/ubuntu/ trusty nginx >> /etc/apt/sources.list
 
 # Update System
 RUN apt-get update
