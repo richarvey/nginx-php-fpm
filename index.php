@@ -1,5 +1,5 @@
 <?PHP
 
-phpsysinfo();
+phpinfo();
 
 ?>
