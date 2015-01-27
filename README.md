@@ -36,7 +36,7 @@ To pull a repository and specify a branch add the GIT_BRANCH environment variabl
 sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -e 'GIT_BRANCH=stage' -v /opt/ngddeploy/:/root/.ssh -p 8080:80 -d richarvey/nginx-php-fpm
 ```
 ### Linking
-Linking to containers also exposes the linked container environment variables which is useful for [templating](templating) and configuring web apps:
+Linking to containers also exposes the linked container environment variables which is useful for [templating](#templating) and configuring web apps:
 Run MySQL container with some extra details:
 ```bash
 sudo docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=yayMySQL -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress_user -e MYSQL_PASSWORD=wordpress_password -d mysql
