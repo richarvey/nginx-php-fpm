@@ -1,5 +1,5 @@
 ## Introduction
-This is a Dockerfile to build a container image for nginx and php-fpm, with the ability to pull website code from git. The container can also use environment variables to configure your web application using the templating detailed in the [special features](#special features) section.
+This is a Dockerfile to build a container image for nginx and php-fpm, with the ability to pull website code from git. The container can also use environment variables to configure your web application using the templating detailed in the [special features](#specialfeatures) section.
 ## Version
 Mainline Version: **1.7.9**
 Stable Version: **1.6.2**
