@@ -11,15 +11,15 @@ ENV DEBIAN_FRONTEND noninteractive
 # Add sources for latest nginx
 RUN apt-get install -y wget
 RUN wget -q http://nginx.org/keys/nginx_signing.key -O- | sudo apt-key add -
-RUN echo deb http://nginx.org/packages/ubuntu/ trusty nginx >> /etc/apt/sources.list
-RUN echo deb-src http://nginx.org/packages/ubuntu/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx >> /etc/apt/sources.list
 
 # Update System
 RUN apt-get update
 RUN apt-get -y upgrade
 
 # Basic Requirements
-RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools curl git unzip
+RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools curl git unzip vim
 
 # Install Extra PHP Modules
 RUN apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
