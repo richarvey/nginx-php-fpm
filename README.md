@@ -48,7 +48,7 @@ Run MySQL container with some extra details:
 sudo docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=yayMySQL -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress_user -e MYSQL_PASSWORD=wordpress_password -d mysql
 ```
 This exposes the following environment variables to the container when linked:
-,,,
+```
 MYSQL_ENV_MYSQL_DATABASE=wordpress
 MYSQL_ENV_MYSQL_ROOT_PASSWORD=yayMySQL
 MYSQL_PORT_3306_TCP_PORT=3306
@@ -61,7 +61,7 @@ MYSQL_PORT_3306_TCP_PROTO=tcp
 MYSQL_PORT_3306_TCP_ADDR=172.17.0.236
 MYSQL_ENV_MYSQL_MAJOR=5.6
 MYSQL_PORT=tcp://172.17.0.236:3306
-,,,
+```
 
 To link the container launch like this:
 
