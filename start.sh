@@ -10,6 +10,11 @@ if [ ! -z "$GIT_REPO" ]; then
   fi
 fi
 
+# Tweak nginx to match the workers to cpu's
+
+procs=$(cat /proc/cpuinfo |grep processor | wc -l)
+sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
+
 # Very dirty hack to replace variables in code with ENVIRONMENT values
 
 for i in $(env)
