@@ -1,7 +1,12 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and php-fpm, with the ability to pull website code from git. The container can also use environment variables to configure your web application using the templating detailed in the special features section.
 
-## Version
+## Git reposiory
+The source files for this project can be found here: [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
+
+If you have any improvements please submit a pull request.
+
+## Nginx Versions
 - Mainline Version: **1.7.9**
 - Stable Version: **1.6.2**
 - *Latest = Mainline Version*
@@ -31,7 +36,7 @@ If you want to link to your web site directory on the docker host to the contain
 sudo docker run --name nginx -p 8080:80 -v /your_code_directory:/usr/share/nginx/html -d richarvey/nginx-php-fpm
 ```
 ### Pulling code from git
-One of the nice features of this container is its ability to pull code from a git repository with a couple of enviromental variables passed at run time.
+One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time.
 
 **Note:** You need to have your SSH key that you use with git to enable the deployment. I recommend using a special deploy key per project to minimise the risk.
 
@@ -77,6 +82,15 @@ To link the container launch like this:
 
 sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
 ```
+### Enabling SSL or Special Nginx Configs
+As with all docker containers its possible to link resources from the host OS to the guest. This makes it really easy to link in custom nginx default config files or extra virtual hosts and SSL enabled sites. For SSL sites first create a directory somewhere such as */opt/deployname/ssl/*. In this directory drop you SSL cert and Key in. Next create a directory for your custom hosts such as  */opt/deployname/sites-enabled*. In here load your custom default.conf file which references your SSL cert and keys at the location, for example:  */etc/nginx/ssl/xxxx.key* 
+
+Then start your container and connect these volumes like so:
+
+```
+sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -**v /opt/deployname/ssl:/etc/nginx/ssl -v /opt/deplyname/sites-enabled:/etc/nginx/sites-enabled** -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
+```
+
 ## Special Features
 
 ### Templating
