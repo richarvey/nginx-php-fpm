@@ -1,9 +1,9 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and php-fpm, with the ability to pull website code from git. The container can also use environment variables to configure your web application using the templating detailed in the [special features](#special-features) section.
 ## Version
-Mainline Version: **1.7.9**
-Stable Version: **1.6.2**
-*Latest = Mainline Version*
+- Mainline Version: **1.7.9**
+- Stable Version: **1.6.2**
+- *Latest = Mainline Version*
 ## Installation
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
 ```bash
@@ -25,7 +25,7 @@ If you want to link to your web site directory on the docker host to the contain
 sudo docker run --name nginx -p 8080:80 -v /your_code_directory:/usr/share/nginx/html -d richarvey/nginx-php-fpm
 ```
 ### Pulling code from git
-One of the nice features of this container is its ability to pull code from a git repository with a couple of enviromental variables passed at run time.
+One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time.
 **Note:** You need to have your SSH key that you use with git to enable the deployment. I recommend using a special deploy key per project to minimise the risk.
 To run the container and pull code simply specify the GIT_REPO URL including *git@* and then make sure you have a folder on the docker host with your id_rsa key stored in it:
 ```bash
