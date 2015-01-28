@@ -1,10 +1,13 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and php-fpm, with the ability to pull website code from git. The container can also use environment variables to configure your web application using the templating detailed in the special features section.
 
-## Git reposiory
+### Git reposiory
 The source files for this project can be found here: [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
 
 If you have any improvements please submit a pull request.
+
+### Docker hub repository
+The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
 ## Nginx Versions
 - Mainline Version: **1.7.9**
@@ -77,9 +80,10 @@ MYSQL_ENV_MYSQL_MAJOR=5.6
 MYSQL_PORT=tcp://172.17.0.236:3306
 
 ```
-To link the container launch like this:
-```
 
+To link the container launch like this:
+
+```
 sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
 ```
 ### Enabling SSL or Special Nginx Configs
@@ -88,7 +92,7 @@ As with all docker containers its possible to link resources from the host OS to
 Then start your container and connect these volumes like so:
 
 ```
-sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -**v /opt/deployname/ssl:/etc/nginx/ssl -v /opt/deplyname/sites-enabled:/etc/nginx/sites-enabled** -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
+sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -v /opt/deployname/ssl:/etc/nginx/ssl -v /opt/deplyname/sites-enabled:/etc/nginx/sites-enabled -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
 ```
 
 ## Special Features
