@@ -12,6 +12,7 @@ if [ ! -z "$GIT_REPO" ]; then
   else
     git clone $GIT_REPO /usr/share/nginx/html/
   fi
+  chown -Rf nginx.nginx /usr/share/nginx/*
 fi
 
 # Tweak nginx to match the workers to cpu's
