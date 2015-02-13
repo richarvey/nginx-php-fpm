@@ -16,12 +16,12 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
 
 ```
-docker pull richarvey/nginx-pfp-fpm:latest
+docker pull richarvey/nginx-php-fpm:latest
 ```
 To pull the Stable Version:
 
 ```
-docker pull richarvey/nginx-pfp-fpm:stable
+docker pull richarvey/nginx-php-fpm:stable
 ```
 ## Running
 To simply run the container:
