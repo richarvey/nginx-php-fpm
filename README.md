@@ -8,9 +8,9 @@ If you have any improvements please submit a pull request.
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
 ## Nginx Versions
-- Mainline Version: **1.7.10**
-- Stable Version: **1.6.2**
-- *Latest = Mainline Version*
+- Mainline Version: **1.7.12**
+- Stable Version: **1.8.0**
+- *Latest = Stable Version*
 
 ## Installation
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
@@ -22,6 +22,11 @@ To pull the Stable Version:
 
 ```
 docker pull richarvey/nginx-php-fpm:stable
+```
+To pull the Mainline Version:
+
+```
+docker pull richarvey/nginx-php-fpm:mainline
 ```
 ## Running
 To simply run the container:
