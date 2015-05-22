@@ -2,6 +2,7 @@
 
 # Disable Strict Host checking for non interactive git clones
 
+mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 # Pull down code form git for our site!
