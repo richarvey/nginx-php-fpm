@@ -139,5 +139,11 @@ database_pass = $$_MYSQL_PASS_$$
 ...
 ?>
 ```
+### Skip Templating
+In order to speed up install time if templating is not required and you have a lot of files in your web root that you don't wish to be scanned, simply include the flag below:
+
+'''-e TEMPLATE_NGINX_HTML=0'''
+
 ### Template anything
 Yes ***ANYTHING***, any variable exposed by a linked container or the **-e** flag lets you template your config files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
+
