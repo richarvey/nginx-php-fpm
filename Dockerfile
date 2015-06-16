@@ -51,6 +51,8 @@ RUN sed -i -e "s/listen.group = www-data/listen.group = nginx/g" /etc/php5/fpm/p
 RUN sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php5/fpm/pool.d/www.conf
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
+VOLUME ["/usr/share"]
+
 # nginx site conf
 RUN rm -Rf /etc/nginx/conf.d/*
 RUN mkdir -p /etc/nginx/sites-available/
@@ -58,6 +60,8 @@ RUN mkdir -p /etc/nginx/sites-enabled/
 RUN mkdir -p /etc/nginx/ssl/
 ADD ./nginx-site.conf /etc/nginx/sites-available/default.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
+
+
 
 # add test PHP file
 ADD ./index.php /usr/share/nginx/html/index.php
