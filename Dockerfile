@@ -51,7 +51,7 @@ RUN sed -i -e "s/listen.group = www-data/listen.group = nginx/g" /etc/php5/fpm/p
 RUN sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php5/fpm/pool.d/www.conf
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-VOLUME ["/usr/share"]
+VOLUME ["/usr/share/nginx/html"]
 
 # nginx site conf
 RUN rm -Rf /etc/nginx/conf.d/*
