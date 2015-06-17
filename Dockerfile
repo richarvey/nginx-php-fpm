@@ -18,6 +18,8 @@ RUN echo deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx >> /etc
 RUN apt-get update
 RUN apt-get -y upgrade
 
+VOLUME ["/usr/share/nginx/html","/etc/nginx"]
+
 # Basic Requirements
 RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools curl git unzip vim
 
@@ -51,7 +53,7 @@ RUN sed -i -e "s/listen.group = www-data/listen.group = nginx/g" /etc/php5/fpm/p
 RUN sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php5/fpm/pool.d/www.conf
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-VOLUME ["/usr/share/nginx/html","/etc/nginx"]
+
 
 # nginx site conf
 RUN rm -Rf /etc/nginx/conf.d/*
