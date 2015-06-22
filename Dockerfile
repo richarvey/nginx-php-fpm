@@ -82,5 +82,5 @@ RUN chmod 755 /start.sh
 # Expose Ports
 EXPOSE 443
 EXPOSE 80
-
+RUN curl -sS https://getcomposer.org/installer | php
 CMD ["/bin/bash", "/start.sh"]
