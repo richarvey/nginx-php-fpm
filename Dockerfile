@@ -19,7 +19,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 VOLUME ["/usr/share/nginx/html"]
-VOLUME ["/etc/nginx"]
+# VOLUME ["/etc/nginx"]
 
 # Basic Requirements
 RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools curl git unzip vim
