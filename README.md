@@ -100,6 +100,16 @@ sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v 
 
 ## Special Features
 
+### Push code to Git
+To push code changes back to git simply run:
+```
+sudo docker exec -t -i <CONATINER_NAME> /usr/bin/push
+```
+### Pull code from Git (Refresh)
+In order to refresh the code in a container and pull newer code form git simply run:
+```
+sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
+```
 ### Templating
 This container will automatically configure your web application if you template your code. For example if you are linking to MySQL like above, and you have a config.php file where you need to set the MySQL details include $$_MYSQL_ENV_MYSQL_DATABASE_$$ style template tags. 
 
