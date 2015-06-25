@@ -18,3 +18,4 @@ ts=$(timestamp)
 cd /usr/share/nginx/html
 git add *
 git commit -a -m "push from container $ts"
+git push

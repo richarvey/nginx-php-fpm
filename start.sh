@@ -11,6 +11,7 @@ if [ ! -z "$GIT_EMAIL" ]; then
 fi
 if [ ! -z "$GIT_NAME" ]; then
  git config --global user.name "$GIT_NAME"
+ git config --global push.default simple
 fi
 
 # Pull down code form git for our site!
