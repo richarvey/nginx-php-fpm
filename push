@@ -1,0 +1,20 @@
+#!/bin/bash
+
+timestamp() {
+  date +"%D %T"
+}
+
+if [ -z "$GIT_EMAIL" ]; then
+ echo "You need to pass the \$GIT_EMAIL variable to the container for this to work"
+ exit
+fi
+
+if [ -z "$GIT_NAME" ]; then
+ echo "You need to pass the \$GIT_NAME variable to the container for this to work"
+ exit
+fi
+
+ts=$(timestamp)
+cd /usr/share/nginx/html
+git add *
+git commit -a -m "push from container $ts"

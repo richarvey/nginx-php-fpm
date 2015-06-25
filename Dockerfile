@@ -63,6 +63,12 @@ RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/defau
 ADD ./index.php /usr/share/nginx/html/index.php
 RUN chown -Rf nginx.nginx /usr/share/nginx/html/
 
+# Add git commands to allow container updating
+ADD ./pull /usr/bin/pull
+ADD ./push /usr/bin/push
+RUN chmod 755 /usr/bin/pull
+RUN chmod 755 /usr/bin/push
+
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
 RUN /usr/bin/easy_install supervisor-stdout

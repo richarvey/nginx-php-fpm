@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z "$GIT_EMAILi2" ]; then
+ echo "You need to pass the \$GIT_EMAIL variable to the container for this to work"
+ exit
+else
+ echo $GIT_EMAIL
+fi
+
+if [ -z "$GIT_NAME" ]; then
+ echo "You need to pass the \$GIT_NAME variable to the container for this to work"
+ exit
+else
+ echo $GIT_NAME
+fi
+
+cd /usr/share/nginx/html
+git pull

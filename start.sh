@@ -5,6 +5,14 @@
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
+# Setup git variables
+if [ ! -z "$GIT_EMAIL" ]; then
+ git config --global user.email "$GIT_EMAIL"
+fi
+if [ ! -z "$GIT_NAME" ]; then
+ git config --global user.name "$GIT_NAME"
+fi
+
 # Pull down code form git for our site!
 if [ ! -z "$GIT_REPO" ]; then
   rm /usr/share/nginx/html/*
