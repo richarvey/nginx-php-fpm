@@ -34,7 +34,7 @@ To simply run the container:
 ```
 sudo docker run --name nginx -p 8080:80 -d richarvey/nginx-php-fpm
 ```
-You can then browse to http://<docker_host>:8080 to view the default install files.
+You can then browse to http://\<docker_host\>:8080 to view the default install files.
 ### Volumes
 If you want to link to your web site directory on the docker host to the container run:
 
@@ -90,7 +90,7 @@ To link the container launch like this:
 sudo docker run -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -v /opt/ngddeploy/:/root/.ssh -p 8080:80 --link some-mysql:mysql -d richarvey/nginx-php-fpm
 ```
 ### Enabling SSL or Special Nginx Configs
-As with all docker containers its possible to link resources from the host OS to the guest. This makes it really easy to link in custom nginx default config files or extra virtual hosts and SSL enabled sites. For SSL sites first create a directory somewhere such as */opt/deployname/ssl/*. In this directory drop you SSL cert and Key in. Next create a directory for your custom hosts such as  */opt/deployname/sites-enabled*. In here load your custom default.conf file which references your SSL cert and keys at the location, for example:  */etc/nginx/ssl/xxxx.key* 
+As with all docker containers its possible to link resources from the host OS to the guest. This makes it really easy to link in custom nginx default config files or extra virtual hosts and SSL enabled sites. For SSL sites first create a directory somewhere such as */opt/deployname/ssl/*. In this directory drop you SSL cert and Key in. Next create a directory for your custom hosts such as  */opt/deployname/sites-enabled*. In here load your custom default.conf file which references your SSL cert and keys at the location, for example:  */etc/nginx/ssl/xxxx.key*
 
 Then start your container and connect these volumes like so:
 
@@ -111,7 +111,7 @@ In order to refresh the code in a container and pull newer code form git simply 
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
 ```
 ### Templating
-This container will automatically configure your web application if you template your code. For example if you are linking to MySQL like above, and you have a config.php file where you need to set the MySQL details include $$_MYSQL_ENV_MYSQL_DATABASE_$$ style template tags. 
+This container will automatically configure your web application if you template your code. For example if you are linking to MySQL like above, and you have a config.php file where you need to set the MySQL details include $$_MYSQL_ENV_MYSQL_DATABASE_$$ style template tags.
 
 Example:
 
