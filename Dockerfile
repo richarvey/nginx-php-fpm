@@ -59,10 +59,6 @@ RUN mkdir -p /etc/nginx/ssl/
 ADD ./nginx-site.conf /etc/nginx/sites-available/default.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
-# add test PHP file
-ADD ./index.php /usr/share/nginx/html/index.php
-RUN chown -Rf nginx.nginx /usr/share/nginx/html/
-
 # Add git commands to allow container updating
 ADD ./pull /usr/bin/pull
 ADD ./push /usr/bin/push
@@ -80,6 +76,10 @@ RUN chmod 755 /start.sh
 
 # Setup Volume
 VOLUME ["/usr/share/nginx/html"]
+
+# add test PHP file
+ADD ./index.php /usr/share/nginx/html/index.php
+RUN chown -Rf nginx.nginx /usr/share/nginx/html/
 
 # Expose Ports
 EXPOSE 443
