@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 MAINTAINER Ric Harvey <ric@ngineered.co.uk>
 
 # Surpress Upstart errors/warning
@@ -11,8 +11,12 @@ ENV DEBIAN_FRONTEND noninteractive
 # Add sources for latest nginx
 RUN apt-get install -y wget
 RUN wget -q http://nginx.org/keys/nginx_signing.key -O- | sudo apt-key add -
-RUN echo deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx >> /etc/apt/sources.list
-RUN echo deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb http://nginx.org/packages/mainline/debian/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb-src http://nginx.org/packages/mainline/debian/ trusty nginx >> /etc/apt/sources.list
+
+# Add PHP packages from dotdeb
+RUN echo deb http://packages.dotdeb.org wheezy-php56 all >> /etc/apt/sources.list
+RUN echo deb-src http://packages.dotdeb.org wheezy-php56 all >> /etc/apt/sources.list
 
 # Update System
 RUN apt-get update
