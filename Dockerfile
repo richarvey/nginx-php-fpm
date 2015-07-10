@@ -8,13 +8,22 @@ RUN ln -sf /bin/true /sbin/initctl
 # Let the conatiner know that there is no tty
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update
+RUN apt-get install -y wget
+
 # Add sources for latest nginx
-RUN echo deb http://nginx.org/packages/mainline/debian/ trusty nginx >> /etc/apt/sources.list
-RUN echo deb-src http://nginx.org/packages/mainline/debian/ trusty nginx >> /etc/apt/sources.list
+RUN echo deb http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list
+RUN echo deb-src http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list
+
+RUN wget http://nginx.org/keys/nginx_signing.key
+RUN apt-key add nginx_signing.key
 
 # Add PHP packages from dotdeb
-RUN echo deb http://packages.dotdeb.org wheezy-php56 all >> /etc/apt/sources.list
-RUN echo deb-src http://packages.dotdeb.org wheezy-php56 all >> /etc/apt/sources.list
+RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
+RUN echo deb-src http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
+
+RUN wget http://www.dotdeb.org/dotdeb.gpg
+RUN apt-key add dotdeb.gpg
 
 # Update System
 RUN apt-get update
@@ -24,7 +33,7 @@ RUN apt-get -y upgrade
 RUN apt-get -y install nginx php5-fpm php5-mysql php-apc pwgen python-setuptools curl git unzip vim
 
 # Install Extra PHP Modules
-RUN apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo
+RUN apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo
 
 # tweak nginx config
 RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf # gets over written by start.sh to match cpu's on container
