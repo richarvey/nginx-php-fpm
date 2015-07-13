@@ -71,12 +71,9 @@ ADD ./nginx-site.conf /etc/nginx/sites-available/default.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # Tidy up files and shrink image size
-
-RUN apt-get purge $(aptitude search '~i!~M!~prequired!~pimportant!~R~prequired!~R~R~prequired!~R~pimportant!~R~R~pimportant!busybox!grub!initramfs-tools' | awk '{print $2}')
-RUN apt-get purge aptitude
 RUN apt-get autoremove
 RUN apt-get clean
-
+RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /usr/share/man/??
 RUN rm -rf /usr/share/man/??_*
 
