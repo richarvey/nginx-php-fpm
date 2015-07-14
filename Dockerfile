@@ -22,7 +22,7 @@ apt-key add /nginx_signing.key && \
 echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
 echo deb-src http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
 apt-key add /dotdeb.gpg && \
-BUILD_PACKAGES="supervisor nginx php5-fpm git php5-mysql php5-mysql php-apc php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo pwgen" && \
+BUILD_PACKAGES="supervisor nginx php5-fpm git php5-mysql php5-mysql php-apc php5-curl php5-gd php5-intl php5-mcrypt php5-memcache php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo pwgen" && \
 apt-get -y install $BUILD_PACKAGES && \
 apt-get clean && \
 apt-get autoclean && \
