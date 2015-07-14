@@ -12,23 +12,21 @@ ENV DEBIAN_FRONTEND noninteractive
 # Add sources for latest nginx
 # Add PHP packages from dotdeb
 # Install software requirements
+ADD nginx_signing.key /nginx_signing.key
+ADD dotdeb.gpg /dotdeb.gpg
 RUN apt-get update && \
 apt-get upgrade -y && \
-apt-get install -y wget && \
 echo deb http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list && \
 echo deb-src http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list && \
-wget http://nginx.org/keys/nginx_signing.key && \
-apt-key add nginx_signing.key && \
+apt-key add /nginx_signing.key && \
 echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
 echo deb-src http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
-wget http://www.dotdeb.org/dotdeb.gpg && \
-apt-key add dotdeb.gpg && \
+apt-key add /dotdeb.gpg && \
 BUILD_PACKAGES="supervisor nginx php5-fpm git php5-mysql php5-mysql php-apc php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo pwgen" && \
 apt-get -y install $BUILD_PACKAGES && \
-apt-get remove --purge -y wget && \
 apt-get clean && \
-echo -n > /var/lib/apt/extended_states && \
 apt-get autoclean && \
+echo -n > /var/lib/apt/extended_states && \
 rm -rf /var/lib/apt/lists/* && \
 rm -rf /usr/share/man/?? && \
 rm -rf /usr/share/man/??_*
@@ -85,7 +83,7 @@ VOLUME ["/usr/share/nginx/html"]
 
 # add test PHP file
 ADD ./index.php /usr/share/nginx/html/index.php
-RUN chown -Rf nginx.nginx /usr/share/nginx/html/
+RUN chown -Rf www-data.www-data /usr/share/nginx/html/
 
 # Expose Ports
 EXPOSE 443
