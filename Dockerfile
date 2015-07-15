@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 MAINTAINER Ric Harvey <ric@ngineered.co.uk>
 
 # Surpress Upstart errors/warning
@@ -10,18 +10,11 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Update base image
 # Add sources for latest nginx
-# Add PHP packages from dotdeb
 # Install software requirements
-ADD nginx_signing.key /nginx_signing.key
-ADD dotdeb.gpg /dotdeb.gpg
-RUN apt-get update && \
+RUN nginx=development && \
+add-apt-repository ppa:nginx/$nginx && \
+apt-get update && \
 apt-get upgrade -y && \
-echo deb http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list && \
-echo deb-src http://nginx.org/packages/mainline/debian/ jessie nginx >> /etc/apt/sources.list && \
-apt-key add /nginx_signing.key && \
-echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
-echo deb-src http://packages.dotdeb.org jessie all >> /etc/apt/sources.list && \
-apt-key add /dotdeb.gpg && \
 BUILD_PACKAGES="supervisor nginx php5-fpm git php5-mysql php5-mysql php-apc php5-curl php5-gd php5-intl php5-mcrypt php5-memcache php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-pgsql php5-mongo pwgen" && \
 apt-get -y install $BUILD_PACKAGES && \
 apt-get clean && \
