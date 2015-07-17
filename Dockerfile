@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install software requirements
 RUN apt-get update && \
 apt-get install -y software-properties-common && \
-nginx=development && \
+nginx=stable && \
 add-apt-repository ppa:nginx/$nginx && \
 apt-get update && \
 apt-get upgrade -y && \
