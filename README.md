@@ -8,7 +8,7 @@ If you have any improvements please submit a pull request.
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
 ## Nginx Versions
-- Mainline Version: **1.9.3**
+- Mainline Version: **1.9.4**
 - Stable Version: **1.8.0**
 - *Latest = Mainline Version*
 
