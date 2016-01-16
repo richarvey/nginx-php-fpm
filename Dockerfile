@@ -63,6 +63,10 @@ mkdir -p /etc/nginx/ssl/
 ADD ./nginx-site.conf /etc/nginx/sites-available/default.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
+# config mcrypt
+RUN ln -s /etc/php5/conf.d/mcrypt.ini /etc/php5/mods-available/mcrypt.ini
+RUN php5enmod mcrypt
+
 # Add git commands to allow container updating
 ADD ./pull /usr/bin/pull
 ADD ./push /usr/bin/push
