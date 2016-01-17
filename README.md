@@ -7,10 +7,14 @@ If you have any improvements please submit a pull request.
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
-## Nginx Versions
+## Nginx Version
 - Mainline Version: **1.9.9**
-- Stable Version: **1.8.0**
-- *Latest = Mainline Version*
+
+## PHP Version
+- PHP: **5.5.9+dfsg-1ubuntu4.14**
+
+## Ubuntu Version
+- Ubuntu Trusty: **14.04.03**
 
 ## Installation
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
@@ -18,16 +22,7 @@ Pull the image from the docker index rather than downloading the git repo. This 
 ```
 docker pull richarvey/nginx-php-fpm:latest
 ```
-To pull the Stable Version:
 
-```
-docker pull richarvey/nginx-php-fpm:stable
-```
-To pull the Mainline Version:
-
-```
-docker pull richarvey/nginx-php-fpm:mainline
-```
 ## Running
 To simply run the container:
 
@@ -151,10 +146,12 @@ database_pass = $$_MYSQL_PASS_$$
 ```
 ### Skip Templating
 In order to speed up install time if templating is not required and you have a lot of files in your web root that you don't wish to be scanned, simply include the flag below:
+
 ```-e TEMPLATE_NGINX_HTML=0```
 
 ### Display Errors
 If you want to display PHP errors on screen for debugging use this feature:
+
 ```-e ERRORS=1```
 
 ### Template anything
