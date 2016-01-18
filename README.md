@@ -6,14 +6,19 @@ The source files for this project can be found here: [https://github.com/ngineer
 If you have any improvements please submit a pull request.
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
-
 ## Versions
 - Nginx Mainline Version: **1.9.9**
 - PHP: **5.5.9+dfsg-1ubuntu4.14**
 - Ubuntu Trusty: **14.04.03**
 
-## Installation
-Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
+## Building from source
+To build from source you need to clone the git repo and run docker build:
+```
+git clone https://github.com/ngineered/nginx-php-fpm.git
+docker build -t richarvey/nginx-php-fpm:latest .
+```
+## Pulling from Docker Hub
+Pull the image from docker hub rather than downloading the git repo. This prevents you having to build the image on every docker host:
 ```
 docker pull richarvey/nginx-php-fpm:latest
 ```
@@ -22,7 +27,7 @@ To simply run the container:
 ```
 sudo docker run --name nginx -p 8080:80 -d richarvey/nginx-php-fpm
 ```
-You can then browse to http://\<docker_host\>:8080 to view the default install files.
+You can then browse to ```http://<DOCKER_HOST>:8080``` to view the default install files.
 ### Volumes
 If you want to link to your web site directory on the docker host to the container run:
 ```
