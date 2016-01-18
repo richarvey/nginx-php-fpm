@@ -57,26 +57,26 @@ RUN php5enmod mcrypt
 RUN rm -Rf /etc/nginx/conf.d/* && \
 rm -Rf /etc/nginx/sites-available/default && \
 mkdir -p /etc/nginx/ssl/
-ADD ./nginx-site.conf /etc/nginx/sites-available/default.conf
+ADD conf/nginx-site.conf /etc/nginx/sites-available/default.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # Add git commands to allow container updating
-ADD ./pull /usr/bin/pull
-ADD ./push /usr/bin/push
+ADD scripts/pull /usr/bin/pull
+ADD scripts/push /usr/bin/push
 RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push
 
 # Supervisor Config
-ADD ./supervisord.conf /etc/supervisord.conf
+ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Start Supervisord
-ADD ./start.sh /start.sh
+ADD scripts/start.sh /start.sh
 RUN chmod 755 /start.sh
 
 # Setup Volume
 VOLUME ["/usr/share/nginx/html"]
 
 # add test PHP file
-ADD ./index.php /usr/share/nginx/html/index.php
+ADD src/index.php /usr/share/nginx/html/index.php
 RUN chown -Rf www-data.www-data /usr/share/nginx/html/
 
 # Expose Ports
