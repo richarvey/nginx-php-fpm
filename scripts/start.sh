@@ -14,6 +14,12 @@ if [ ! -z "$GIT_NAME" ]; then
  git config --global push.default simple
 fi
 
+# Install Extras
+if [ ! -z "$DEBS" ]; then
+ apt-get update
+ apt-get install -y $DEBS
+fi
+
 # Pull down code form git for our site!
 if [ ! -z "$GIT_REPO" ]; then
   rm /usr/share/nginx/html/*
@@ -37,7 +43,7 @@ procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
 # Very dirty hack to replace variables in code with ENVIRONMENT values
-if [[ "$TEMPLATE_NGINX_HTML" != "0" ]] ; then
+if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
   for i in $(env)
   do
     variable=$(echo "$i" | cut -d'=' -f1)

@@ -7,9 +7,9 @@ If you have any improvements please submit a pull request.
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 ## Versions
-- Nginx Mainline Version: **1.9.9**
-- PHP: **5.5.9+dfsg-1ubuntu4.14**
-- Ubuntu Trusty: **14.04.03**
+- Nginx Mainline Version: **1.9.12**
+- PHP: **5.5.9-1ubuntu4.14**
+- Ubuntu Trusty: **14.04.4**
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
@@ -91,6 +91,11 @@ In order to refresh the code in a container and pull newer code form git simply 
 ```
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
 ```
+### Install Extra Modules
+If you wish to install extras at boot time, such as extra php modules you can specify this by adding the DEBS flag, to add multiple packages you need to space separate the values:
+```
+sudo docker run --name nginx -e 'DEBS=php5-mongo php-json" -p 8080:80 -d richarvey/nginx-php-fpm
+```
 ### Templating
 This container will automatically configure your web application if you template your code. For example if you are linking to MySQL like above, and you have a config.php file where you need to set the MySQL details include $$_MYSQL_ENV_MYSQL_DATABASE_$$ style template tags.
 
@@ -125,10 +130,10 @@ database_pass = $$_MYSQL_PASS_$$
 ...
 ?>
 ```
-### Skip Templating
-In order to speed up install time if templating is not required and you have a lot of files in your web root that you don't wish to be scanned, simply include the flag below:
+### Enable Templating
+In order to speed up boot time templating is now diabled by default, if you wish to enable it simply include the flag below:
 ```
--e TEMPLATE_NGINX_HTML=0
+-e TEMPLATE_NGINX_HTML=1
 ```
 ### Template anything
 Yes ***ANYTHING***, any variable exposed by a linked container or the **-e** flag lets you template your configuration files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
