@@ -22,13 +22,13 @@ fi
 
 # Pull down code form git for our site!
 if [ ! -z "$GIT_REPO" ]; then
-  rm /usr/share/nginx/html/*
+  rm /var/www/html/*
   if [ ! -z "$GIT_BRANCH" ]; then
-    git clone -b $GIT_BRANCH $GIT_REPO /usr/share/nginx/html/
+    git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
   else
-    git clone $GIT_REPO /usr/share/nginx/html/
+    git clone $GIT_REPO /var/www/html/
   fi
-  chown -Rf nginx.nginx /usr/share/nginx/*
+  chown -Rf nginx.nginx /var/www/nginx/*
 fi
 
 # Display PHP error's or not
@@ -50,13 +50,13 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
     value=$(echo "$i" | cut -d'=' -f2)
     if [[ "$variable" != '%s' ]] ; then
       replace='\$\$_'${variable}'_\$\$'
-      find /usr/share/nginx/html -type f -exec sed -i -e 's/'${replace}'/'${value}'/g' {} \;
+      find /var/www/html -type f -exec sed -i -e 's/'${replace}'/'${value}'/g' {} \;
     fi
   done
 fi
 
 # Again set the right permissions (needed when mounting from a volume)
-chown -Rf www-data.www-data /usr/share/nginx/html/
+chown -Rf www-data.www-data /var/www/html/
 
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf

@@ -15,7 +15,7 @@ if [ -z "$GIT_NAME" ]; then
 fi
 
 ts=$(timestamp)
-cd /usr/share/nginx/html
+cd /var/www/html
 git add *
 git commit -a -m "push from container $ts"
 git push
