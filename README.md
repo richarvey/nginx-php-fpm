@@ -7,9 +7,12 @@ If you have any improvements please submit a pull request.
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 ## Versions
-- Nginx Mainline Version: **1.9.12**
-- PHP: **5.5.9-1ubuntu4.14**
-- Ubuntu Trusty: **14.04.4**
+
+| Tag    | nginx  | PHP               | Ubuntu  |
+|--------|--------|-------------------|---------|
+| latest | 1.9.12 | 5.5.9-1ubuntu4.14 | 14.04.4 |
+| beta56 | 1.9.11 | 5.6               | 16.04   |
+| beta70 | 1.9.11 | 7.0               | 16.04   |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
