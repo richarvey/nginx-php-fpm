@@ -33,8 +33,8 @@ fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
-  sed -i -e "s/error_reporting =.*=/error_reporting = E_ALL/g" /etc/php5/fpm/php.ini
-  sed -i -e "s/display_errors =.*/display_errors = On/g" /etc/php5/fpm/php.ini
+  sed -i -e "s/error_reporting =.*=/error_reporting = E_ALL/g" /etc/php/5.6/fpm/php.ini
+  sed -i -e "s/display_errors =.*/display_errors = On/g" /etc/php/5.6/fpm/php.ini
 fi
 
 # Tweak nginx to match the workers to cpu's
