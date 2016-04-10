@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # Disable Strict Host checking for non interactive git clones
-
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-# Setup git variables
+# Set up git variables
 if [ ! -z "$GIT_EMAIL" ]; then
  git config --global user.email "$GIT_EMAIL"
 fi
@@ -14,13 +13,13 @@ if [ ! -z "$GIT_NAME" ]; then
  git config --global push.default simple
 fi
 
-# Install Extras
+# Install extras
 if [ ! -z "$DEBS" ]; then
  apt-get update
  apt-get install -y $DEBS
 fi
 
-# Pull down code form git for our site!
+# Pull down code from git for our site!
 if [ ! -z "$GIT_REPO" ]; then
   rm /usr/share/nginx/html/*
   if [ ! -z "$GIT_BRANCH" ]; then
@@ -31,14 +30,13 @@ if [ ! -z "$GIT_REPO" ]; then
   chown -Rf nginx.nginx /usr/share/nginx/*
 fi
 
-# Display PHP error's or not
+# Display PHP errors or not
 if [[ "$ERRORS" != "1" ]] ; then
   sed -i -e "s/error_reporting =.*=/error_reporting = E_ALL/g" /etc/php5/fpm/php.ini
   sed -i -e "s/display_errors =.*/display_errors = On/g" /etc/php5/fpm/php.ini
 fi
 
-# Tweak nginx to match the workers to cpu's
-
+# Tweak nginx to match workers to CPUs
 procs=$(cat /proc/cpuinfo |grep processor | wc -l)
 sed -i -e "s/worker_processes 5/worker_processes $procs/" /etc/nginx/nginx.conf
 
@@ -55,8 +53,8 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
   done
 fi
 
-# Again set the right permissions (needed when mounting from a volume)
+# Set owner of files (needed when mounting from a volume)
 chown -Rf www-data.www-data /usr/share/nginx/html/
 
-# Start supervisord and services
+# Start supervisord and the services configured therein
 /usr/bin/supervisord -n -c /etc/supervisord.conf
