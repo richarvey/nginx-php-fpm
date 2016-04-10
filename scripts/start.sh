@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Define some constants that are reused in this script
+PATH_NGINX=/usr/share/nginx
+PATH_HTML=$PATH_NGINX/html/
+
 # Disable Strict Host checking for non interactive git clones
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
@@ -23,11 +27,11 @@ fi
 if [ ! -z "$GIT_REPO" ]; then
   rm /usr/share/nginx/html/*
   if [ ! -z "$GIT_BRANCH" ]; then
-    git clone -b $GIT_BRANCH $GIT_REPO /usr/share/nginx/html/
+    git clone -b $GIT_BRANCH $GIT_REPO $PATH_HTML
   else
-    git clone $GIT_REPO /usr/share/nginx/html/
+    git clone $GIT_REPO $PATH_HTML
   fi
-  chown -Rf nginx.nginx /usr/share/nginx/*
+  chown -Rf nginx.nginx $PATH_NGINX/*
 fi
 
 # Display PHP errors or not
@@ -54,7 +58,7 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
 fi
 
 # Set owner of files (needed when mounting from a volume)
-chown -Rf www-data.www-data /usr/share/nginx/html/
+chown -Rf www-data.www-data $PATH_HTML
 
 # Start supervisord and the services configured therein
 /usr/bin/supervisord -n -c /etc/supervisord.conf
