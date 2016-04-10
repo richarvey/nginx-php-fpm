@@ -157,6 +157,21 @@ In order to speed up boot time templating is now diabled by default, if you wish
 ### Template anything
 Yes ***ANYTHING***, any variable exposed by a linked container or the **-e** flag lets you template your configuration files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
 
+### Changing the owner of the website files at startup
+The container has
+[a startup script](https://github.com/ngineered/nginx-php-fpm/blob/master/scripts/start.sh)
+which, by default, changes only the group of the website files to `www-data`,
+and leaves the user of these files alone. This way, in a
+development environment, in which you are probably mounting the
+website files as a volume, you can still save the files.
+
+For any other environment, you should determine the owner of the files, too,
+by setting this environment variable when running the container:
+
+```
+-e SET_USER=www-data
+```
+
 ## Logging and Errors
 
 ### Logging

@@ -57,8 +57,14 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
   done
 fi
 
-# Set owner of files (needed when mounting from a volume)
-chown -Rf www-data.www-data $PATH_HTML
+# Set user and group of website files (needed when mounting from a volume)
+if [ -z "$SET_USER" ]; then
+  # In production it is recommended to:  -e SET_USER=www-data
+  chown -Rf $SET_USER.www-data $PATH_HTML
+else
+  # In development you keep your user and we set the group only
+  chgrp -Rf www-data $PATH_HTML
+fi
 
 # Start supervisord and the services configured therein
 /usr/bin/supervisord -n -c /etc/supervisord.conf
