@@ -55,6 +55,18 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
   done
 fi
 
+# Register $_ENV global in PHP and pass environment variable who match with pattern
+echo '' > /etc/nginx/env_params 
+if [ ! -z "$ENV_PASS_PATTERN" ]; then
+  for k in $(env | cut -d'=' -f1 | grep -v ^_$ | grep $ENV_PASS_PATTERN)
+  do 
+    v=$(eval "echo \$$k")
+    v=${v/\'/\\\'}
+    echo "fastcgi_param $k  '$v';" >> /etc/nginx/env_params
+  done
+  sed -i -e "s/variables_order =.*/variables_order = \"EGPCS\"/g" /etc/php5/fpm/php.ini
+fi
+
 # Again set the right permissions (needed when mounting from a volume)
 chown -Rf www-data.www-data /usr/share/nginx/html/
 
