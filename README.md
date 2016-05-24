@@ -141,6 +141,21 @@ In order to speed up boot time templating is now diabled by default, if you wish
 ### Template anything
 Yes ***ANYTHING***, any variable exposed by a linked container or the **-e** flag lets you template your configuration files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
 
+### Register $_ENV global in PHP and pass environment variable
+$_ENV is only populated if `php.ini` allows it and it does not contains system environment variables. It mostly contains what is imported from `fastcgi_params`.
+With `ENV_PASS_PATTERN` you can pass environment variables and use it as a PHP `$_ENV` vars.
+
+Example:
+```
+sudo docker run -e 'ENV_PASS_PATTERN=^APP_' -e 'APP_ENV=dev' -e 'APP_VENTURE_ID=MY' -p 8080:80 -d richarvey/nginx-php-fpm
+```
+
+```
+<?php 
+echo $_ENV["APP_ENV"];
+\\ prints dev
+```
+
 ## Logging and Errors
 
 ### Logging
