@@ -16,13 +16,13 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 To build from source you need to clone the git repo and run docker build:
 ```
 git clone https://github.com/ngineered/nginx-php-fpm.git
-docker build -t nginx-php-fpm:latest .
+docker build -t nginx-php-fpm:php7 .
 ```
 
 ## Pulling from Docker Hub
 Pull the image from docker hub rather than downloading the git repo. This prevents you having to build the image on every docker host:
 ```
-docker pull richarvey/nginx-php-fpm:latest
+docker pull richarvey/nginx-php-fpm:php7
 ```
 
 ## Running
