@@ -10,5 +10,5 @@ if [ -z "$GIT_NAME" ]; then
  exit
 fi
 
-cd /usr/share/nginx/html
+cd /var/www/html
 git pull

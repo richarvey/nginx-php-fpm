@@ -1,0 +1,20 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+### Added
+- Documentation updates to cover PHP modules
+
+## [0.1.1] - 2016-6-15
+### Added
+- Added php5-gd, php5-intl, php5-memcache, php5-sqlite3, php5-pgsql, php5-xml, php5-xsl @richarvey
+
+## [0.1.0] - 2016-06-15
+### Added
+- Pull in alpine build @drobertson2
+- Merge git scripts from old stable @richarvey
+- Tested Tamplating @richarvey
+
+## [0.0.0] - 2016-6-14
+### Added
+- Port nginx/php fpm to alpine @danroberston2
