@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Documentation updates to cover PHP modules
 
+## [0.2.0] - 2016-6-15
+### Added
+- updated to php7 @richarvey
+
 ## [0.1.1] - 2016-6-15
 ### Added
 - Added php5-gd, php5-intl, php5-memcache, php5-sqlite3, php5-pgsql, php5-xml, php5-xsl @richarvey
