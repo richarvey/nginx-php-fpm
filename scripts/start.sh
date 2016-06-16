@@ -22,7 +22,8 @@ fi
 
 # Pull down code form git for our site!
 if [ ! -z "$GIT_REPO" ]; then
-  rm /var/www/html/*
+  rm -Rf /var/www/html
+  mkdir /var/www/html
   if [ ! -z "$GIT_BRANCH" ]; then
     git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
   else
