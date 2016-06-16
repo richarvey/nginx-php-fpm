@@ -34,7 +34,7 @@ fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
-  php_flag[display_errors] = off >> /etc/php7/php-fpm.conf
+ echo php_flag[display_errors] = off >> /etc/php7/php-fpm.conf
 else
  echo php_flag[display_errors] = on >> /etc/php7/php-fpm.conf
 fi
