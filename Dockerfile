@@ -72,6 +72,7 @@ sed -i -e "s/;listen.mode = 0660/listen.mode = 0666/g" ${fpm_conf} && \
 sed -i -e "s/;listen.owner = nobody/listen.owner = nginx/g" ${fpm_conf} && \
 sed -i -e "s/;listen.group = nobody/listen.group = nginx/g" ${fpm_conf} && \
 sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_conf} &&\
+ln -s /etc/php5/php.ini /etc/php5/conf.d/php.ini && \
 find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # Add Scripts
