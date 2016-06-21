@@ -20,7 +20,7 @@ if [ ! -z "$GIT_NAME" ]; then
  git config --global push.default simple
 fi
 
-# Pull down code form git for our site!
+# Pull down code from git for our site!
 if [ ! -z "$GIT_REPO" ]; then
   #force clean version to be pulled and avoid git clone fails
   rm -Rf /var/www/html
