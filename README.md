@@ -71,7 +71,7 @@ You'll need some extra ENV vars to enable this feature. These are ```GIT_EMAIL``
 ### Push code to Git
 To push code changes made within the container back to git simply run:
 ```
-sudo docker exec -t -i <CONATINER_NAME> /usr/bin/push
+sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/push
 ```
 
 ### Pull code from Git (Refresh)
