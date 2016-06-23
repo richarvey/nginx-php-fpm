@@ -29,6 +29,7 @@ if [ ! -z "$GIT_REPO" ]; then
   else
     git clone $GIT_REPO /var/www/html/
   fi
+  chown -Rf nginx.nginx /var/www/html
 fi
 
 # Display PHP error's or not
