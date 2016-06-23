@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
-ENV php_conf /etc/php5/php.ini 
+ENV php_conf /etc/php5/php.ini
 ENV fpm_conf /etc/php5/php-fpm.conf
 
 RUN apk add --no-cache bash \
@@ -37,9 +37,11 @@ RUN apk add --no-cache bash \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
-    mkdir -p /var/log/supervisor 
+    mkdir -p /var/log/supervisor
 
+RUN mkdir -p /etc/supervisord.conf.d/
 ADD conf/supervisord.conf /etc/supervisord.conf
+
 
 # Copy our nginx config
 RUN rm -Rf /etc/nginx/nginx.conf

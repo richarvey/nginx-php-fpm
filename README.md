@@ -133,3 +133,7 @@ If you want to display PHP errors on screen (in the browser) for debugging purpo
 ```
 -e ERRORS=1
 ```
+
+## Supervisord
+
+Put you configuration under ```/etc/supervisord.conf.d/<filename>.conf``` in order to add more services inside the container under the control of Supervisord (e.g. rsyslog).
