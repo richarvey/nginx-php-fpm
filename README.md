@@ -8,21 +8,23 @@ If you have any improvements please submit a pull request.
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 ## Versions
-- Nginx: **1.10.1**
-- PHP: **7.0.7**
-- Alpine Version: **3.4**
+| Tag | Nginx | PHP | Alpine |
+|-----|-------|-----|--------|
+| latest | 1.10.1 | 5.6.21 |
+| php5 | 1.10.1 | 5.6.21 |
+| php7 | 1.10.1 | 7.0.7 |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
 ```
 git clone https://github.com/ngineered/nginx-php-fpm.git
-docker build -t nginx-php-fpm:php7 .
+docker build -t nginx-php-fpm:latest .
 ```
 
 ## Pulling from Docker Hub
 Pull the image from docker hub rather than downloading the git repo. This prevents you having to build the image on every docker host:
 ```
-docker pull richarvey/nginx-php-fpm:php7
+docker pull richarvey/nginx-php-fpm:latest
 ```
 
 ## Running
@@ -125,6 +127,8 @@ All logs should now print out in stdout/stderr and are available via the docker 
 ```
 docker logs <CONTAINER_NAME>
 ```
+### WebRoot
+You can set your webroot in the container to anything you want using the -e "WEBROOT=/var/www/html/public" variable.
 
 ### Displaying Errors
 If you want to display PHP errors on screen (in the browser) for debugging purposes use this feature:
