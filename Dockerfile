@@ -32,6 +32,7 @@ RUN apk add --no-cache bash \
     php5-iconv \
     php5-json \
     php5-phar \
+    php5-soap \
     php5-dom && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     mkdir -p /etc/nginx && \
