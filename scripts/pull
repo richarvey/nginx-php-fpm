@@ -12,3 +12,4 @@ fi
 
 cd /var/www/html
 git pull
+chown -Rf nginx:nginx /var/www/html
