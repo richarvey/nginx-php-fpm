@@ -16,6 +16,6 @@ fi
 
 ts=$(timestamp)
 cd /var/www/html
-git add *
+git add .
 git commit -a -m "push from container $ts"
 git push
