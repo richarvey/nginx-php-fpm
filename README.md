@@ -12,7 +12,7 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 |-----|-------|-----|--------|
 | latest | 1.10.1 | 5.6.23 | 3.4 |
 | php5 | 1.10.1 | 5.6.23 | 3.4 |
-| php7 | 1.10.1 | 7.0.7 | 3.4 |
+| php7 | 1.10.1 | 7.0.8 | 3.4 |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
