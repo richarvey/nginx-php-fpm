@@ -10,8 +10,8 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 ## Versions
 | Tag | Nginx | PHP | Alpine |
 |-----|-------|-----|--------|
-| latest | 1.10.1 | 5.6.21 | 3.4 |
-| php5 | 1.10.1 | 5.6.21 | 3.4 |
+| latest | 1.10.1 | 5.6.23 | 3.4 |
+| php5 | 1.10.1 | 5.6.23 | 3.4 |
 | php7 | 1.10.1 | 7.0.7 | 3.4 |
 
 ## Building from source
@@ -111,12 +111,6 @@ MYSQL_USER=username
 MYSQL_PASS=password
 ```
 
-### Enable Templating
-In order to speed up boot time templating is now disabled by default, if you wish to enable it simply include the flag below:
-```
--e TEMPLATE_NGINX_HTML=1
-```
-
 ### Template anything
 Yes ***ANYTHING***, any variable exposed by the **-e** flag lets you template your configuration files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
 
@@ -127,11 +121,20 @@ All logs should now print out in stdout/stderr and are available via the docker 
 ```
 docker logs <CONTAINER_NAME>
 ```
-### WebRoot
-You can set your webroot in the container to anything you want using the -e "WEBROOT=/var/www/html/public" variable.
+## Available Configuration Parameters
 
-### Displaying Errors
-If you want to display PHP errors on screen (in the browser) for debugging purposes use this feature:
-```
--e ERRORS=1
-```
+The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
+
+ - **GIT_REPO** : URL to the repository containing your source code
+ - **GIT_BRANCH** : Select a specific branch (optional)
+ - **GIT_EMAIL** : Set your email for code pushing (required for git to work)
+ - **GIT_NAME** : Set your name for code pushing (required for got to work)
+ - **SSH_KEY** : Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)
+ - **WEBROOT** : change the default webroot directory from /var/www/html to your own setting
+ - **ERRORS** : set to 1 to display PHP Errors in the browser
+ - **TEMPLATE_NGINX_HTML** : enable by setting to 1 search and replace templating to happen on your code
+ - **HIDE_NGINX_HEADERS** : disable by setting to 0 default behavious is to hide nginx + php version in headers 
+ - **PHP_MEM_LIMIT** : Set higher PHP memory limit default is 128 Mb
+ - **PHP_POST_MAX_SIZE** : Set a larger post_max_size default is 100 Mb
+ - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize default is 100 Mb
+

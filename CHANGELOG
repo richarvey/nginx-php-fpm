@@ -3,7 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- Documentation updates to cover PHP modules
+
+## [0.1.2] - 2016-7-13
+### Added
+- Added options to set PHP values @richarvey
+- Added default to hide nginx and php version with overrride @richarvey
 
 ## [0.1.1] - 2016-6-15
 ### Added
