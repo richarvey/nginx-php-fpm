@@ -128,12 +128,12 @@ The following flags are a list of all the currently supported options that can b
  - **GIT_REPO** : URL to the repository containing your source code
  - **GIT_BRANCH** : Select a specific branch (optional)
  - **GIT_EMAIL** : Set your email for code pushing (required for git to work)
- - **GIT_NAME** : Set your name for code pushing (required for got to work)
+ - **GIT_NAME** : Set your name for code pushing (required for git to work)
  - **SSH_KEY** : Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)
- - **WEBROOT** : change the default webroot directory from /var/www/html to your own setting
- - **ERRORS** : set to 1 to display PHP Errors in the browser
- - **TEMPLATE_NGINX_HTML** : enable by setting to 1 search and replace templating to happen on your code
- - **HIDE_NGINX_HEADERS** : disable by setting to 0 default behavious is to hide nginx + php version in headers 
- - **PHP_MEM_LIMIT** : Set higher PHP memory limit default is 128 Mb
- - **PHP_POST_MAX_SIZE** : Set a larger post_max_size default is 100 Mb
- - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize default is 100 Mb
+ - **WEBROOT** : Change the default webroot directory from `/var/www/html` to your own setting
+ - **ERRORS** : Set to 1 to display PHP Errors in the browser
+ - **TEMPLATE_NGINX_HTML** : Enable by setting to 1 search and replace templating to happen on your code
+ - **HIDE_NGINX_HEADERS** : Disable by setting to 0, default behaviour is to hide nginx + php version in headers 
+ - **PHP_MEM_LIMIT** : Set higher PHP memory limit, default is 128 Mb
+ - **PHP_POST_MAX_SIZE** : Set a larger post_max_size, default is 100 Mb
+ - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize, default is 100 Mb
