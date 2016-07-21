@@ -39,7 +39,6 @@ if [ ! -d "${webroot}/.git" ]; then
    else
      git clone $GIT_REPO $webroot
    fi
-   chown -Rf nginx.nginx /var/www/html
  fi
 fi
 
@@ -84,6 +83,9 @@ if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
     fi
   done
 fi
+
+# Always chown webroot for better mounting
+chown -Rf nginx.nginx $webroot
 
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
