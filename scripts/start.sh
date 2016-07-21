@@ -13,7 +13,10 @@ fi
 
 # Set custom webroot
 if [ ! -z "$WEBROOT" ]; then
- sed -i "s#root /var/www/html;#root ${WEBROOT};#g" /etc/nginx/sites-available/default.conf
+  webroot=$WEBROOT
+  sed -i "s#root /var/www/html;#root ${webroot};#g" /etc/nginx/sites-available/default.conf
+else
+  webroot=/var/www/html
 fi
 
 # Setup git variables
@@ -26,15 +29,15 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "${webroot}/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
    rm -Rf /var/www/html/index.php
    if [ ! -z "$GIT_BRANCH" ]; then
-     git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
+     git clone -b $GIT_BRANCH $GIT_REPO $webroot
    else
-     git clone $GIT_REPO /var/www/html/
+     git clone $GIT_REPO $webroot
    fi
    chown -Rf nginx.nginx /var/www/html
  fi
