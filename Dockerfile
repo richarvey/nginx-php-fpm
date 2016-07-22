@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
-ENV php_conf /etc/php5/php.ini 
+ENV php_conf /etc/php5/php.ini
 ENV fpm_conf /etc/php5/php-fpm.conf
 ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
@@ -77,6 +77,7 @@ sed -i -e "s/;listen.mode = 0660/listen.mode = 0666/g" ${fpm_conf} && \
 sed -i -e "s/;listen.owner = nobody/listen.owner = nginx/g" ${fpm_conf} && \
 sed -i -e "s/;listen.group = nobody/listen.group = nginx/g" ${fpm_conf} && \
 sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_conf} &&\
+sed -i -e "s/^;clear_env = no$/clear_env = no/" ${fpm_conf} &&\
 ln -s /etc/php5/php.ini /etc/php5/conf.d/php.ini && \
 find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 

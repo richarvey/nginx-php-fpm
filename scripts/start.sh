@@ -13,7 +13,10 @@ fi
 
 # Set custom webroot
 if [ ! -z "$WEBROOT" ]; then
- sed -i "s#root /var/www/html;#root ${WEBROOT};#g" /etc/nginx/sites-available/default.conf
+  webroot=$WEBROOT
+  sed -i "s#root /var/www/html;#root ${webroot};#g" /etc/nginx/sites-available/default.conf
+else
+  webroot=/var/www/html
 fi
 
 # Setup git variables
@@ -26,25 +29,24 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "${webroot}/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
    rm -Rf /var/www/html/index.php
    if [ ! -z "$GIT_BRANCH" ]; then
-     git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
+     git clone -b $GIT_BRANCH $GIT_REPO $webroot
    else
-     git clone $GIT_REPO /var/www/html/
+     git clone $GIT_REPO $webroot
    fi
-   chown -Rf nginx.nginx /var/www/html
  fi
 fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
- echo php_flag[display_errors] = off >> /etc/php5/php-fpm.conf
+ echo php_flag[display_errors] = off >> $fpm_conf
 else
- echo php_flag[display_errors] = on >> /etc/php5/php-fpm.conf
+ echo php_flag[display_errors] = on >> $fpm_conf
 fi
 
 # Display Version Details or not
@@ -69,18 +71,8 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
  sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /etc/php5/conf.d/php.ini
 fi
 
-# Very dirty hack to replace variables in code with ENVIRONMENT values
-if [[ "$TEMPLATE_NGINX_HTML" == "1" ]] ; then
-  for i in $(env)
-  do
-    variable=$(echo "$i" | cut -d'=' -f1)
-    value=$(echo "$i" | cut -d'=' -f2)
-    if [[ "$variable" != '%s' ]] ; then
-      replace='\$\$_'${variable}'_\$\$'
-      find /var/www/html -type f -exec sed -i -e 's/'${replace}'/'${value}'/g' {} \;
-    fi
-  done
-fi
+# Always chown webroot for better mounting
+chown -Rf nginx.nginx $webroot
 
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
