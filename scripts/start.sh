@@ -33,7 +33,7 @@ if [ ! -d "${webroot}/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
-   rm -Rf /var/www/html/index.php
+   rm -Rf $webroot/index.php
    if [ ! -z "$GIT_BRANCH" ]; then
      git clone -b $GIT_BRANCH $GIT_REPO $webroot
    else
@@ -44,9 +44,9 @@ fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
- echo php_flag[display_errors] = off >> $fpm_conf
+ echo php_flag[display_errors] = off >> /etc/php5/php-fpm.conf
 else
- echo php_flag[display_errors] = on >> $fpm_conf
+ echo php_flag[display_errors] = on >> /etc/php5/php-fpm.conf
 fi
 
 # Display Version Details or not
