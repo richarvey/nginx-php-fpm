@@ -36,7 +36,18 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-json \
     php7-phar \
     php5-soap \
-    php7-dom && \
+    php7-dom \
+    python \
+    python-dev \
+    py-pip \
+    augeas-dev \
+    openssl-dev \
+    ca-certificates \
+    dialog \
+    gcc \
+    musl-dev \
+    linux-headers \
+    libffi-dev &&\
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
@@ -44,7 +55,10 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
-    php7 -r "unlink('composer-setup.php');"
+    php7 -r "unlink('composer-setup.php');" && \
+    pip install -U certbot && \
+    mkdir -p /etc/letsencrypt/webrootauth && \
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
@@ -59,6 +73,7 @@ mkdir -p /etc/nginx/ssl/ && \
 rm -Rf /var/www/* && \
 mkdir /var/www/html/
 ADD conf/nginx-site.conf /etc/nginx/sites-available/default.conf
+ADD conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # tweak php-fpm config
@@ -87,8 +102,9 @@ find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {}
 ADD scripts/start.sh /start.sh
 ADD scripts/pull /usr/bin/pull
 ADD scripts/push /usr/bin/push
-RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push
-RUN chmod 755 /start.sh
+ADD scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
+ADD scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
+RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push && chmod 755 /usr/bin/letsencrypt-setup && chmod 755 /usr/bin/letsencrypt-renew && chmod 755 /start.sh
 
 # copy in code
 ADD src/ /var/www/html/
