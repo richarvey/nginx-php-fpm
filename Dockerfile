@@ -34,7 +34,18 @@ RUN apk add --no-cache bash \
     php5-json \
     php5-phar \
     php5-soap \
-    php5-dom && \
+    php5-dom \
+    python \
+    python-dev \
+    py-pip \
+    augeas-dev \
+    openssl-dev \
+    ca-certificates \
+    dialog \
+    gcc \
+    musl-dev \
+    linux-headers \
+    libffi-dev &&\
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
@@ -42,7 +53,11 @@ RUN apk add --no-cache bash \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
-    php -r "unlink('composer-setup.php');"
+    php -r "unlink('composer-setup.php');" && \
+    pip install -U certbot && \
+    mkdir -p /etc/letsencrypt/webrootauth && \
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
+
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
@@ -85,8 +100,9 @@ find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {}
 ADD scripts/start.sh /start.sh
 ADD scripts/pull /usr/bin/pull
 ADD scripts/push /usr/bin/push
-RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push
-RUN chmod 755 /start.sh
+ADD scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
+ADD scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
+RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push && chmod 755 /usr/bin/letsencrypt-setup && chmod 755 /usr/bin/letsencrypt-renew && chmod 755 /start.sh
 
 # copy in code
 ADD src/ /var/www/html/
