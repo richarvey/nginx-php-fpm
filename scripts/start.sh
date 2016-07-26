@@ -33,12 +33,13 @@ if [ ! -d "/var/www/html/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
-   rm -Rf $webroot/index.php
+   rm -Rf /var/www/html/index.php
    if [ ! -z "$GIT_BRANCH" ]; then
      git clone -b $GIT_BRANCH $GIT_REPO /var/www/html
    else
      git clone $GIT_REPO /var/www/html
    fi
+   chown -Rf nginx.nginx /var/www/html
    chown -Rf nginx.nginx $webroot
  fi
 fi
