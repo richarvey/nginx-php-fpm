@@ -29,15 +29,15 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "${webroot}/.git" ]; then
+if [ ! -d "/var/www/html/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
    rm -Rf $webroot/index.php
    if [ ! -z "$GIT_BRANCH" ]; then
-     git clone -b $GIT_BRANCH $GIT_REPO $webroot
+     git clone -b $GIT_BRANCH $GIT_REPO /var/www/html
    else
-     git clone $GIT_REPO $webroot
+     git clone $GIT_REPO /var/www/html
    fi
  fi
 fi
