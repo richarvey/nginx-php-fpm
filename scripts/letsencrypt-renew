@@ -5,7 +5,7 @@ if [ -z "$DOMAIN" ]; then
  echo "You need to have \$DOMAIN set"
 else
  if [ -f /etc/letsencrypt/live/${DOMAIN}/fullchain.pem ]; then
-  cerbot renew
+  certbot renew
   supervisorctl restart nginx
  else
   echo "There is no cert to renew"
