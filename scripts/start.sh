@@ -22,7 +22,7 @@ fi
 # Set custom index files
 if [ ! -z "$INDEX_FILES" ]; then
  index_files=$INDEX_FILES
- sed -i "s#index.php index.php index.html index.htm;#root ${index_files};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#index index.php index.html index.htm;#index ${index_files};#g" /etc/nginx/sites-available/default.conf
 fi
 
 # Setup git variables
