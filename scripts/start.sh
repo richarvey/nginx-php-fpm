@@ -19,6 +19,12 @@ else
  webroot=/var/www/html
 fi
 
+# Set custom index files
+if [ ! -z "$INDEX_FILES" ]; then
+ index_files=$INDEX_FILES
+ sed -i "s#index.php index.php index.html index.htm;#root ${index_files};#g" /etc/nginx/sites-available/default.conf
+fi
+
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
  git config --global user.email "$GIT_EMAIL"
