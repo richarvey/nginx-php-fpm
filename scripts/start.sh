@@ -21,14 +21,14 @@ fi
 
 # Set custom index files
 if [ ! -z "$INDEX_FILES" ]; then
- index_files=$INDEX_FILES
- sed -i "s#index index.php index.html index.htm;#index ${index_files};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#index index.php index.html index.htm;#index ${INDEX_FILES};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#index index.php index.html index.htm;#index ${INDEX_FILES};#g" /etc/nginx/sites-available/default-ssl.conf
 fi
 
 # Set custom fpm index file
 if [ ! -z "$FPM_INDEX_FILE" ]; then
- fpm_index_file=$FPM_INDEX_FILE
- sed -i "s#fastcgi_index index.php;#fastcgi_index ${fpm_index_file};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${FPM_INDEX_FILE};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${FPM_INDEX_FILE};#g" /etc/nginx/sites-available/default-ssl.conf
 fi
 
 # Setup git variables
