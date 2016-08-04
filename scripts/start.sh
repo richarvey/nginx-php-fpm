@@ -26,9 +26,9 @@ if [ ! -z "$INDEX_FILES" ]; then
 fi
 
 # Set custom fpm index file
-if [ ! -z "$FPM_INDEX_FILES" ]; then
- fpm_index_files=$FPM_INDEX_FILES
- sed -i "s#fastcgi_index index.php;#fastcgi_index ${fpm_index_files};#g" /etc/nginx/sites-available/default.conf
+if [ ! -z "$FPM_INDEX_FILE" ]; then
+ fpm_index_file=$FPM_INDEX_FILE
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${fpm_index_file};#g" /etc/nginx/sites-available/default.conf
 fi
 
 # Setup git variables
