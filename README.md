@@ -45,6 +45,7 @@ The following flags are a list of all the currently supported options that can b
  - **SSH_KEY** : Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)
  - **WEBROOT** : Change the default webroot directory from `/var/www/html` to your own setting
  - **INDEX_FILES** : Change the default index files from `index.php index.html index.htm` to your own setting
+ - **FPM_INDEX_FILES** : Change the default fpm index files from `index.php` to your own setting
  - **ERRORS** : Set to 1 to display PHP Errors in the browser
  - **TEMPLATE_NGINX_HTML** : Enable by setting to 1 search and replace templating to happen on your code
  - **HIDE_NGINX_HEADERS** : Disable by setting to 0, default behaviour is to hide nginx + php version in headers

@@ -25,6 +25,12 @@ if [ ! -z "$INDEX_FILES" ]; then
  sed -i "s#index index.php index.html index.htm;#index ${index_files};#g" /etc/nginx/sites-available/default.conf
 fi
 
+# Set custom fpm index file
+if [ ! -z "$FPM_INDEX_FILES" ]; then
+ fpm_index_files=$FPM_INDEX_FILES
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${fpm_index_files};#g" /etc/nginx/sites-available/default.conf
+fi
+
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
  git config --global user.email "$GIT_EMAIL"
