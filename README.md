@@ -99,37 +99,6 @@ In order to refresh the code in a container and pull newer code form git simply 
 ```
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
 ```
-### Templating
-**NOTE: You now need to enable templates see below**
-This container will automatically configure your web application if you template your code.
-### Using environment variables
-For example if you are using a MySQL server, and you have a config.php file where you need to set the MySQL details include $$_MYSQL_HOST_$$ style template tags.
-
-Example config.php::
-```
-<?php
-database_host = $$_MYSQL_HOST_$$;
-database_user = $$_MYSQL_USER_$$;
-database_pass = $$_MYSQL_PASS_$$
-...
-?>
-```
-
-To set the variables simply pass them in as environmental variables on the docker command line.
-
-Example:
-```
-sudo docker run -d -e 'GIT_REPO=git@git.ngd.io:ngineered/ngineered-website.git' -e 'SSH_KEY=base64_key' -e 'TEMPLATE_NGINX_HTML=1' -e 'GIT_BRANCH=stage' -e 'MYSQL_HOST=host.x.y.z' -e 'MYSQL_USER=username' -e 'MYSQL_PASS=supper_secure_password' richarvey/nginx-php-fpm
-```
-
-This will expose the following variables that can be used to template your code.
-```
-MYSQL_HOST=host.x.y.z
-MYSQL_USER=username
-MYSQL_PASS=password
-```
-### Template anything
-Yes ***ANYTHING***, any variable exposed by the **-e** flag lets you template your configuration files. This means you can add redis, mariaDB, memcache or anything you want to your application very easily.
 ## Logging and Errors
 ### Logging
 All logs should now print out in stdout/stderr and are available via the docker logs command:
