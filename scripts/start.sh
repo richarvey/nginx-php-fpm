@@ -80,5 +80,20 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
  sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /etc/php7/conf.d/php.ini
 fi
 
+# Always chown webroot for better mounting
+chown -Rf nginx.nginx /var/www/html
+
+# Run custom scripts
+if [[ "$RUN_SCRIPTS" == "1" ]] ; then
+  if [ -d "/var/www/html/scripts/" ]; then
+    # make scripts executable incase they aren't
+    chmod -Rf 750 /var/www/html/scripts/*
+    # run scripts in number order
+    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+  else
+    echo "Can't find script directory"
+  fi
+fi
+
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
