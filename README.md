@@ -54,7 +54,6 @@ The following flags are a list of all the currently supported options that can b
  - **DOMAIN** : Set domain name for Lets Encrypt scripts
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
 
-
 ### Dynamically Pulling code from git
 One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](docs/repo_layout.md).
 
