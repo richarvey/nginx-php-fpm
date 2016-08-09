@@ -55,7 +55,7 @@ The following flags are a list of all the currently supported options that can b
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
 
 ### Dynamically Pulling code from git
-One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](docs/repo_layout.md).
+One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md).
 
 There are two methods of pulling code from git, you can either use a Personal Token (recommended method) or an SSH key.
 
@@ -97,7 +97,7 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 ```
 
 ### Scripting
-There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](docs/repo_layout.md) for more details on how to organise this.
+There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md) for more details on how to organise this.
 
 ### Lets Encrypt support (Experimental)
 #### Enabling SSL or Special Nginx Configs
