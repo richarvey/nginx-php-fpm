@@ -16,6 +16,10 @@ However if you wish to use scripting support you'll want to split code and scrip
  - repo root (/var/www/html)
   - src
     - your code here
+  - conf
+    - nginx
+      - default-site.conf
+      - default-site-ssl.conf
   - scripts
     - 00-firstscript.sh
     - 01-second.sh
@@ -25,7 +29,7 @@ However if you wish to use scripting support you'll want to split code and scrip
 ### src
 If you use an alternative directory for your application root like the previous example of __src/__, you can use the __WEBROOT__ variable to instruct nginx that that is where the code should be served from.
 
-``` docker run -e 'WEBROOT=/var/www/html/src/' -e OTHER_VARS ........```
+``` docker run -e 'WEBROOT=/var/www/html/src/' -e OTHER_VARS ........ ```
 
 One example would be, if you are running craft CMS you'll end up with a repo structure like this:
 
@@ -39,6 +43,9 @@ One example would be, if you are running craft CMS you'll end up with a repo str
 ```
 
 In this case __WEBROOT__ would be set as __/var/www/html/public__
+
+### conf
+This directory is where you can put config files you call from your scripts. It is also home to the nginx folder where you can include custom nginx config files.
 
 ### scripts
 Scripts are executed in order so its worth numbering them ```00,01,..,99``` to control their run order. Bash scripts are supported but, of course, you could install other run times in the first script then write your scripts in your preferred language.
