@@ -109,6 +109,8 @@ RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push && chmod 755 /usr/bin/let
 ADD src/ /var/www/html/
 ADD errors/ /var/www/errors/
 
+VOLUME /var/www/html
+
 EXPOSE 443 80
 
 #CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
