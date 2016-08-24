@@ -13,6 +13,7 @@ RUN apk add --no-cache bash \
     supervisor \
     curl \
     git \
+    redis-server \
     php5-fpm \
     php5-pdo \
     php5-pdo_mysql \
@@ -35,6 +36,7 @@ RUN apk add --no-cache bash \
     php5-phar \
     php5-soap \
     php5-dom \
+    php5-redis \
     python \
     python-dev \
     py-pip \
@@ -80,6 +82,8 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} && \
 sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} && \
 sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} && \
 sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} && \
+sed -i -e "s/;date.timezone\s*=/date.timezone = Asia\/Shanghai/g" ${php_conf} && \
+sed -i -e "s/short_open_tag\s*=\s*Off/short_open_tag = On/g" ${php_conf} && \
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" ${fpm_conf} && \
 sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf} && \
 sed -i -e "s/pm.max_children = 4/pm.max_children = 4/g" ${fpm_conf} && \
@@ -111,7 +115,7 @@ ADD errors/ /var/www/errors/
 
 VOLUME /var/www/html
 
-EXPOSE 443 80
+EXPOSE 443 80 6379
 
 #CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 CMD ["/start.sh"]
