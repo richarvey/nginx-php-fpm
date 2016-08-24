@@ -6,42 +6,6 @@ ENV php_conf /etc/php5/php.ini
 ENV fpm_conf /etc/php5/php-fpm.conf
 ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN addgroup -S redis && adduser -S -G redis redis
-
-# grab su-exec for easy step-down from root
-RUN apk add --no-cache 'su-exec>=0.2'
-
-ENV REDIS_VERSION 3.0.7
-ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-3.0.7.tar.gz
-ENV REDIS_DOWNLOAD_SHA1 e56b4b7e033ae8dbf311f9191cf6fdf3ae974d1c
-
-# for redis-sentinel see: http://redis.io/topics/sentinel
-RUN set -x \
-	&& apk add --no-cache --virtual .build-deps \
-		gcc \
-		linux-headers \
-		make \
-		musl-dev \
-		tar \
-	&& wget -O redis.tar.gz "$REDIS_DOWNLOAD_URL" \
-	&& echo "$REDIS_DOWNLOAD_SHA1 *redis.tar.gz" | sha1sum -c - \
-	&& mkdir -p /usr/src/redis \
-	&& tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1 \
-	&& rm redis.tar.gz \
-	&& make -C /usr/src/redis \
-	&& make -C /usr/src/redis install \
-	&& rm -r /usr/src/redis \
-	&& apk del .build-deps
-
-#RUN mkdir /data && chown redis:redis /data
-#VOLUME /data
-#WORKDIR /data
-
-ADD scripts/docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
-
-
 RUN apk add --no-cache bash \
     openssh-client \
     wget \
@@ -91,11 +55,9 @@ RUN apk add --no-cache bash \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');" && \
     pip install -U certbot && \
-    mkdir -p /etc/letsencrypt/webrootauth
+    mkdir -p /etc/letsencrypt/webrootauth && \
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 
-# Install testing php-redis
-RUN apk add php5-redis --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted && php -m
-RUN apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
@@ -118,8 +80,6 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} && \
 sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} && \
 sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} && \
 sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} && \
-sed -i -e "s/;date.timezone\s*=/date.timezone = Asia\/Shanghai/g" ${php_conf} && \
-sed -i -e "s/short_open_tag\s*=\s*Off/short_open_tag = On/g" ${php_conf} && \
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" ${fpm_conf} && \
 sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf} && \
 sed -i -e "s/pm.max_children = 4/pm.max_children = 4/g" ${fpm_conf} && \
@@ -151,10 +111,7 @@ ADD errors/ /var/www/errors/
 
 VOLUME /var/www/html
 
-EXPOSE 443 80 6379
-
-#ENTRYPOINT ["docker-entrypoint.sh"]
-#CMD [ "redis-server" ]
+EXPOSE 443 80
 
 #CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 CMD ["/start.sh"]
