@@ -71,7 +71,7 @@ RUN apk add --no-cache bash \
     php5-phar \
     php5-soap \
     php5-dom \
-    phpredis \
+    phpredis@testing \
     python \
     python-dev \
     py-pip \
