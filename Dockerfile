@@ -71,7 +71,6 @@ RUN apk add --no-cache bash \
     php5-phar \
     php5-soap \
     php5-dom \
-    php-redis \
     python \
     python-dev \
     py-pip \
@@ -96,7 +95,7 @@ RUN apk add --no-cache bash \
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 
 # Install testing php-redis
-#RUN apk add php-redis --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted && php -m
+RUN apk add php-redis --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted && php -m
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
