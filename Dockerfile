@@ -154,7 +154,7 @@ VOLUME /var/www/html
 EXPOSE 443 80 6379
 
 #ENTRYPOINT ["docker-entrypoint.sh"]
-CMD [ "redis-server" ]
+#CMD [ "redis-server" ]
 
 #CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 CMD ["/start.sh"]
