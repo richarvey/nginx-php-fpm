@@ -38,6 +38,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php5-soap \
     php7-dom \
     php7-zip \
+    php7-session \
     python \
     python-dev \
     py-pip \
