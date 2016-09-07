@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM nginx:mainline-alpine
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
@@ -9,7 +9,6 @@ ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afe
 RUN apk add --no-cache bash \
     openssh-client \
     wget \
-    nginx \
     supervisor \
     curl \
     git \
