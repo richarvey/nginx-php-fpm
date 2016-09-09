@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM nginx:mainline-alpine
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
