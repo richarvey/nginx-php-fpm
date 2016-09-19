@@ -33,7 +33,7 @@ To simply run the container:
 sudo docker run -d richarvey/nginx-php-fpm
 ```
 
-You can then browse to ```http://<DOCKER_HOST>:8080``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
+You can then browse to ```http://<DOCKER_HOST>``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
 
 ### Available Configuration Parameters
 The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
