@@ -12,9 +12,7 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 |-----|-------|-----|--------|
 | latest | 1.11.3 | 5.6.25 | 3.4 |
 | php5 | 1.11.3 | 5.6.25 | 3.4 |
-| php7 | 1.11.3 | 7.0.10 | 3.4 |
-
-See: [https://hub.docker.com/_/nginx/](https://hub.docker.com/_/nginx/) for base details and nginx module support
+| php7 | 1.10.1 | 7.0.10 | 3.4 |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
@@ -35,7 +33,7 @@ To simply run the container:
 sudo docker run -d richarvey/nginx-php-fpm
 ```
 
-You can then browse to ```http://<DOCKER_HOST>:8080``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
+You can then browse to ```http://<DOCKER_HOST>``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
 
 ### Available Configuration Parameters
 The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
@@ -57,7 +55,7 @@ The following flags are a list of all the currently supported options that can b
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
 
 ### Dynamically Pulling code from git
-One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/php7/docs/repo_layout.md).
+One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md).
 
 There are two methods of pulling code from git, you can either use a Personal Token (recommended method) or an SSH key.
 
@@ -102,9 +100,9 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 Sometimes you need a custom config file for nginx to do rewrites or password protection, etc. For this reason we've included the ability to have custom nginx configs pulled directly from your git source. Please have a read of the [repo layout guidelines](docs/repo_layout.md) for more information. Its pretty simple to enable this, all you need to do is include a folder in the root of your repository called ```conf/nginx/``` within this folder you need to include a file called ```nginx-site.conf``` which will contain your default nginx site config. If you wish to have a custom file for SSL you simply include a file called ```nginx-site-ssl.conf``` in the same directory. These files will then be swapped in after you code is cloned.
 
 ### Scripting
-There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/php7/docs/repo_layout.md) for more details on how to organise this.
+There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md) for more details on how to organise this.
 
-### Lets Encrypt support (Experimental)
+### Lets Encrypt support
 #### Enabling SSL or Special Nginx Configs
 You can either map a local folder containing your configs to /etc/nginx or (recommended method) edit the files within the  __conf__ directory in a copy of this git repo, and then rebuilding the base image.
 #### Setup
@@ -118,7 +116,6 @@ Lets Encrypt certs expire every 90 days, to renew simply run:
 ```
 sudo docker exec -t <CONTAINER_NAME> /usr/bin/letsencrypt-renew
 ```
-
 ## Special Git Features
 Specify the ```GIT_EMAIL``` and ```GIT_NAME``` variables for this to work. They are used to set up git correctly and allow the following commands to work.
 
@@ -134,7 +131,7 @@ In order to refresh the code in a container and pull newer code from git run:
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
 ```
 
-### Using environment variables
+### Using environment variables / templating
 
 To set the variables pass them in as environment variables on the docker command line.
 
@@ -142,7 +139,10 @@ Example:
 ```
 sudo docker run -d -e 'YOUR_VAR=VALUE' richarvey/nginx-php-fpm
 ```
-
+You can then use PHP to get teh environment variable into your code:
+```
+string getenv ( string $YOUR_VAR )
+```
 ## Logging and Errors
 
 ### Logging
