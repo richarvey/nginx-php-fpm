@@ -103,7 +103,7 @@ Sometimes you need a custom config file for nginx to do rewrites or password pro
 There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md) for more details on how to organise this.
 
 ### Lets Encrypt support
-[Lets Encrypt Guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md)
+This container includes support to easily manage lets encrypt certificates. Please see the [Lets Encrypt Guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md) for more details.
 
 ## Special Git Features
 Specify the ```GIT_EMAIL``` and ```GIT_NAME``` variables for this to work. They are used to set up git correctly and allow the following commands to work.
