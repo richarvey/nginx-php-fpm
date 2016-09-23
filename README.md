@@ -97,13 +97,13 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 ```
 
 ### Custom Nginx Config files
-Sometimes you need a custom config file for nginx to do rewrites or password protection, etc. For this reason we've included the ability to have custom nginx configs pulled directly from your git source. Please have a read of the [repo layout guidelines](docs/repo_layout.md) for more information. Its pretty simple to enable this, all you need to do is include a folder in the root of your repository called ```conf/nginx/``` within this folder you need to include a file called ```nginx-site.conf``` which will contain your default nginx site config. If you wish to have a custom file for SSL you simply include a file called ```nginx-site-ssl.conf``` in the same directory. These files will then be swapped in after you code is cloned.
+Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md) 
 
-### Scripting
-There is often an occasion where you need to run a script on code to do a transformation once code lands in the container. For this reason we have developed scripting support. By including a scripts folder in your git repository and passing the __RUN_SCRIPTS=1__ flag to your command line the container will execute your scripts. Please see the [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md) for more details on how to organise this.
+### Scripting and Templating
+Please see the [Scripting and templating guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md) for more details.
 
 ### Lets Encrypt support
-This container includes support to easily manage lets encrypt certificates. Please see the [Lets Encrypt Guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md) for more details.
+This container includes support to easily manage lets encrypt certificates. Please see the [Lets Encrypt guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md) for more details.
 
 ## Special Git Features
 Specify the ```GIT_EMAIL``` and ```GIT_NAME``` variables for this to work. They are used to set up git correctly and allow the following commands to work.
@@ -118,19 +118,6 @@ sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/push
 In order to refresh the code in a container and pull newer code from git run:
 ```
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
-```
-
-### Using environment variables / templating
-
-To set the variables pass them in as environment variables on the docker command line.
-
-Example:
-```
-sudo docker run -d -e 'YOUR_VAR=VALUE' richarvey/nginx-php-fpm
-```
-You can then use PHP to get teh environment variable into your code:
-```
-string getenv ( string $YOUR_VAR )
 ```
 ## Logging and Errors
 
