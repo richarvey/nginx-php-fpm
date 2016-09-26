@@ -21,6 +21,7 @@ RUN apk add --no-cache bash \
     php5-ctype \
     php5-zlib \
     php5-gd \
+    php5-exif \
     php5-intl \
     php5-memcache \
     php5-sqlite3 \
