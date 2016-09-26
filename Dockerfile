@@ -24,6 +24,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-ctype \
     php7-zlib \
     php7-gd \
+    php7-exif \
     php7-intl \
     php7-sqlite3 \
     php7-pdo_pgsql \
