@@ -29,35 +29,35 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "${webroot}/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
-   rm -Rf /var/www/html/*
+   rm -Rf ${webroot}/*
    if [ ! -z "$GIT_BRANCH" ]; then
      if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-       git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
+       git clone -b $GIT_BRANCH $GIT_REPO ${webroot}/
      else
-       git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html
+       git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} ${webroot}
      fi
    else
      if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-       git clone $GIT_REPO /var/www/html/
+       git clone $GIT_REPO ${webroot}/
      else
-       git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html
+       git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} ${webroot}
      fi
    fi
-   chown -Rf nginx.nginx /var/www/html
+   chown -Rf nginx.nginx ${webroot}
  fi
 fi
 
 # Enable custom nginx config files if they exist
-if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+if [ -f ${webroot}/conf/nginx/nginx-site.conf ]; then
+  cp ${webroot}/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
 fi
 
-if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+if [ -f ${webroot}/conf/nginx/nginx-site-ssl.conf ]; then
+  cp ${webroot}/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 fi
 
 # Display PHP error's or not
@@ -90,15 +90,15 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
 fi
 
 # Always chown webroot for better mounting
-chown -Rf nginx.nginx /var/www/html
+chown -Rf nginx.nginx ${webroot}
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
-  if [ -d "/var/www/html/scripts/" ]; then
+  if [ -d "${webroot}/scripts/" ]; then
     # make scripts executable incase they aren't
-    chmod -Rf 750 /var/www/html/scripts/*
+    chmod -Rf 750 ${webroot}/scripts/*
     # run scripts in number order
-    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+    for i in `ls ${webroot}/scripts/`; do ${webroot}/scripts/$i ; done
   else
     echo "Can't find script directory"
   fi
