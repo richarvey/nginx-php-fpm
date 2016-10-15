@@ -6,8 +6,7 @@ ENV php_conf /etc/php7/php.ini
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
 ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
-RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-    echo http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && apk update && \
+RUN sed -i -e "s/v3.4/edge/" /etc/apk/repositories && apk update && \
     apk add --no-cache bash \
     openssh-client \
     wget \
@@ -42,7 +41,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-session \
     python \
     python-dev \
-    py-pip \
+    py2-pip \
     augeas-dev \
     openssl-dev \
     ca-certificates \
@@ -102,8 +101,8 @@ RUN sed -i \
         -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" \
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf} && \
-    ln -s /etc/php5/php.ini /etc/php5/conf.d/php.ini && \
-    find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
+    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
