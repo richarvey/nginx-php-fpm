@@ -20,6 +20,7 @@ RUN sed -i -e "s/v3.4/edge/" /etc/apk/repositories && apk update && \
     php7-mysqlnd \
     php7-mysqli \
     php7-mcrypt \
+    php7-mbstring \
     php7-ctype \
     php7-zlib \
     php7-gd \
