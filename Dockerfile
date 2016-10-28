@@ -6,7 +6,8 @@ ENV php_conf /etc/php5/php.ini
 ENV fpm_conf /etc/php5/php-fpm.conf
 ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
-RUN apk add --no-cache bash \
+RUN apk update && \
+    apk add --no-cache bash \
     openssh-client \
     wget \
     supervisor \
