@@ -94,11 +94,18 @@ chown -Rf nginx.nginx /var/www/html
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
-  if [ -d "/var/www/html/scripts/" ]; then
-    # make scripts executable incase they aren't
-    chmod -Rf 750 /var/www/html/scripts/*
-    # run scripts in number order
-    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+  if [[ -d "/var/www/html/scripts/" ]]; then
+    while read _script; do
+      echo >&2 ":: Going to try local script '$_script'..."
+      chmod 750 "$_script" \
+      && "$_script"
+    done < \
+      <(
+        # The script may be shell or ruby kind.
+        find "/var/www/html/scripts/" -type f -exec file {} \; \
+        | grep ' script' \
+        | awk -F: '{print $1}'
+      )
   else
     echo "Can't find script directory"
   fi
