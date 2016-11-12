@@ -98,7 +98,8 @@ if [[ "$RUN_SCRIPTS" == "1" ]] ; then
     while read _script; do
       echo >&2 ":: Going to try local script '$_script'..."
       chmod 750 "$_script" \
-      && "$_script"
+      && "$_script" \
+      || exit 1
     done < \
       <(
         # The script may be shell or ruby kind.
