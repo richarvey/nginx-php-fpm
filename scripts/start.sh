@@ -19,6 +19,18 @@ else
  webroot=/var/www/html
 fi
 
+# Set custom index files
+if [ ! -z "$INDEX_FILES" ]; then
+ sed -i "s#index index.php index.html index.htm;#index ${INDEX_FILES};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#index index.php index.html index.htm;#index ${INDEX_FILES};#g" /etc/nginx/sites-available/default-ssl.conf
+fi
+
+# Set custom fpm index file
+if [ ! -z "$FPM_INDEX_FILE" ]; then
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${FPM_INDEX_FILE};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#fastcgi_index index.php;#fastcgi_index ${FPM_INDEX_FILE};#g" /etc/nginx/sites-available/default-ssl.conf
+fi
+
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
  git config --global user.email "$GIT_EMAIL"

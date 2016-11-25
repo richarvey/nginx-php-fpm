@@ -46,6 +46,8 @@ The following flags are a list of all the currently supported options that can b
  - **GIT_PERSONAL_TOKEN** : Personal access token for your git account (required for HTTPS git access)
  - **GIT_USERNAME** : Git username for use with personal tokens. (required for HTTPS git access)
  - **WEBROOT** : Change the default webroot directory from `/var/www/html` to your own setting
+ - **INDEX_FILES** : Change the default index files from `index.php index.html index.htm` to your own setting
+ - **FPM_INDEX_FILE** : Change the default fpm index files from `index.php` to your own setting
  - **ERRORS** : Set to 1 to display PHP Errors in the browser
  - **HIDE_NGINX_HEADERS** : Disable by setting to 0, default behaviour is to hide nginx + php version in headers
  - **PHP_MEM_LIMIT** : Set higher PHP memory limit, default is 128 Mb
