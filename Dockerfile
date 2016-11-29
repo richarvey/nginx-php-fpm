@@ -62,8 +62,8 @@ RUN sed -i -e "s/v3.4/edge/" /etc/apk/repositories && apk update && \
     pip install -U pip && \
     pip install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
-    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
-
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev && \
+    ln -s /usr/bin/php7 /usr/bin/php
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
