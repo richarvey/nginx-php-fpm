@@ -6,9 +6,9 @@ services:
   - docker
 
 install:
-  - docker build -t blog .
-  - docker run -d -p 127.0.0.1:80:80 --name blog blog
+  - docker build -t php .
+  - docker run -d -p 127.0.0.1:80:80 --name nginx-php-fpm php
 
 script:
-  - docker ps | grep -q blog
-  - curl 127.0.0.1
+  - docker ps | grep -q nginx-php-fpm
+  - curl 172.17.0.2
