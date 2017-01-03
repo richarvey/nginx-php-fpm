@@ -4,7 +4,7 @@
 if [ -z "$WEBROOT" ] || [ -z "$GIT_EMAIL" ] || [ -z "$DOMAIN" ]; then
  echo "You need the \$WEBROOT, \$GIT_EMAIL and the \$DOMAIN Variables"
 else
- certbot certonly --webroot -w $WEBROOT -d $DOMAIN --email $GIT_EMAIL --agree-tos
+ certbot certonly --webroot -w $WEBROOT -d $DOMAIN --email $GIT_EMAIL --agree-tos --quiet
  ln -s /etc/nginx/sites-available/default-ssl.conf /etc/nginx/sites-enabled/
 
  # change nginx for webroot and domain name
