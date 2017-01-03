@@ -12,7 +12,7 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 |-----|-------|-----|--------|
 | latest | 1.11.5 | 7.0.14 | 3.4@edge |
 | php7   | 1.11.5 | 7.0.14 | 3.4@edge |
-| php5   | 1.11.5 | 5.6.27 | 3.4 |
+| php5   | 1.11.5 | 5.6.29 | 3.4 |
 
 **PLEASE NOTE: PHP7 is now the default**
 
