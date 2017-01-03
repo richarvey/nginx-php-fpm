@@ -10,5 +10,5 @@ install:
   - docker run -d -p 127.0.0.1:80:80 --name nginx-php-fpm php
 
 script:
-  - docker ps | grep -q nginx-php-fpm
-  - curl 172.17.0.2
+  - docker ps
+  - curl 127.0.0.1:80
