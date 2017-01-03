@@ -10,9 +10,11 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 ## Versions
 | Tag | Nginx | PHP | Alpine |
 |-----|-------|-----|--------|
-| latest | 1.11.5 | 5.6.27 | 3.4 |
-| php5 | 1.11.5 | 5.6.27 | 3.4 |
-| php7 | 1.11.5 | 7.0.12 | 3.4 |
+| latest | 1.11.5 | 7.0.14 | 3.4@edge |
+| php7   | 1.11.5 | 7.0.14 | 3.4@edge |
+| php5   | 1.11.5 | 5.6.27 | 3.4 |
+
+**PLEASE NOTE: PHP7 is now the default**
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
@@ -97,7 +99,7 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 ```
 
 ### Custom Nginx Config files
-Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md)
+Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md) 
 
 ### Scripting and Templating
 Please see the [Scripting and templating guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md) for more details.

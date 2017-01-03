@@ -2,48 +2,50 @@ FROM nginx:mainline-alpine
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
-ENV php_conf /etc/php5/php.ini
-ENV fpm_conf /etc/php5/php-fpm.conf
-ENV composer_hash aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d 
+ENV php_conf /etc/php7/php.ini 
+ENV fpm_conf /etc/php7/php-fpm.d/www.conf
+ENV composer_hash 61069fe8c6436a4468d0371454cf38a812e451a14ab1691543f25a9627b97ff96d8753d92a00654c21e2212a5ae1ff36
 
-#RUN echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+    sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && \
-    apk add --no-cache bash \
+    apk add --no-cache bash \ 
     openssh-client \
     wget \
+    nginx \
     supervisor \
     curl \
     git \
-    php5-fpm \
-    php5-pdo \
-    php5-pdo_mysql \
-    php5-mysql \
-    php5-mysqli \
-    php5-mcrypt \
-    php5-ctype \
-    php5-zlib \
-    php5-gd \
-    php5-exif \
-    php5-intl \
-    php5-memcache \
-    php5-sqlite3 \
-    php5-pgsql \
-    php5-xml \
-    php5-xsl \
-    php5-curl \
-    php5-openssl \
-    php5-iconv \
-    php5-json \
-    php5-phar \
-    php5-soap \
-    php5-dom \
-    php5-zip \
-    php5-redis@testing \
+    php7-fpm \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-mysqlnd \
+    php7-mysqli \
+    php7-mcrypt \
+    php7-mbstring \
+    php7-ctype \
+    php7-zlib \
+    php7-gd \
+    php7-exif \
+    php7-intl \
+    php7-sqlite3 \
+    php7-pdo_pgsql \
+    php7-pgsql \
+    php7-xml \
+    php7-xsl \
+    php7-curl \
+    php7-openssl \
+    php7-iconv \
+    php7-json \
+    php7-phar \
+    php7-soap \
+    php7-dom \
+    php7-zip \
+    php7-session \
     python \
     python-dev \
-    py-pip \
+    py2-pip \
     augeas-dev \
     openssl-dev \
     ca-certificates \
@@ -55,16 +57,15 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
-    mkdir -p /var/log/supervisor &&\
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-    php composer-setup.php --install-dir=/usr/bin --filename=composer && \
-    php -r "unlink('composer-setup.php');" && \
+    mkdir -p /var/log/supervisor && \
+    php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    php7 -r "unlink('composer-setup.php');" && \
     pip install -U pip && \
     pip install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
-
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
@@ -105,8 +106,9 @@ RUN sed -i \
         -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" \
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf} && \
-    ln -s /etc/php5/php.ini /etc/php5/conf.d/php.ini && \
-    find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
+    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
@@ -118,7 +120,7 @@ RUN chmod 755 /usr/bin/pull && chmod 755 /usr/bin/push && chmod 755 /usr/bin/let
 
 # copy in code
 ADD src/ /var/www/html/
-ADD errors/ /var/www/errors/
+ADD errors/ /var/www/errors
 
 VOLUME /var/www/html
 
