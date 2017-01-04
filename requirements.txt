@@ -1,5 +1,0 @@
-jinja2
-PyYaml
-mistune
-markdown
-pygments
