@@ -9,10 +9,20 @@ install:
   - docker build -t php .
   - docker run -d -p 127.0.0.1:80:80 --name nginx-php-fpm php
 
+before_script:
+  - pip install -r requirements.txt
+  - pip install mock
+  - pip install requests
+  - pip install feedparser
+  - pip install coverage
+  - pip install coveralls
+
 script:
   - docker ps
   - sleep 5
   - curl -I 127.0.0.1:80
+  - python tests.py
+  - coverage run tests.py
 
 notifications:
   slack: ngineered:EIKJFrzibOe0TwUhLXNe8Q2Q
