@@ -4,7 +4,7 @@ MAINTAINER ngineered <support@ngineered.co.uk>
 
 ENV php_conf /etc/php7/php.ini 
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
-ENV composer_hash 61069fe8c6436a4468d0371454cf38a812e451a14ab1691543f25a9627b97ff96d8753d92a00654c21e2212a5ae1ff36
+ENV composer_hash 55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30
 
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
