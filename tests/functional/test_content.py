@@ -9,7 +9,7 @@ class ContentTest(unittest.TestCase):
     def setUp(self):
         ''' Create some starter data to be used in tests '''
         self.domain = "http://127.0.0.1"
-        self.search_string = "flibble"
+        self.search_string = "Version"
 
     def tearDown(self):
         ''' Destroy starter data '''
