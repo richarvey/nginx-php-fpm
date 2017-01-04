@@ -13,3 +13,6 @@ script:
   - docker ps
   - sleep 5
   - curl 127.0.0.1:80
+
+notifications:
+  slack: ngineered:EIKJFrzibOe0TwUhLXNe8Q2Q
