@@ -10,6 +10,11 @@ if [ -z "$GIT_NAME" ]; then
  exit
 fi
 
+# Try auto install for composer
+if [ -f "$WEBROOT/composer.lock" ]; then
+	  php composer.phar update
+fi
+
 cd /var/www/html
 git pull || exit 1
 chown -Rf nginx:nginx /var/www/html
