@@ -11,5 +11,5 @@ if [ -z "$GIT_NAME" ]; then
 fi
 
 cd /var/www/html
-git pull
+git pull || exit 1
 chown -Rf nginx:nginx /var/www/html
