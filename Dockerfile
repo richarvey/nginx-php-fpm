@@ -53,6 +53,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     gcc \
     musl-dev \
     linux-headers \
+    sassc \
     libffi-dev &&\
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
