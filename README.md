@@ -15,10 +15,10 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 | Tag | Nginx | PHP | Alpine |
 |-----|-------|-----|--------|
 | latest | 1.11.9 | 7.1.1 | 3.4 |
-| php7   | 1.11.9 | 7.1.1 | 3.4 |
+| php71  | 1.11.9 | 7.1.1 | 3.4 |
 | php5   | 1.11.5 | 5.6.29 | 3.4 |
 
-**PLEASE NOTE: PHP7 is now the default**
+**PLEASE NOTE: PHP7.1 is now the default and support for php5 will be dropped soon**
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
