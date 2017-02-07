@@ -4,6 +4,7 @@ MAINTAINER ngineered <support@ngineered.co.uk>
 
 ENV php_conf /usr/local/etc/php-fpm.conf 
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
+ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 ENV composer_hash 55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30
 
 ENV NGINX_VERSION 1.11.9
@@ -191,25 +192,22 @@ ADD conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # tweak php-fpm config
-RUN sed -i \
-        -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" \
-        -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" \
-        -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" \
-        -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" \
-        ${php_conf} && \
+RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
+    echo "upload_max_filesize = 100M"  >> ${php_vars} &&\
+    echo "post_max_size = 100M"  >> ${php_vars} &&\
+    echo "variables_order = \"EGPCS\""  >> ${php_vars} && \
     sed -i \
-        -e "s/;daemonize\s*=\s*yes/daemonize = no/g" \
         -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" \
-        -e "s/pm.max_children = 4/pm.max_children = 4/g" \
+        -e "s/pm.max_children = 5/pm.max_children = 4/g" \
         -e "s/pm.start_servers = 2/pm.start_servers = 3/g" \
         -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" \
         -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" \
-        -e "s/pm.max_requests = 500/pm.max_requests = 200/g" \
+        -e "s/;pm.max_requests = 500/pm.max_requests = 200/g" \
         -e "s/user = nobody/user = nginx/g" \
         -e "s/group = nobody/group = nginx/g" \
         -e "s/;listen.mode = 0660/listen.mode = 0666/g" \
-        -e "s/;listen.owner = nobody/listen.owner = nginx/g" \
-        -e "s/;listen.group = nobody/listen.group = nginx/g" \
+        -e "s/;listen.owner = www-data/listen.owner = nginx/g" \
+        -e "s/;listen.group = www-data/listen.group = nginx/g" \
         -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" \
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf}
