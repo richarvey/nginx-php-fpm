@@ -5,6 +5,10 @@
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
+if [[ "$GIT_USE_SSH" == "1" ]] ; then
+  echo -e "Host *\n\tUser ${GIT_USERNAME}\n\n" >> /root/.ssh/config
+fi
+
 if [ ! -z "$SSH_KEY" ]; then
  echo $SSH_KEY > /root/.ssh/id_rsa.base64
  base64 -d /root/.ssh/id_rsa.base64 > /root/.ssh/id_rsa
@@ -42,10 +46,11 @@ if [ ! -d "/var/www/html/.git" ]; then
    if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
      GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
    else
-   if [[ "$GIT_USE_SSH" == "1" ]]; then
-     GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
-   else
-     GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
+    if [[ "$GIT_USE_SSH" == "1" ]]; then
+      GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
+    else
+      GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
+    fi
    fi
    ${GIT_COMMAND} /var/www/html || exit 1
    chown -Rf nginx.nginx /var/www/html
