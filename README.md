@@ -48,6 +48,7 @@ The following flags are a list of all the currently supported options that can b
  - **GIT_BRANCH** : Select a specific branch (optional)
  - **GIT_EMAIL** : Set your email for code pushing (required for git to work)
  - **GIT_NAME** : Set your name for code pushing (required for git to work)
+ - **GIT_USE_SSH** : Set this to 1 if you want to use git over SSH (instead of HTTP), useful if you want to use Bitbucket instead of GitHub
  - **SSH_KEY** : Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)
  - **GIT_PERSONAL_TOKEN** : Personal access token for your git account (required for HTTPS git access)
  - **GIT_USERNAME** : Git username for use with personal tokens. (required for HTTPS git access)
