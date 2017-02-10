@@ -112,6 +112,22 @@ Please see the [Scripting and templating guide](https://github.com/ngineered/ngi
 ### Lets Encrypt support
 This container includes support to easily manage lets encrypt certificates. Please see the [Lets Encrypt guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md) for more details.
 
+### Install PHP Modules
+
+First of all drop into the container:
+```
+docker exec -t -i nginx /bin/bash
+```
+Then configure and install your module:
+```
+/usr/local/bin/docker-php-ext-configure sockets
+/usr/local/bin/docker-php-ext-install sockets
+```
+Now restart php-fpm:
+```
+supervisorctl restart php-fpm
+```
+
 ## Special Git Features
 Specify the ```GIT_EMAIL``` and ```GIT_NAME``` variables for this to work. They are used to set up git correctly and allow the following commands to work.
 
