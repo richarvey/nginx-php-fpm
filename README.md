@@ -59,6 +59,8 @@ The following flags are a list of all the currently supported options that can b
  - **PHP_POST_MAX_SIZE** : Set a larger post_max_size, default is 100 Mb
  - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize, default is 100 Mb
  - **DOMAIN** : Set domain name for Lets Encrypt scripts
+ - **REAL_IP_HEADER** : set to 1 to enable real ip support in the logs
+ - **REAL_IP_FROM** : set to your CIDR block for real ip in logs
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
 
 ### Dynamically Pulling code from git
@@ -106,7 +108,7 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 ### Custom Nginx Config files
 Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md) 
 
-## REAL IP / X-Forwarded-For Headers
+#### REAL IP / X-Forwarded-For Headers
 If you operate your container behind a load balancer, an ELB on AWS for example, you need to configure nginx to get the real IP and not the load balancer IP in the logs by using the X-Forwarded-For. We've provided some handy flags to let you do this. You need to set both of these to get this to work:
 ```
 -e "REAL_IP_HEADER=1"
