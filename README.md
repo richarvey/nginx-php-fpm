@@ -106,6 +106,17 @@ sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GI
 ### Custom Nginx Config files
 Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md) 
 
+## REAL IP / X-Forwarded-For Headers
+If you operate your container behind a load balancer, an ELB on AWS for example, you need to configure nginx to get the real IP and not the load balancer IP in the logs by using the X-Forwarded-For. We've provided some handy flags to let you do this. You need to set both of these to get this to work:
+```
+-e "REAL_IP_HEADER=1"
+-e "REAL_IP_FROM=Your_CIDR"
+```
+For example:
+```
+docker run -d -e "REAL_IP_HEADER=1" -e "REAL_IP_FROM=10.1.0.0/16" richarvey/nginx-php-fpm:latest
+```
+
 ### Scripting and Templating
 Please see the [Scripting and templating guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md) for more details.
 
