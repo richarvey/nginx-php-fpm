@@ -119,6 +119,28 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
  sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /usr/local/etc/php/conf.d/docker-vars.ini
 fi
 
+
+if [[ "$PUID" != "" ]] ; then
+
+  # lifted from
+  # https://github.com/pstauffer/docker-bind/commit/1f9b577d543ee8e47f6bdab06870692ec87333f8
+
+  PGID=${PGID:-101}
+  PUID=${PUID:-100}
+
+  echo "Recreating nginx user/group with these ids: user -> ${PUID}, group -> ${PGID}"
+
+  NAMED_UID_ACTUAL=$(id -u nginx)
+  NAMED_GID_ACTUAL=$(id -g nginx)
+
+  deluser nginx
+  addgroup -g ${PGID} nginx
+  adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx -u ${PUID} nginx
+  find / -user ${NAMED_UID_ACTUAL} -exec chown nginx {} \;
+  find / -group ${NAMED_GID_ACTUAL} -exec chgrp nginx {} \;
+
+fi
+
 # Always chown webroot for better mounting
 chown -Rf nginx.nginx /var/www/html
 
