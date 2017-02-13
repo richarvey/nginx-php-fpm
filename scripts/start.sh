@@ -119,8 +119,17 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
  sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /usr/local/etc/php/conf.d/docker-vars.ini
 fi
 
-# Always chown webroot for better mounting
-chown -Rf nginx.nginx /var/www/html
+if [ ! -z "$PUID" ]; then
+  if [ -z "$PGID" ]; then
+    PGID=${PUID}
+  fi
+  deluser nginx
+  addgroup -g ${PGID} nginx
+  adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx -u ${PUID} nginx
+else
+  # Always chown webroot for better mounting
+  chown -Rf nginx.nginx /var/www/html
+fi
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then

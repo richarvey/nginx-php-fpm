@@ -62,6 +62,8 @@ The following flags are a list of all the currently supported options that can b
  - **REAL_IP_HEADER** : set to 1 to enable real ip support in the logs
  - **REAL_IP_FROM** : set to your CIDR block for real ip in logs
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
+ - **PGID** : Set to GroupId you want to use for nginx (helps permissions when using local volume)
+ - **PUID** : Set to UserID you want to use for nginx (helps permissions when using local volume)
 
 ### Dynamically Pulling code from git
 One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time. Please take a look at our recommended [repo layout guidelines](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md).
@@ -104,6 +106,18 @@ To pull a repository and specify a branch add the GIT_BRANCH environment variabl
 ```
 sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'SSH_KEY=BIG_LONG_BASE64_STRING_GOES_IN_HERE' -e 'GIT_BRANCH=stage' richarvey/nginx-php-fpm:latest
 ```
+
+### User / Group Identifiers
+
+Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and optionally the group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
+
+An example of mapping the UID and GID to the container is as follows:
+
+```
+docker run -d -e "PUID=`id -u $USER`" -e "PGID=`id -g $USER`" -v local_dir:/var/www/html richarvey/nginx-php-fpm:latest
+```
+
+This will pull your local UID/GID and map it into the container so you can edit on your host machine and the code will still run in the container.
 
 ### Custom Nginx Config files
 Sometimes you need a custom config file for nginx to achieve this read the [Nginx config guide](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md) 

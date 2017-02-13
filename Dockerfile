@@ -232,5 +232,4 @@ VOLUME /var/www/html
 
 EXPOSE 443 80
 
-#CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 CMD ["/start.sh"]
