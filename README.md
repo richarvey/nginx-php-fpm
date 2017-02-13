@@ -1,5 +1,5 @@
-[![Travis](https://img.shields.io/docker/pulls/richarvey/nginx-php-fpm.svg?style=flat-square)]() |
-[![Travis](https://img.shields.io/docker/stars/richarvey/nginx-php-fpm.svg?style=flat-square)]() |
+[![Travis](https://img.shields.io/docker/pulls/richarvey/nginx-php-fpm.svg?style=flat-square)]()
+[![Travis](https://img.shields.io/docker/stars/richarvey/nginx-php-fpm.svg?style=flat-square)]()
 [![Travis](https://img.shields.io/travis/ngineered/nginx-php-fpm.svg?style=flat-square)]()
 
 ## Overview
@@ -11,12 +11,11 @@ This is a Dockerfile/image to build a container for nginx and php-fpm, with the 
 | latest | 1.11.9 | 7.1.1 | 3.4 |
 | php71  | 1.11.9 | 7.1.1 | 3.4 |
 
-### Git repository
-The source files for this project can be found here: [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
+### Links
+[https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
+[https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
-If you have any improvements please submit a pull request.
-### Docker hub repository
-The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
+## Docker Pull
 ```
 docker pull richarvey/nginx-php-fpm
 ```
@@ -57,18 +56,25 @@ The following flags are a list of all the currently supported options that can b
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
  - **PGID** : Set to GroupId you want to use for nginx (helps permissions when using local volume)
  - **PUID** : Set to UserID you want to use for nginx (helps permissions when using local volume)
+
 ## Documentation
 
 - [Building from source](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/building.md)
 - [Git Auth](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md)
- - Personal Access token
- - SSH Keys
+ - [Personal Access token](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md#personal-access-token)
+ - [SSH Keys](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md#ssh-keys)
 - [Git Commands](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_commands.md)
+ - [Push](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_commands.md#push-code-to-git)
+ - [Pull](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_commands.md#pull-code-from-git-refresh)
 - [Repository layout / webroot](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md)
+ - [webroot](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/repo_layout.md#src--webroot)
 - [User / Group Identifiers](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/UID_GID_Mapping.md)
 - [Custom Nginx Config files](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md)
- - REAL IP / X-Forwarded-For Headers
-- [Scripting and Templating](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md) for more details.
-- [Lets Encrypt Support](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md) for more details.
+ - [REAL IP / X-Forwarded-For Headers](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/nginx_configs.md#real-ip--x-forwarded-for-headers)
+- [Scripting and Templating](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md)
+ - [Environment Variables](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/scripting_templating.md#using-environment-variables--templating)
+- [Lets Encrypt Support](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md)
+ - [Setup](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md#setup)
+ - [Renewal](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md#renewal)
 - [PHP Modules](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/php_modules.md)
 - [Logging and Errors](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/logs.md)
