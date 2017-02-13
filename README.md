@@ -12,8 +12,8 @@ This is a Dockerfile/image to build a container for nginx and php-fpm, with the 
 | php71  | 1.11.9 | 7.1.1 | 3.4 |
 
 ### Links
-[https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
-[https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
+- [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
+- [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
 ## Docker Pull
 ```
