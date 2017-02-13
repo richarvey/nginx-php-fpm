@@ -26,7 +26,7 @@ However if you wish to use scripting support you'll want to split code and scrip
     - ......
 ```
 
-### src
+### src / Webroot
 If you use an alternative directory for your application root like the previous example of __src/__, you can use the __WEBROOT__ variable to instruct nginx that that is where the code should be served from.
 
 ``` docker run -e 'WEBROOT=/var/www/html/src/' -e OTHER_VARS ........ ```
