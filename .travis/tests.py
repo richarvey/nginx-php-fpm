@@ -5,7 +5,7 @@ import sys
 
 def run_functional_tests():
     ''' Execute Functional Tests '''
-    tests = unittest.TestLoader().discover('tests/functional')
+    tests = unittest.TestLoader().discover('.travis/tests/functional')
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     return result.wasSuccessful()
 

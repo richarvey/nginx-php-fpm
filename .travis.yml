@@ -16,7 +16,7 @@ script:
   - docker ps
   - sleep 5
   - curl -I 127.0.0.1:80
-  - python tests.py
+  - python .travis/tests.py
 
 notifications:
   slack: ngineered:EIKJFrzibOe0TwUhLXNe8Q2Q
