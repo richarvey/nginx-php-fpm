@@ -17,11 +17,12 @@ If you have improvements or suggestions please open an issue or pull request on 
 - [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
 - [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
-## Docker Pull
-```
-docker pull richarvey/nginx-php-fpm
-```
 ## Running
+To pull from docker hub:
+```
+docker pull richarvey/nginx-php-fpm:latest
+```
+### Starting
 To simply run the container:
 ```
 sudo docker run -d richarvey/nginx-php-fpm
@@ -35,7 +36,7 @@ docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERN
 
 For more detailed examples and explanations please refer to the documentation.
 
-### Available Configuration Parameters
+## Available Configuration Parameters
 The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
 
  - **GIT_REPO** : URL to the repository containing your source code. If you are using a personal token, this is the https URL without https://, e.g github.com/project/ for ssh prepend with git@ e.g git@github.com:project.git
