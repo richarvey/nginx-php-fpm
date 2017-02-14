@@ -17,52 +17,28 @@ If you have improvements or suggestions please open an issue or pull request on 
 - [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
 - [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
 
-## Running
+## Quick Start
 To pull from docker hub:
 ```
 docker pull richarvey/nginx-php-fpm:latest
 ```
-### Starting
+### Running
 To simply run the container:
 ```
 sudo docker run -d richarvey/nginx-php-fpm
 ```
-You can then browse to ```http://<DOCKER_HOST>``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address (normally 172.17.0.2)
-
-To pull code from git when running:
+To dynamically pull code from git when starting:
 ```
 docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'GIT_PERSONAL_TOKEN=<long_token_string_here>' richarvey/nginx-php-fpm:latest
 ```
 
+You can then browse to ```http://<DOCKER_HOST>``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address (normally 172.17.0.2)
+
 For more detailed examples and explanations please refer to the documentation.
-
-## Available Configuration Parameters
-The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
-
- - **GIT_REPO** : URL to the repository containing your source code. If you are using a personal token, this is the https URL without https://, e.g github.com/project/ for ssh prepend with git@ e.g git@github.com:project.git
- - **GIT_BRANCH** : Select a specific branch (optional)
- - **GIT_EMAIL** : Set your email for code pushing (required for git to work)
- - **GIT_NAME** : Set your name for code pushing (required for git to work)
- - **GIT_USE_SSH** : Set this to 1 if you want to use git over SSH (instead of HTTP), useful if you want to use Bitbucket instead of GitHub
- - **SSH_KEY** : Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)
- - **GIT_PERSONAL_TOKEN** : Personal access token for your git account (required for HTTPS git access)
- - **GIT_USERNAME** : Git username for use with personal tokens. (required for HTTPS git access)
- - **WEBROOT** : Change the default webroot directory from `/var/www/html` to your own setting
- - **ERRORS** : Set to 1 to display PHP Errors in the browser
- - **HIDE_NGINX_HEADERS** : Disable by setting to 0, default behaviour is to hide nginx + php version in headers
- - **PHP_MEM_LIMIT** : Set higher PHP memory limit, default is 128 Mb
- - **PHP_POST_MAX_SIZE** : Set a larger post_max_size, default is 100 Mb
- - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize, default is 100 Mb
- - **DOMAIN** : Set domain name for Lets Encrypt scripts
- - **REAL_IP_HEADER** : set to 1 to enable real ip support in the logs
- - **REAL_IP_FROM** : set to your CIDR block for real ip in logs
- - **RUN_SCRIPTS** : Set to 1 to execute scripts
- - **PGID** : Set to GroupId you want to use for nginx (helps permissions when using local volume)
- - **PUID** : Set to UserID you want to use for nginx (helps permissions when using local volume)
-
 ## Documentation
 
 - [Building from source](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/building.md)
+- [Config Flags](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/config_flags.md)
 - [Git Auth](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md)
  - [Personal Access token](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md#personal-access-token)
  - [SSH Keys](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md#ssh-keys)
@@ -81,3 +57,6 @@ The following flags are a list of all the currently supported options that can b
  - [Renewal](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md#renewal)
 - [PHP Modules](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/php_modules.md)
 - [Logging and Errors](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/logs.md)
+
+## Guides
+- [Running in Kubernetes](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/guides/kubernetes.md)
