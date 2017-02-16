@@ -2,7 +2,7 @@ FROM php:7.1-fpm-alpine
 
 MAINTAINER ngineered <support@ngineered.co.uk>
 
-ENV php_conf /usr/local/etc/php-fpm.conf 
+ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 ENV composer_hash 55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30
@@ -136,7 +136,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 #    sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && \
-    apk add --no-cache bash \ 
+    apk add --no-cache bash \
     openssh-client \
     wget \
     supervisor \
@@ -158,7 +158,14 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     icu-dev \
     libpq \
     libxslt-dev \
-    libffi-dev &&\
+    libffi-dev \
+    freetype-dev \
+    libjpeg-turbo-dev && \
+    docker-php-ext-configure gd \
+      --with-gd \
+      --with-freetype-dir=/usr/include/ \
+      --with-png-dir=/usr/include/ \
+      --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
     docker-php-ext-install pdo_mysql mysqli mcrypt gd exif intl xsl json soap dom zip && \
     mkdir -p /etc/nginx && \
