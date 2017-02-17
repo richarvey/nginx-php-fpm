@@ -60,3 +60,4 @@ For more detailed examples and explanations please refer to the documentation.
 
 ## Guides
 - [Running in Kubernetes](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/guides/kubernetes.md)
+- [Using Docker Compose](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/guides/docker_compose.md)
