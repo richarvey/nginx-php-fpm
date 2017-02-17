@@ -10,7 +10,7 @@ install:
   - docker run -d -p 127.0.0.1:80:80 --name nginx-php-fpm php
 
 before_script:
-  - pip install -r requirements.txt
+  - pip install -r .travis/requirements.txt
 
 script:
   - docker ps
