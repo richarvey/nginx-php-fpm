@@ -1,28 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.1.2] - 2017-2-17
 ### Added
+- Bumped nginx version to 1.11.10
+- changed pull script to do composer install (container scripts 0.2.6)
+- added --no-dev to composer install thx @SamMousa
+- Moved to semver
 
-## [0.2.1] - 2016-7-13
+## [1.1.1] - 2017-2-14
 ### Added
-- Added options to set PHP values @richarvey
-- Added default to hide nginx and php version with overrride @richarvey
-
-## [0.2.0] - 2016-6-15
-### Added
-- updated to php7 @richarvey
-
-## [0.1.1] - 2016-6-15
-### Added
-- Added php5-gd, php5-intl, php5-memcache, php5-sqlite3, php5-pgsql, php5-xml, php5-xsl @richarvey
-
-## [0.1.0] - 2016-06-15
-### Added
-- Pull in alpine build @drobertson2
-- Merge git scripts from old stable @richarvey
-- Tested Tamplating @richarvey
-
-## [0.0.0] - 2016-6-14
-### Added
-- Port nginx/php fpm to alpine @danroberston2
+- Stable Release

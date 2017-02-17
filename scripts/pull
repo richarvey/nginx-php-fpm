@@ -12,7 +12,7 @@ fi
 
 # Try auto install for composer
 if [ -f "$WEBROOT/composer.lock" ]; then
-  php composer.phar update
+  php composer.phar install --no-dev
 fi
 
 cd /var/www/html

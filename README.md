@@ -7,11 +7,12 @@ This is a Dockerfile/image to build a container for nginx and php-fpm, with the 
 
 If you have improvements or suggestions please open an issue or pull request on the GitHub project page.
 
-### Versions
-| Tag | Nginx | PHP | Alpine |
+### Versioning
+| Docker Tag | GitHub Release | Nginx Version | PHP Version | Alpine Version |
 |-----|-------|-----|--------|
-| latest | 1.11.9 | 7.1.1 | 3.4 |
-| php71  | 1.11.9 | 7.1.1 | 3.4 |
+| latest | Master Branch |1.11.10 | 7.1.1 | 3.4 |
+
+For other tags please see: [versioning](docs/versioning.md)
 
 ### Links
 - [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
@@ -38,6 +39,7 @@ For more detailed examples and explanations please refer to the documentation.
 ## Documentation
 
 - [Building from source](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/building.md)
+- [Versioning](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/versioning.md)
 - [Config Flags](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/config_flags.md)
 - [Git Auth](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md)
  - [Personal Access token](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/git_auth.md#personal-access-token)

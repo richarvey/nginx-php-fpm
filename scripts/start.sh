@@ -59,7 +59,7 @@ fi
 
 # Try auto install for composer
 if [ -f "$WEBROOT/composer.lock" ]; then
-  php composer.phar install
+  php composer.phar install --no-dev
 fi
 
 # Enable custom nginx config files if they exist
