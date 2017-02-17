@@ -14,7 +14,7 @@ We will use the [semver](http://ricostacruz.com/cheatsheets/semver.html) style n
 The latest tag will always follow the master branch in git. the other versions will have releases attached.
 
 | Docker Tag | GitHub Release | Nginx Version | PHP Version | Alpine Version | Container Scripts |
-|-----|-------|-----|--------|--------|
+|-----|-------|-----|--------|--------|--------|
 | latest | Master Branch |1.11.10 | 7.1.1 | 3.4 | 0.2.6 |
 | 1.1.1 | 1.1.1 |1.11.9 | 7.1.1 | 3.4 |  0.2.5 |
 | 1.1.2 | 1.1.2 |1.11.10 | 7.1.1 | 3.4 |  0.2.6 |
