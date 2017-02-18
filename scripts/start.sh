@@ -19,6 +19,7 @@ fi
 if [ ! -z "$WEBROOT" ]; then
  webroot=$WEBROOT
  sed -i "s#root /var/www/html;#root ${webroot};#g" /etc/nginx/sites-available/default.conf
+ sed -i "s#root /var/www/html;#root ${webroot};#g" /etc/nginx/sites-available/default-ssl.conf
 else
  webroot=/var/www/html
 fi
@@ -33,11 +34,11 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "$webroot/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
-   rm -Rf /var/www/html/*
+   rm -Rf $webroot/*
    GIT_COMMAND='git clone '
    if [ ! -z "$GIT_BRANCH" ]; then
      GIT_COMMAND=${GIT_COMMAND}" -b ${GIT_BRANCH}"
@@ -52,8 +53,8 @@ if [ ! -d "/var/www/html/.git" ]; then
       GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
     fi
    fi
-   ${GIT_COMMAND} /var/www/html || exit 1
-   chown -Rf nginx.nginx /var/www/html
+   ${GIT_COMMAND} $webroot || exit 1
+   chown -Rf nginx.nginx $webroot
  fi
 fi
 
@@ -63,12 +64,12 @@ if [ -f "$WEBROOT/composer.lock" ]; then
 fi
 
 # Enable custom nginx config files if they exist
-if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+if [ -f $webroot/conf/nginx/nginx-site.conf ]; then
+  cp $webroot/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
 fi
 
-if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+if [ -f $webroot/conf/nginx/nginx-site-ssl.conf ]; then
+  cp $webroot/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 fi
 
 # Display PHP error's or not
@@ -128,16 +129,16 @@ if [ ! -z "$PUID" ]; then
   adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx -u ${PUID} nginx
 else
   # Always chown webroot for better mounting
-  chown -Rf nginx.nginx /var/www/html
+  chown -Rf nginx.nginx $webroot
 fi
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
-  if [ -d "/var/www/html/scripts/" ]; then
+  if [ -d "$webroot/scripts/" ]; then
     # make scripts executable incase they aren't
-    chmod -Rf 750 /var/www/html/scripts/*
+    chmod -Rf 750 $webroot/scripts/*
     # run scripts in number order
-    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+    for i in `ls $webroot/scripts/`; do $webroot/scripts/$i ; done
   else
     echo "Can't find script directory"
   fi
@@ -145,4 +146,3 @@ fi
 
 # Start supervisord and services
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
-
