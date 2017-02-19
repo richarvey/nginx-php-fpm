@@ -3,7 +3,7 @@
 This guide will show you how to make a quick and easy docker compose file to get your container running using the compose tool.
 
 
-### Creating a copomse file
+### Creating a compose file
 Create a docker-compose.yml file with the following contents:
 
 ```
