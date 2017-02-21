@@ -12,7 +12,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 |-----|-------|-----|--------|--------|
 | latest | Master Branch |1.11.10 | 7.1.2 | 3.4 |
 
-For other tags please see: [versioning](docs/versioning.md)
+For other tags please see: [versioning](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/versioning.md)
 
 ### Links
 - [https://github.com/ngineered/nginx-php-fpm](https://github.com/ngineered/nginx-php-fpm)
