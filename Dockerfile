@@ -1,4 +1,4 @@
-FROM php:7.0-fpm-alpine
+FROM php:7.1.1-fpm-alpine
 
 MAINTAINER Tauno Hogue <tauno@thinkshout.com>
 
