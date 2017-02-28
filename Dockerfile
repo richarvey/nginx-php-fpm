@@ -182,7 +182,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 #    ln -s /usr/bin/php7 /usr/bin/php
 
-RUN apk add mysql-client
+RUN apk add --no-cache mysql-client \
+    su-exec
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
