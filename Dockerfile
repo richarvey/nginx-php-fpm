@@ -1,6 +1,6 @@
-FROM php:7.1.2-fpm-alpine
+FROM php:7.0-fpm-alpine
 
-MAINTAINER ngineered <support@ngineered.co.uk>
+MAINTAINER Tauno Hogue <tauno@thinkshout.com>
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
@@ -182,6 +182,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 #    ln -s /usr/bin/php7 /usr/bin/php
 
+    apk add mysql-client
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
