@@ -183,7 +183,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 #    ln -s /usr/bin/php7 /usr/bin/php
 
 RUN apk add --no-cache mysql-client \
-    su-exec
+    su-exec \
+    rsync
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
