@@ -185,8 +185,9 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 # TS Customizations
 RUN apk add --no-cache mysql-client \
     su-exec \
-    rsync &&\
-    echo "sendmail_path=`which true`"  >> ${php_vars}
+    rsync
+RUN echo "sendmail_path=`which true`"  >> ${php_vars} && \
+    composer global require "hirak/prestissimo:^0.3"
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
