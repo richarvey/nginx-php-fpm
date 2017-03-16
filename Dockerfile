@@ -166,7 +166,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
       --with-png-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
-    docker-php-ext-install pdo_mysql mysqli mcrypt gd exif intl xsl json soap dom zip && \
+    docker-php-ext-install pdo_mysql mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
+    docker-php-source delete && \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
