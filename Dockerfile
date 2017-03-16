@@ -182,13 +182,6 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
 #    ln -s /usr/bin/php7 /usr/bin/php
 
-# TS Customizations
-RUN apk add --no-cache mysql-client \
-    su-exec \
-    rsync
-RUN echo "sendmail_path=`which true`"  >> ${php_vars} && \
-    composer global require "hirak/prestissimo:^0.3"
-
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
@@ -229,6 +222,12 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
 #    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
 #    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
+# TS Customizations
+RUN apk add --no-cache mysql-client \
+    su-exec \
+    rsync
+RUN echo "sendmail_path=`which true`"  >> ${php_vars} && \
+    composer global require "hirak/prestissimo:^0.3"
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
