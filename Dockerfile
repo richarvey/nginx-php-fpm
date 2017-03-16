@@ -4,7 +4,6 @@ MAINTAINER ngineered <support@ngineered.co.uk>
 
 ENV php_conf /etc/php7/php.ini 
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
-ENV composer_hash 55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30
 
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
@@ -58,10 +57,11 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     mkdir -p /var/www/app && \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
-    php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-    php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
-    php7 -r "unlink('composer-setup.php');" && \
+    EXPECTED_COMPOSER_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig) && \
+    /usr/bin/php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    /usr/bin/php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${EXPECTED_COMPOSER_SIGNATURE}') { echo 'Composer.phar Installer verified'; } else { echo 'Composer.phar Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    /usr/bin/php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    /usr/bin/php7 -r "unlink('composer-setup.php');"  && \
     pip install -U pip && \
     pip install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
