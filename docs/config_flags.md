@@ -21,4 +21,4 @@ The following flags are a list of all the currently supported options that can b
  - **RUN_SCRIPTS** : Set to 1 to execute scripts
  - **PGID** : Set to GroupId you want to use for nginx (helps permissions when using local volume)
  - **PUID** : Set to UserID you want to use for nginx (helps permissions when using local volume)
-
+ - **REMOVE_FILES** : Use REMOVE_FILES=0 to prevent the script from clearing out /var/www/html (useful for working with local files)

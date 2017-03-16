@@ -36,8 +36,12 @@ fi
 if [ ! -d "/var/www/html/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
-   # Remove the test index file
-   rm -Rf /var/www/html/*
+   # Remove the test index file if you are pulling in a git repo
+   if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
+     echo "skiping removal of files"
+   else
+     rm -Rf /var/www/html/*
+   fi
    GIT_COMMAND='git clone '
    if [ ! -z "$GIT_BRANCH" ]; then
      GIT_COMMAND=${GIT_COMMAND}" -b ${GIT_BRANCH}"
