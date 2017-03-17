@@ -229,7 +229,7 @@ RUN apk add --no-cache mysql-client \
 RUN echo "sendmail_path=`which true`"  >> ${php_vars} && \
     composer global require -n "hirak/prestissimo:^0.3" && \
     composer global require -n "consolidation/cgr" && \
-    cgr "pantheon-systems/terminus:~1" --stability beta
+    cgr "pantheon-systems/terminus:~1"
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
