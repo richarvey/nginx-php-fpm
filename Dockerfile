@@ -227,7 +227,9 @@ RUN apk add --no-cache mysql-client \
     su-exec \
     rsync
 RUN echo "sendmail_path=`which true`"  >> ${php_vars} && \
-    composer global require "hirak/prestissimo:^0.3"
+    composer global require -n "hirak/prestissimo:^0.3" && \
+    composer global require -n "consolidation/cgr" && \
+    cgr "pantheon-systems/terminus:~1" --stability beta
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
