@@ -6,7 +6,7 @@ ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 ENV composer_hash 669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410
-
+ENV PATH "~/.composer/vendor/bin:$PATH"
 ENV NGINX_VERSION 1.11.10
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
