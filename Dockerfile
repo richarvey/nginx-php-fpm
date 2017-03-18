@@ -202,7 +202,7 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
     echo "upload_max_filesize = 100M"  >> ${php_vars} &&\
     echo "post_max_size = 100M"  >> ${php_vars} &&\
     echo "variables_order = \"EGPCS\""  >> ${php_vars} && \
-    echo "memory_limit = 128M"  >> ${php_vars} && \
+    echo "memory_limit = 256M"  >> ${php_vars} && \
     sed -i \
         -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" \
         -e "s/pm.max_children = 5/pm.max_children = 4/g" \
@@ -226,9 +226,7 @@ RUN apk add --no-cache mysql-client \
     su-exec \
     rsync
 RUN export PATH="~/.composer/vendor/bin:$PATH" && \
-    echo "sendmail_path=`which true`"  >> ${php_vars} && \
-    composer global require -n "hirak/prestissimo:^0.3" && \
-    composer global require -n "pantheon-systems/terminus:~1"
+    echo "sendmail_path=`which true`"  >> ${php_vars}
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
