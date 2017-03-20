@@ -44,6 +44,8 @@ One example would be, if you are running craft CMS you'll end up with a repo str
 
 In this case __WEBROOT__ would be set as __/var/www/html/public__
 
+Note that if you are managing dependencies with composer, your composer.json and composer.lock files should *always* be located in the repo root, not in the directory you set as __WEBROOT__.
+
 ### conf
 This directory is where you can put config files you call from your scripts. It is also home to the nginx folder where you can include custom nginx config files.
 
