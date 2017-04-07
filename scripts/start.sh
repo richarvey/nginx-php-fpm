@@ -5,8 +5,6 @@
 mkdir -p -m 0700 /root/.ssh
 # Prevent config files from being filled to infinity by force of stop and restart the container 
 echo "" > /root/.ssh/config
-/usr/local/etc/php-fpm.conf
-
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 if [[ "$GIT_USE_SSH" == "1" ]] ; then
