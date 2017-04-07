@@ -3,6 +3,10 @@
 # Disable Strict Host checking for non interactive git clones
 
 mkdir -p -m 0700 /root/.ssh
+# Prevent config files from being filled to infinity by force of stop and restart the container 
+echo "" > /root/.ssh/config
+/usr/local/etc/php-fpm.conf
+
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 if [[ "$GIT_USE_SSH" == "1" ]] ; then
@@ -73,6 +77,13 @@ fi
 
 if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
   cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+fi
+
+
+# Prevent config files from being filled to infinity by force of stop and restart the container
+lastlinephpconf="$(grep "." ./run_example.sh | tail -1)"
+if [[ $lastlinephpconf == *"php_flag[display_errors]"* ]]; then
+ sed '$' /usr/local/etc/php-fpm.conf
 fi
 
 # Display PHP error's or not
