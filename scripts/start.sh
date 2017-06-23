@@ -79,9 +79,9 @@ fi
 
 
 # Prevent config files from being filled to infinity by force of stop and restart the container
-lastlinephpconf="$(grep "." ./run_example.sh | tail -1)"
+lastlinephpconf="$(grep "." /usr/local/etc/php-fpm.conf | tail -1)"
 if [[ $lastlinephpconf == *"php_flag[display_errors]"* ]]; then
- sed '$' /usr/local/etc/php-fpm.conf
+ sed -i '$ d' /usr/local/etc/php-fpm.conf
 fi
 
 # Display PHP error's or not
