@@ -130,6 +130,7 @@ if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
   else
   	echo "Enabling xdebug"
   	echo "If you get this error, you can safely ignore it: /usr/local/bin/docker-php-ext-enable: line 83: nm: not found"
+  	# see https://github.com/docker-library/php/pull/420
     docker-php-ext-enable xdebug
     # see if file exists
     if [ -f $XdebugFile ]; then
