@@ -226,7 +226,28 @@ RUN apk add --no-cache mysql-client \
     su-exec \
     rsync
 RUN export PATH="~/.composer/vendor/bin:$PATH" && \
-    echo "sendmail_path=`which true`"  >> ${php_vars}
+    echo "sendmail_path=`which true`"  >> ${php_vars} \
+    # Get WP CLI
+    && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp \
+
+    # Get Drush
+    && wget http://files.drush.org/drush.phar \
+    && php drush.phar core-status \
+    && chmod +x drush.phar \
+    && mv drush.phar /usr/local/bin/drush \
+
+    # Get Terminus
+    && mkdir -p /var/www/.composer \
+    && cd /var/www/.composer \
+    && curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar \
+    && php installer.phar install \
+
+    # Get Drupal console
+    && curl https://drupalconsole.com/installer -L -o drupal.phar \
+    && chmod +x drupal.phar \
+    && mv drupal.phar /usr/local/bin/drupal
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
