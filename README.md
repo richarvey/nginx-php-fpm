@@ -58,6 +58,7 @@ For more detailed examples and explanations please refer to the documentation.
  - [Setup](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md#setup)
  - [Renewal](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/lets_encrypt.md#renewal)
 - [PHP Modules](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/php_modules.md)
+- [Xdebug](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/xdebug.md)
 - [Logging and Errors](https://github.com/ngineered/nginx-php-fpm/blob/master/docs/logs.md)
 
 ## Guides
