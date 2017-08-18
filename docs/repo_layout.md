@@ -18,8 +18,8 @@ However if you wish to use scripting support you'll want to split code and scrip
     - your code here
   - conf
     - nginx
-      - default-site.conf
-      - default-site-ssl.conf
+      - nginx-site.conf
+      - nginx-site-ssl.conf
   - scripts
     - 00-firstscript.sh
     - 01-second.sh
