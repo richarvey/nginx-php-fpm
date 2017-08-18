@@ -69,6 +69,10 @@ if [ -f "/var/www/html/composer.lock" ]; then
 fi
 
 # Enable custom nginx config files if they exist
+if [ -f /var/www/html/conf/nginx/nginx.conf ]; then
+  cp /var/www/html/conf/nginx/nginx.conf /etc/nginx/nginx.conf
+fi
+
 if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
   cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
 fi
