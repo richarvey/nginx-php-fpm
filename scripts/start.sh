@@ -62,12 +62,6 @@ if [ ! -d "/var/www/html/.git" ]; then
  fi
 fi
 
-# Try auto install for composer
-if [ -f "/var/www/html/composer.lock" ]; then
-  composer global require hirak/prestissimo
-  composer install --no-dev --working-dir=/var/www/html
-fi
-
 # Enable custom nginx config files if they exist
 if [ -f /var/www/html/conf/nginx/nginx.conf ]; then
   cp /var/www/html/conf/nginx/nginx.conf /etc/nginx/nginx.conf
@@ -190,6 +184,17 @@ if [[ "$RUN_SCRIPTS" == "1" ]] ; then
   else
     echo "Can't find script directory"
   fi
+fi
+
+# Try auto install for composer
+if [ -f "/var/www/html/composer.lock" ]; then
+    if [ "$APPLICATION_ENV" == "development" ]; then
+        composer global require hirak/prestissimo
+        composer install --working-dir=/var/www/html
+    else
+        composer global require hirak/prestissimo
+        composer install --no-dev --working-dir=/var/www/html
+    fi
 fi
 
 # Start supervisord and services
