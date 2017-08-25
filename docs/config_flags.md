@@ -22,3 +22,4 @@ The following flags are a list of all the currently supported options that can b
  - **PGID** : Set to GroupId you want to use for nginx (helps permissions when using local volume)
  - **PUID** : Set to UserID you want to use for nginx (helps permissions when using local volume)
  - **REMOVE_FILES** : Use REMOVE_FILES=0 to prevent the script from clearing out /var/www/html (useful for working with local files)
+ - **APPLICATION_ENV** : set this to development to prevent composer deleteing local dev dependancies
