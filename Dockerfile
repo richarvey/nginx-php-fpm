@@ -1,6 +1,6 @@
 FROM php:7.1.8-fpm-alpine
 
-MAINTAINER ngineered <support@ngineered.co.uk>
+MAINTAINER Ric Harvey <ric@ngd.io>
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
