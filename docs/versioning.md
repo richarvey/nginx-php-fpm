@@ -34,6 +34,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.3.2 | 1.3.2 |1.13.4 | 7.1.8 | 3.4 | 0.3.2 | 
 | 1.3.3 | 1.3.3 |1.13.4 | 7.1.9 | 3.4 | 0.3.2 | 
 | 1.3.4 | 1.3.4 |1.13.4 | 7.1.9 | 3.4 | 0.3.3 | 
+| 1.3.5 | 1.3.5 |1.13.5 | 7.1.9 | 3.4 | 0.3.3 | 
 
 These tags will be created as releases on GitHub and as tags in docker hub.
 
