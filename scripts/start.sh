@@ -58,7 +58,9 @@ if [ ! -d "/var/www/html/.git" ]; then
     fi
    fi
    ${GIT_COMMAND} /var/www/html || exit 1
-   chown -Rf nginx.nginx /var/www/html
+   if [ -z "$SKIP_CHOWN" ]; then
+     chown -Rf nginx.nginx /var/www/html
+   fi
  fi
 fi
 
@@ -170,8 +172,9 @@ if [ ! -z "$PUID" ]; then
   addgroup -g ${PGID} nginx
   adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx -u ${PUID} nginx
 else
-  # Always chown webroot for better mounting
-  chown -Rf nginx.nginx /var/www/html
+  if [ -z "$SKIP_CHOWN" ]; then
+    chown -Rf nginx.nginx /var/www/html
+  fi
 fi
 
 # Run custom scripts
