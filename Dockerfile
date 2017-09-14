@@ -2,6 +2,8 @@ FROM php:7.1.9-fpm-alpine
 
 MAINTAINER Ric Harvey <ric@ngd.io>
 
+ARG WITH_PINBA=false
+
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
@@ -65,6 +67,11 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --add-module=/usr/src/ngx_devel_kit-$DEVEL_KIT_MODULE_VERSION \
     --add-module=/usr/src/lua-nginx-module-$LUA_MODULE_VERSION \
   " \
+  && if [ "$WITH_PINBA" != "false" ]; then \
+        curl -fSL https://github.com/tony2001/ngx_http_pinba_module/archive/master.tar.gz -o /tmp/ngx_http_pinba_module.tar.gz; \
+        tar -xf /tmp/ngx_http_pinba_module.tar.gz -C /tmp/; \
+        CONFIG="${CONFIG} --add-module=/tmp/ngx_http_pinba_module-master "; \
+  fi \
   && addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \ 
   && apk add --no-cache --virtual .build-deps \
@@ -123,6 +130,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && strip /usr/sbin/nginx* \
   && strip /usr/lib/nginx/modules/*.so \
   && rm -rf /usr/src/nginx-$NGINX_VERSION \
+  && if [ "$WITH_PINBA" != "false" ]; then \
+    rm /tmp/ngx_http_pinba_module.tar.gz; \
+    rm -rf /tmp/ngx_http_pinba_module-master; \
+  fi \
   \
   # Bring in gettext so we can get `envsubst`, then throw
   # the rest away. To do this, we need to install `gettext`
@@ -185,6 +196,14 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
       --with-png-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
+    if [ "$WITH_PINBA" != "false" ]; then \
+        ls /usr/src/php; \
+        ls /usr/src/php/ext/; \
+        curl -fSL https://github.com/tony2001/pinba_extension/archive/master.tar.gz -o /tmp/pinba_extension.tar.gz; \
+        tar -xvf /tmp/pinba_extension.tar.gz -C /usr/src/php/ext/; \
+        mv /usr/src/php/ext/pinba_extension-master /usr/src/php/ext/pinba; \
+        docker-php-ext-install pinba; \
+    fi && \
     docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
     pecl install xdebug && \
     docker-php-source delete && \
