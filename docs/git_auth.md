@@ -2,6 +2,7 @@
 There are two methods of pulling code from git, you can either use a Personal Token (recommended method) or an SSH key.
 
 **Note:** We would recommend using a git personal token over an SSH key as it simplifies the set up process. To create a personal access token on Github follow this [guide](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
+If your repository is on BitBucket, you can create an "app password" and use it as the personnal access token. To get an app password for BitBucket, follow this [guide](https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html).
 
 ### Personal Access token
 
