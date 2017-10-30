@@ -35,8 +35,23 @@ fi
 
 # Dont pull code down if the .git folder exists
 if [ ! -d "/var/www/html/.git" ]; then
- # Pull down code from git for our site!
- if [ ! -z "$GIT_REPO" ]; then
+  #Pulling source code from zip file 
+  if [ ! -z "$CODE_ZIP_URL" ]; then
+    if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
+     echo "skiping removal of files"
+   else
+     rm -Rf /var/www/html/*
+   fi
+   wget -O "/tmp/source_code.zip" $CODE_ZIP_URL || exit 1
+   unzip "/tmp/source_code.zip" -d /var/www/html || exit 1
+   if [ -z "$SKIP_CHOWN" ]; then
+     chown -Rf nginx.nginx /var/www/html
+   fi      
+  fi
+
+
+  # Pull down code from git for our site!
+  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file if you are pulling in a git repo
    if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
      echo "skiping removal of files"
@@ -61,7 +76,7 @@ if [ ! -d "/var/www/html/.git" ]; then
    if [ -z "$SKIP_CHOWN" ]; then
      chown -Rf nginx.nginx /var/www/html
    fi
- fi
+  fi
 fi
 
 # Enable custom nginx config files if they exist
