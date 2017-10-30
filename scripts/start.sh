@@ -117,6 +117,12 @@ if [ -f /etc/nginx/sites-available/default-ssl.conf ]; then
  fi
 fi
 
+#Display errors in docker logs
+if [ ! -z "$PHP_ERRORS_STDERR" ]; then
+  echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-vars.ini
+  echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/docker-vars.ini
+fi
+
 # Increase the memory_limit
 if [ ! -z "$PHP_MEM_LIMIT" ]; then
  sed -i "s/memory_limit = 128M/memory_limit = ${PHP_MEM_LIMIT}M/g" /usr/local/etc/php/conf.d/docker-vars.ini
