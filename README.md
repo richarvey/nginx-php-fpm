@@ -9,7 +9,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 ### Versioning
 | Docker Tag | GitHub Release | Nginx Version | PHP Version | Alpine Version |
 |-----|-------|-----|--------|--------|
-| latest | Master Branch |1.13.6 | 7.1.10 | 3.4 |
+| latest | Master Branch |1.13.6 | 7.1.11 | 3.4 |
 
 For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/versioning.md)
 
