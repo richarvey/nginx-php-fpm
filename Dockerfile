@@ -1,4 +1,4 @@
-FROM php:7.1.12-fpm-alpine
+FROM php:7.2.0-fpm-alpine
 
 LABEL maintainer="Ric Harvey <ric@ngd.io>"
 
@@ -10,7 +10,7 @@ ENV NGINX_VERSION 1.13.7
 ENV LUA_MODULE_VERSION 0.10.11
 ENV DEVEL_KIT_MODULE_VERSION 0.3.0
 ENV LUAJIT_LIB=/usr/lib
-ENV LUAJIT_INC=/usr/include/luajit-2.0
+ENV LUAJIT_INC=/usr/include/luajit-2.1
 
 # resolves #166
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
@@ -100,7 +100,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   done; \
   test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEYS" && exit 1; \
   gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
-  && rm -r "$GNUPGHOME" nginx.tar.gz.asc \
+  #&& rm -r "$GNUPGHOME" nginx.tar.gz.asc \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
   && tar -zxC /usr/src -f ndk.tar.gz \
@@ -158,7 +158,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-#    sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && \
     apk add --no-cache bash \
@@ -195,8 +194,9 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
       --with-png-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
-    docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
-    pecl install xdebug && \
+    #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
+    docker-php-ext-install iconv pdo_mysql pdo_sqlite mysqli gd exif intl xsl json soap dom zip opcache && \
+    #pecl install xdebug && \
     docker-php-source delete && \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
