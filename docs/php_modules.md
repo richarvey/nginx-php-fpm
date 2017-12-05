@@ -1,4 +1,10 @@
 ## Install PHP Modules
+- To install [Pinba](https://github.com/tony2001/pinba_engine)
+add `WITH_PINBA=true` build flag
+```
+docker build -t nginx-php-fpm:latest --build-arg WITH_PINBA=true .
+```
+# Custom
 To install and configure extra PHP modules in this image, first of all drop into the container:
 ```
 docker exec -t -i nginx /bin/bash
