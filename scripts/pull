@@ -11,8 +11,8 @@ if [ -z "$GIT_NAME" ]; then
 fi
 
 # Try auto install for composer
-if [ -f "$WEBROOT/composer.lock" ]; then
-  php composer.phar install --no-dev
+if [ -f "/var/www/html/composer.lock" ]; then
+  composer install --no-dev --working-dir=/var/www/html
 fi
 
 cd /var/www/html
