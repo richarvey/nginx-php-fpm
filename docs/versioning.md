@@ -48,6 +48,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | Docker Tag | GitHub Release | Nginx Version | PHP Version | Alpine Version | Container Scripts |
 |-----|-------|-----|--------|--------|--------|
 | 1.4.0 | 7.2.0 |1.13.2 | 7.2.0 | 3.6 | 0.3.5 |
+| 1.4.1 | 7.2.0 |1.13.2 | 7.2.0 | 3.6 | 0.3.6 |
 
 These tags will be created as releases on GitHub and as tags in docker hub.
 
