@@ -150,6 +150,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     supervisor \
     curl \
     libcurl \
+    git \
     python \
     python-dev \
     py-pip \
