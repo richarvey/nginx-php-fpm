@@ -11,6 +11,8 @@ ENV LUA_MODULE_VERSION 0.10.11
 ENV DEVEL_KIT_MODULE_VERSION 0.3.0
 ENV LUAJIT_LIB=/usr/lib
 ENV LUAJIT_INC=/usr/include/luajit-2.0
+#https://github.com/bravist/php-cli-alpine-aliyun-app
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # resolves #166
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
