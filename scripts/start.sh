@@ -79,23 +79,23 @@ fi
 
 
 # Prevent config files from being filled to infinity by force of stop and restart the container
-lastlinephpconf="$(grep "." /usr/local/etc/php-fpm.conf | tail -1)"
+lastlinephpconf="$(grep "." /usr/local/etc/php-fpm.d/www.conf | tail -1)"
 if [[ $lastlinephpconf == *"php_flag[display_errors]"* ]]; then
- sed -i '$ d' /usr/local/etc/php-fpm.conf
+ sed -i '$ d' /usr/local/etc/php-fpm.d/www.conf
 fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
- echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.d/www.conf
 else
- echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.d/www.conf
 fi
 
 # Display Version Details or not
 if [[ "$HIDE_NGINX_HEADERS" == "0" ]] ; then
  sed -i "s/server_tokens off;/server_tokens on;/g" /etc/nginx/nginx.conf
 else
- sed -i "s/expose_php = On/expose_php = Off/g" /usr/local/etc/php-fpm.conf
+ sed -i "s/expose_php = On/expose_php = Off/g" /usr/local/etc/php-fpm.d/www.conf
 fi
 
 # Pass real-ip to logs when behind ELB, etc
