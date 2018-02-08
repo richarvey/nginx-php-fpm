@@ -275,8 +275,6 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
     && cd /var/www/.composer \
     && curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar \
     && php installer.phar install \
-    # Temporary fix until the next terminus release to use symfony 3.x
-    && composer require symfony/process:^3 \
 
     # Get Drupal console
     && curl https://drupalconsole.com/installer -L -o drupal.phar \
