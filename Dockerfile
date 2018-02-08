@@ -263,19 +263,16 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
     && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp \
-
     # Get Drush
     && wget http://files.drush.org/drush.phar \
     && php drush.phar core-status \
     && chmod +x drush.phar \
     && mv drush.phar /usr/local/bin/drush \
-
     # Get Terminus
     && mkdir -p /var/www/.composer \
     && cd /var/www/.composer \
     && curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar \
     && php installer.phar install \
-
     # Get Drupal console
     && curl https://drupalconsole.com/installer -L -o drupal.phar \
     && chmod +x drupal.phar \
