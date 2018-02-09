@@ -263,9 +263,8 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
     && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp \
-    # Get Drush
-    && wget http://files.drush.org/drush.phar \
-    && php drush.phar core-status \
+    # Get Drush launcher
+    && wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.5.1/drush.phar \
     && chmod +x drush.phar \
     && mv drush.phar /usr/local/bin/drush \
     # Get Terminus
