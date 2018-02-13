@@ -7,9 +7,11 @@ This is a Dockerfile/image to build a container for nginx and php-fpm, with the 
 If you have improvements or suggestions please open an issue or pull request on the GitHub project page.
 
 ### Versioning
+```
 | Docker Tag | GitHub Release | Nginx Version | PHP Version | Alpine Version |
-|-----|-------|-----|--------|--------|
-| latest | Master Branch |1.13.7 | 7.1.12 | 3.4 |
+|------------|----------------|---------------|-------------|----------------|
+| latest     | Master Branch  | 1.13.7        | 7.1.12      | 3.4            |
+```
 
 For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/versioning.md)
 
