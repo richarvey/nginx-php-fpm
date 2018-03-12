@@ -280,6 +280,9 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
 # Get java for Behat/selenium/chromedriver tests
 RUN apk add --no-cache openjdk8-jre
 
+# Get Google Chrome (well, chromium)
+RUN apk add -U --no-cache --allow-untrusted chromium
+
 # Add Scripts
 ADD scripts/start.sh /start.sh
 ADD scripts/pull /usr/bin/pull
