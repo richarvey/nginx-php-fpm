@@ -1,4 +1,4 @@
-FROM php:7.4.0-fpm-alpine
+FROM php:7.2.5-fpm-alpine
 
 LABEL maintainer="Tauno Hogue <tauno@thinkshout.com>"
 
