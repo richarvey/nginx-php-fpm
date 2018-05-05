@@ -58,6 +58,12 @@ if [ ! -d "/var/www/html/.git" ]; then
     fi
    fi
    ${GIT_COMMAND} /var/www/html || exit 1
+   if [ ! -z "$GIT_TAG" ]; then
+     git checkout ${GIT_TAG} || exit 1
+   fi
+   if [ ! -z "$GIT_COMMIT" ]; then
+     git checkout ${GIT_COMMIT} || exit 1
+   fi
    if [ -z "$SKIP_CHOWN" ]; then
      chown -Rf nginx.nginx /var/www/html
    fi
