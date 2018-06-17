@@ -1,9 +1,18 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
 before_script:
   - echo Logging in to Docker Hub...
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
-job:
+build:
+  stage: build
   script:
-  - echo Build started on `date`
-  - docker build -t richarvey/nginx-php-fpm:latest
-  - docker push richarvey/nginx-php-fpm:latest
+    - echo Build started on `date`
+    - docker build -t richarvey/nginx-php-fpm:latest .
+    - docker push richarvey/nginx-php-fpm:latest
