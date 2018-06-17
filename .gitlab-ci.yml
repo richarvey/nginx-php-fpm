@@ -8,7 +8,7 @@ stages:
 
 before_script:
   - echo Logging in to Docker Hub...
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 
 build:
   stage: build
