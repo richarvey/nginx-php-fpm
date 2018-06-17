@@ -1,0 +1,9 @@
+before_script:
+  - echo Logging in to Docker Hub...
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
+job:
+  script:
+  - echo Build started on `date`
+  - docker build -t richarvey/nginx-php-fpm:latest
+  - docker push richarvey/nginx-php-fpm:latest
