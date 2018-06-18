@@ -15,7 +15,7 @@ services:
     restart: always
     environment:
       SSH_KEY: '<YOUR _KEY_HERE>'
-      GIT_REPO: 'git@github.com:<YOUR_ACCOUNT>/<YOUR_REPO?.git'
+      GIT_REPO: 'git@github.com:<YOUR_ACCOUNT>/<YOUR_REPO>.git'
       GIT_EMAIL: 'void@ngd.io'
       GIT_NAME: '<YOUR_NAME>'
 ```
