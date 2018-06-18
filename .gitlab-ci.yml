@@ -12,6 +12,7 @@ before_script:
 build:
   stage: build
   script:
-    - echo Build started on `date`
-    - docker build -t richarvey/nginx-php-fpm:latest .
-    - docker push richarvey/nginx-php-fpm:latest
+    - echo Build started on `date` for $CI_COMMIT_REF_NAME
+    - f [[ "$CI_REGISTRY" =~ "master" ]]; then export build=latest else build=$CI_REGISTRY fi
+    - docker build -t richarvey/nginx-php-fpm:"$build" .
+    - docker push richarvey/nginx-php-fpm:"$build"
