@@ -7,7 +7,6 @@ stages:
 
 before_script:
   - echo Logging in to Docker Hub...
-  - docker login -u $USER -p $PASS index.docker.io
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 build:
