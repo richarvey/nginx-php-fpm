@@ -20,8 +20,12 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.4.0 | 7.2.0 |1.13.2 | 7.2.0 | 3.6 | 0.3.5 |
 | 1.4.1 | 7.2.0 |1.13.2 | 7.2.0 | 3.6 | 0.3.6 |
 | 1.5.0 | 7.2.4 |1.14.0 | 7.2.4 | 3.6 | 0.3.6 |
-| 1.5.1 | 7.2.6 |1.14.0 | 7.2.4 | 3.6 | 0.3.6 |
+| 1.5.1 | 7.2.6 |1.14.0 | 7.2.4 | 3.7 | 0.3.6 |
+| 1.5.2 | 7.2.6 |1.14.0 | 7.2.4 | 3.7 | 0.3.7 |
 
+These tags will be created on GitLab and as tags in docker hub.
+
+### Unmaintained tags:
 #### PHP 7.1
 
 | Docker Tag | Git Release | Nginx Version | PHP Version | Alpine Version | Container Scripts |
@@ -52,9 +56,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.3.9 | 1.3.9 |1.13.7 | 7.1.11 | 3.4 | 0.3.3 | 
 | 1.3.10 | 1.3.10 |1.13.7 | 7.1.12 | 3.4 | 0.3.4 | 
 
-These tags will be created as releases on GitHub and as tags in docker hub.
-
-### Unmaintained tags:
+### Legacy tags:
 
 - php5
 - php7
