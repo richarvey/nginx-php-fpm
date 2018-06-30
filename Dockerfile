@@ -160,7 +160,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && apk upgrade &&\
-    apk add --no-cache --virtual .sys-deps \
+    apk add --no-cache \
     bash \
     openssh-client \
     wget \
@@ -211,8 +211,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     pip install -U pip && \
     pip install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
-#    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev make autoconf && \
-    apk del .sys-deps
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev make autoconf
+#    apk del .sys-deps
 #    ln -s /usr/bin/php7 /usr/bin/php
 
 ADD conf/supervisord.conf /etc/supervisord.conf
@@ -271,4 +271,5 @@ ADD errors/ /var/www/errors
 
 EXPOSE 443 80
 
+WORKDIR ["/"]
 CMD ["/start.sh"]
