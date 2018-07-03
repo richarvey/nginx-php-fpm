@@ -1,12 +1,20 @@
-FROM php:7.1.7-fpm-alpine
+FROM php:7.2.7-fpm-alpine
 
-MAINTAINER ngineered <support@ngineered.co.uk>
+LABEL maintainer="Ric Harvey <ric@ngd.io>"
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 
-ENV NGINX_VERSION 1.13.2
+ENV NGINX_VERSION 1.14.0
+ENV LUA_MODULE_VERSION 0.10.13
+ENV DEVEL_KIT_MODULE_VERSION 0.3.0
+ENV LUAJIT_LIB=/usr/lib
+ENV LUAJIT_INC=/usr/include/luajit-2.1
+
+# resolves #166
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
@@ -54,14 +62,17 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     --with-compat \
     --with-file-aio \
     --with-http_v2_module \
+    --add-module=/usr/src/ngx_devel_kit-$DEVEL_KIT_MODULE_VERSION \
+    --add-module=/usr/src/lua-nginx-module-$LUA_MODULE_VERSION \
   " \
   && addgroup -S nginx \
-  && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
+  && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \ 
   && apk add --no-cache --virtual .build-deps \
+    autoconf \
     gcc \
     libc-dev \
     make \
-    openssl-dev \
+    libressl-dev \
     pcre-dev \
     zlib-dev \
     linux-headers \
@@ -71,15 +82,30 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     gd-dev \
     geoip-dev \
     perl-dev \
+    luajit-dev \
   && curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
+  && curl -fSL https://github.com/simpl/ngx_devel_kit/archive/v$DEVEL_KIT_MODULE_VERSION.tar.gz -o ndk.tar.gz \
+  && curl -fSL https://github.com/openresty/lua-nginx-module/archive/v$LUA_MODULE_VERSION.tar.gz -o lua.tar.gz \
   && export GNUPGHOME="$(mktemp -d)" \
-  && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEYS" \
-  && gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
-  && rm -r "$GNUPGHOME" nginx.tar.gz.asc \
+  && found=''; \
+  for server in \
+    ha.pool.sks-keyservers.net \
+    hkp://keyserver.ubuntu.com:80 \
+    hkp://p80.pool.sks-keyservers.net:80 \
+    pgp.mit.edu \
+  ; do \
+    echo "Fetching GPG key $GPG_KEYS from $server"; \
+    gpg --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$GPG_KEYS" && found=yes && break; \
+  done; \
+  test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEYS" && exit 1; \
+  gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
+  #&& rm -r "$GNUPGHOME" nginx.tar.gz.asc \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
-  && rm nginx.tar.gz \
+  && tar -zxC /usr/src -f ndk.tar.gz \
+  && tar -zxC /usr/src -f lua.tar.gz \
+  && rm nginx.tar.gz ndk.tar.gz lua.tar.gz \ 
   && cd /usr/src/nginx-$NGINX_VERSION \
   && ./configure $CONFIG --with-debug \
   && make -j$(getconf _NPROCESSORS_ONLN) \
@@ -132,10 +158,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-#    sed -i -e "s/v3.4/edge/" /etc/apk/repositories && \
     echo /etc/apk/respositories && \
-    apk update && \
-    apk add --no-cache bash \
+    apk update && apk upgrade &&\
+    apk add --no-cache \
+    bash \
     openssh-client \
     wget \
     supervisor \
@@ -146,9 +172,11 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     python-dev \
     py-pip \
     augeas-dev \
-    openssl-dev \
+    libressl-dev \
     ca-certificates \
     dialog \
+    autoconf \
+    make \
     gcc \
     musl-dev \
     linux-headers \
@@ -167,7 +195,9 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
       --with-png-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
-    docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
+    #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
+    docker-php-ext-install iconv pdo_mysql pdo_sqlite mysqli gd exif intl xsl json soap dom zip opcache && \
+    pecl install xdebug-2.6.0 && \
     docker-php-source delete && \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
@@ -181,7 +211,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     pip install -U pip && \
     pip install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
-    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev make autoconf
+#    apk del .sys-deps
 #    ln -s /usr/bin/php7 /usr/bin/php
 
 ADD conf/supervisord.conf /etc/supervisord.conf
@@ -240,4 +271,5 @@ ADD errors/ /var/www/errors
 
 EXPOSE 443 80
 
+WORKDIR ["/"]
 CMD ["/start.sh"]
