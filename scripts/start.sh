@@ -21,7 +21,7 @@ fi
 if [ ! -z "$WEBROOT" ]; then
  sed -i "s#root /var/www/html;#root ${WEBROOT};#g" /etc/nginx/sites-available/default.conf
 else
- webroot=/var/www/html
+ WEBROOT=/var/www/html
 fi
 
 # Setup git variables
@@ -34,14 +34,14 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "${WEBROOT}/.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file if you are pulling in a git repo
    if [ ! -z ${REMOVE_FILES} ] && [ ${REMOVE_FILES} == 0 ]; then
      echo "skiping removal of files"
    else
-     rm -Rf /var/www/html/*
+     rm -Rf ${WEBROOT}/*
    fi
    GIT_COMMAND='git clone '
    if [ ! -z "$GIT_BRANCH" ]; then
@@ -57,7 +57,7 @@ if [ ! -d "/var/www/html/.git" ]; then
       GIT_COMMAND=${GIT_COMMAND}" https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO}"
     fi
    fi
-   ${GIT_COMMAND} /var/www/html || exit 1
+   ${GIT_COMMAND} ${WEBROOT} || exit 1
    if [ ! -z "$GIT_TAG" ]; then
      git checkout ${GIT_TAG} || exit 1
    fi
@@ -65,22 +65,26 @@ if [ ! -d "/var/www/html/.git" ]; then
      git checkout ${GIT_COMMIT} || exit 1
    fi
    if [ -z "$SKIP_CHOWN" ]; then
-     chown -Rf nginx.nginx /var/www/html
+     chown -Rf nginx.nginx ${WEBROOT}
    fi
  fi
 fi
 
+if [ -z "$CONFIG_FOLDER" ]; then
+ CONFIG_FOLDER=${WEBROOT}/conf
+fi
+
 # Enable custom nginx config files if they exist
-if [ -f /var/www/html/conf/nginx/nginx.conf ]; then
-  cp /var/www/html/conf/nginx/nginx.conf /etc/nginx/nginx.conf
+if [ -f ${CONFIG_FOLDER}/nginx.conf ]; then
+  cp ${CONFIG_FOLDER}/nginx.conf /etc/nginx/nginx.conf
 fi
 
-if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+if [ -f ${CONFIG_FOLDER}/nginx-site.conf ]; then
+  cp ${CONFIG_FOLDER}/nginx-site.conf /etc/nginx/sites-available/default.conf
 fi
 
-if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+if [ -f ${CONFIG_FOLDER}/nginx-site-ssl.conf ]; then
+  cp ${CONFIG_FOLDER}/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 fi
 
 
@@ -169,7 +173,7 @@ if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
         fi
     fi
   fi
-else
+else 
     if [ -f $XdebugFile ]; then
         echo "Disabling Xdebug"
       rm $XdebugFile
@@ -185,17 +189,22 @@ if [ ! -z "$PUID" ]; then
   adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx -u ${PUID} nginx
 else
   if [ -z "$SKIP_CHOWN" ]; then
-    chown -Rf nginx.nginx /var/www/html
+    chown -Rf nginx.nginx ${WEBROOT}
   fi
 fi
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
-  if [ -d "/var/www/html/scripts/" ]; then
+
+  if [ -z "$SCRIPTS_FOLDER" ]; then
+    SCRIPTS_FOLDER=${WEBROOT}/scripts/
+  fi
+
+  if [ -d "${SCRIPTS_FOLDER}" ]; then
     # make scripts executable incase they aren't
-    chmod -Rf 750 /var/www/html/scripts/*; sync;
+    chmod -Rf 750 ${SCRIPTS_FOLDER}/*; sync;
     # run scripts in number order
-    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+    for i in `ls ${SCRIPTS_FOLDER}/`; do ${SCRIPTS_FOLDER}/$i ; done
   else
     echo "Can't find script directory"
   fi
@@ -203,13 +212,13 @@ fi
 
 if [ -z "$SKIP_COMPOSER" ]; then
     # Try auto install for composer
-    if [ -f "/var/www/html/composer.lock" ]; then
+    if [ -f "${WEBROOT}/composer.lock" ]; then
         if [ "$APPLICATION_ENV" == "development" ]; then
             composer global require hirak/prestissimo
-            composer install --working-dir=/var/www/html
+            composer install --working-dir=${WEBROOT}
         else
             composer global require hirak/prestissimo
-            composer install --no-dev --working-dir=/var/www/html
+            composer install --no-dev --working-dir=${WEBROOT}
         fi
     fi
 fi
