@@ -1,4 +1,4 @@
-FROM php:7.2.7-fpm-stretch
+FROM php:7-fpm-stretch
 
 MAINTAINER Ethan Setnik <esetnik@gmail.com>
 
@@ -6,8 +6,8 @@ ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 
-ENV NGINX_VERSION 1.15.0-1~stretch
-ENV NJS_VERSION   1.15.0.0.2.1-1~stretch
+ENV NGINX_VERSION 1.15.5-1~stretch
+ENV NJS_VERSION   1.15.5.0.2.4-1~stretch
 
 RUN set -x \
 	&& apt-get update \
@@ -97,7 +97,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
+  && apt-get install --no-install-recommends --no-install-suggests -y \
     supervisor \
     wget \
     certbot \
