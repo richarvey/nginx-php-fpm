@@ -6,8 +6,8 @@ ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 
-ENV NGINX_VERSION 1.15.5-1~stretch
-ENV NJS_VERSION   1.15.5.0.2.4-1~stretch
+ENV NGINX_VERSION 1.15.7-1~stretch
+ENV NJS_VERSION   1.15.7.0.2.6-1~stretch
 
 RUN set -x \
 	&& apt-get update \
@@ -110,12 +110,15 @@ RUN apt-get update \
     libmcrypt-dev \
     libicu-dev \
     libxslt-dev \
+		libzip-dev \
+    zip \
     libjpeg62-turbo-dev && \
     docker-php-ext-configure gd \
       --with-gd \
       --with-freetype-dir=/usr/include/ \
       --with-png-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ && \
+		docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install pdo_mysql mysqli gd exif intl xsl soap zip opcache && \
     docker-php-source delete && \
     mkdir -p /etc/nginx && \
