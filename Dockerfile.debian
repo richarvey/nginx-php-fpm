@@ -133,6 +133,30 @@ RUN apt-get update \
     mkdir -p /etc/letsencrypt/webrootauth 
 #    ln -s /usr/bin/php7 /usr/bin/php
 
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends gnupg \
+  apt-transport-https \
+  cron \
+  gettext \
+  && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -  && \
+  curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+  apt-get update && \
+  ACCEPT_EULA=Y apt-get install -y \
+  unixodbc-dev \
+  libgss3 \
+  odbcinst \
+  msodbcsql17 \
+  mssql-tools \
+  locales && \ 
+  ln -sfn /opt/mssql-tools/bin/sqlcmd /usr/bin/sqlcmd && \
+  ln -sfn /opt/mssql-tools/bin/bcp /usr/bin/bcp && \
+  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+  locale-gen && \
+  rm -r /var/lib/apt/lists/*
+
+RUN pecl install sqlsrv pdo_sqlsrv && \
+    docker-php-ext-enable sqlsrv pdo_sqlsrv
+
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 # Copy our nginx config
