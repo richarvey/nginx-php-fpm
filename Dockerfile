@@ -1,4 +1,4 @@
-FROM php:7.3.2-fpm-alpine
+FROM php:7.3.2-fpm-alpine3.9
 
 LABEL maintainer="Ric Harvey <ric@ngd.io>"
 
