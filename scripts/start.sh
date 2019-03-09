@@ -92,9 +92,9 @@ fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
- echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.d/www.conf
 else
- echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.d/www.conf
 fi
 
 # Display Version Details or not
@@ -123,7 +123,10 @@ if [ -f /etc/nginx/sites-available/default-ssl.conf ]; then
  fi
 fi
 
-#Display errors in docker logs
+# Set the desired timezone
+echo date.timezone=$(cat /etc/TZ) > /usr/local/etc/php/conf.d/timezone.ini
+
+# Display errors in docker logs
 if [ ! -z "$PHP_ERRORS_STDERR" ]; then
   echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-vars.ini
   echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/docker-vars.ini
