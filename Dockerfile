@@ -75,9 +75,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
     libressl-dev \
     pcre-dev \
     zlib-dev \
-    bzip2-dev \
-    imap-dev \
-    openssl-dev \
     linux-headers \
     curl \
     gnupg \
@@ -171,6 +168,9 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     curl \
     libcurl \
     libzip-dev \
+    bzip2-dev \
+    imap-dev \
+    openssl-dev \
     git \
     python \
     python-dev \
