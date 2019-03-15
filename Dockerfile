@@ -283,6 +283,14 @@ RUN apk add --no-cache openjdk8-jre
 # Get Google Chrome (well, chromium)
 RUN apk add -U --no-cache --allow-untrusted chromium
 
+# Add packages and settings for screener.io automated visual regression testing
+RUN apk add --update jq
+RUN apk add --update nodejs nodejs-npm
+RUN npm config set unsafe-perm=true
+RUN export NODE_PATH=/usr/lib/node_modules
+RUN npm install dotenv@latest --global
+RUN npm install screener-runner@latest --global
+
 # Add Scripts
 ADD scripts/start.sh /start.sh
 ADD scripts/pull /usr/bin/pull
