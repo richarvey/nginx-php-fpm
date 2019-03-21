@@ -15,7 +15,7 @@ if [ -z "$GIT_NAME" ]; then
 fi
 
 ts=$(timestamp)
-cd /var/www/html
+cd ${WEBROOT}
 git add .
 git commit -a -m "push from container $ts"
 git push
