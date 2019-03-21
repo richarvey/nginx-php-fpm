@@ -24,6 +24,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.6.4 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
 | 1.6.5 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
 | 1.6.6 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
+| 1.6.7 | 7.3.3 |1.14.2 | 3.9 | 0.3.13 |
 
 #### PHP 7.2
 
