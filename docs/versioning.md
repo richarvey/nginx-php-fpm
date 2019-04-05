@@ -15,17 +15,21 @@ The latest tag will always follow the master branch in git. the other versions w
 
 #### PHP 7.3
 
-| Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts |
-|-----|-------|-----|--------|--------|
-| 1.6.0 | 7.3.2 |1.14.2 | 3.9 | 0.3.8 |
-| 1.6.1 | 7.3.2 |1.14.2 | 3.9 | 0.3.9 |
-| 1.6.2 | 7.3.3 |1.14.2 | 3.9 | 0.3.10 |
-| 1.6.3 | 7.3.3 |1.14.2 | 3.9 | 0.3.11 |
-| 1.6.4 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
-| 1.6.5 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
-| 1.6.6 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 |
-| 1.6.7 | 7.3.3 |1.14.2 | 3.9 | 0.3.13 |
+| Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
+|-----|-------|-----|--------|--------|----------|
+| 1.6.0 | 7.3.2 |1.14.2 | 3.9 | 0.3.8 ||
+| 1.6.1 | 7.3.2 |1.14.2 | 3.9 | 0.3.9 ||
+| 1.6.2 | 7.3.3 |1.14.2 | 3.9 | 0.3.10 ||
+| 1.6.3 | 7.3.3 |1.14.2 | 3.9 | 0.3.11 ||
+| 1.6.4 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 ||
+| 1.6.5 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 ||
+| 1.6.6 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 ||
+| 1.6.7 | 7.3.3 |1.14.2 | 3.9 | 0.3.13 | Broken |
+| 1.6.8 | 7.3.4 |1.14.2 | 3.9 | 0.3.12 | Custom scripts rolled back |
 
+These tags will be created on GitLab and as tags in docker hub.
+
+### Unmaintained tags:
 #### PHP 7.2
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts |
@@ -41,9 +45,6 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.5.6 | 7.2.9 |1.14.0 | 3.7 | 0.3.8 |
 | 1.5.7 | 7.2.10 |1.14.0 | 3.7 | 0.3.8 |
 
-These tags will be created on GitLab and as tags in docker hub.
-
-### Unmaintained tags:
 #### PHP 7.1
 
 | Docker Tag | Git Release | Nginx Version | PHP Version | Alpine Version | Container Scripts |

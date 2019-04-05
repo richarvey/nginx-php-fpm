@@ -21,7 +21,6 @@ The following flags are a list of all the currently supported options that can b
 | Name                    | Description                                                                                                    |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | WEBROOT                 | Change the default webroot directory from `/var/www/html` to your own setting                                  |
-| CONFIG_FOLDER           | Change the default config directory from `/var/www/html/conf` to your own setting                              |
 | ERRORS                  | Set to 1 to display PHP Errors in the browser                                                                  |
 | HIDE_NGINX_HEADERS      | Disable by setting to 0, default behaviour is to hide nginx + php version in headers                           |
 | PHP_MEM_LIMIT           | Set higher PHP memory limit, default is 128 Mb                                                                 |
@@ -32,7 +31,6 @@ The following flags are a list of all the currently supported options that can b
 | REAL_IP_HEADER          | set to 1 to enable real ip support in the logs                                                                 |
 | REAL_IP_FROM            | set to your CIDR block for real ip in logs                                                                     |
 | RUN_SCRIPTS             | Set to 1 to execute scripts                                                                                    |
-| SCRIPTS_FOLDER          | Change the default script folder from `/var/www/html/scripts` to your won setting                              |
 | PGID                    | Set to GroupId you want to use for nginx (helps permissions when using local volume)                           |
 | PUID                    | Set to UserID you want to use for nginx (helps permissions when using local volume)                            |
 | REMOVE_FILES            | Use REMOVE_FILES=0 to prevent the script from clearing out /var/www/html (useful for working with local files) |
