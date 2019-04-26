@@ -26,6 +26,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.6.6 | 7.3.3 |1.14.2 | 3.9 | 0.3.12 ||
 | 1.6.7 | 7.3.3 |1.14.2 | 3.9 | 0.3.13 | Broken |
 | 1.6.8 | 7.3.4 |1.14.2 | 3.9 | 0.3.12 | Custom scripts rolled back |
+| 1.7.0 | 7.3.4 |1.16.0 | 3.9 | 0.3.12 | First move to nginx 1.16.0 |
 
 These tags will be created on GitLab and as tags in docker hub.
 
