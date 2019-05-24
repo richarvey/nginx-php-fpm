@@ -253,6 +253,8 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
 #    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
 #    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
+# make sure root login is disabled
+    RUN sed -i -e 's/^root::/root:!:/' /etc/shadow
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
