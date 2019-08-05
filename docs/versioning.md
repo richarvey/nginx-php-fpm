@@ -30,6 +30,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.7.1 | 7.3.5 |1.16.0 | 3.9 | 0.3.12 | Bump to PHP 7.3.5 |
 | 1.7.2 | 7.3.6 |1.16.0 | 3.9 | 0.3.12 | Bump to PHP 7.3.6 |
 | 1.7.3 | 7.3.6 |1.16.0 | 3.9 | 0.3.12 | Bump xdebug 2.7.2 |
+| 1.7.4 | 7.3.8 |1.16.0 | 3.9 | 0.3.12 | upgrade php to 7.3.8 |
 
 These tags will be created on GitLab and as tags in docker hub.
 
