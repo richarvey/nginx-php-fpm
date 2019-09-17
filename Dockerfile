@@ -1,4 +1,4 @@
-FROM php:7.3.8-fpm-alpine3.9
+FROM php:7.3.9-fpm-alpine3.10
 
 LABEL maintainer="Ric Harvey <ric@ngd.io>"
 
@@ -6,7 +6,7 @@ ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 
-ENV NGINX_VERSION 1.16.0
+ENV NGINX_VERSION 1.16.1
 ENV LUA_MODULE_VERSION 0.10.14
 ENV DEVEL_KIT_MODULE_VERSION 0.3.0
 ENV LUAJIT_LIB=/usr/lib
