@@ -23,6 +23,7 @@ The following flags are a list of all the currently supported options that can b
 | WEBROOT                 | Change the default webroot directory from `/var/www/html` to your own setting                                  |
 | ERRORS                  | Set to 1 to display PHP Errors in the browser                                                                  |
 | HIDE_NGINX_HEADERS      | Disable by setting to 0, default behaviour is to hide nginx + php version in headers                           |
+| PHP_CATCHALL            | Enable a 404 catch all to `index.php` -- changes `=404` on `try_files` to `/index.php?$args`                   |
 | PHP_MEM_LIMIT           | Set higher PHP memory limit, default is 128 Mb                                                                 |
 | PHP_POST_MAX_SIZE       | Set a larger post_max_size, default is 100 Mb                                                                  |
 | PHP_UPLOAD_MAX_FILESIZE | Set a larger upload_max_filesize, default is 100 Mb                                                            |
