@@ -32,6 +32,7 @@ The latest tag will always follow the master branch in git. the other versions w
 | 1.7.3 | 7.3.6 |1.16.0 | 3.9 | 0.3.12 | Bump xdebug 2.7.2 |
 | 1.7.4 | 7.3.8 |1.16.0 | 3.9 | 0.3.12 | upgrade php to 7.3.8 |
 | 1.8.0 | 7.3.9 |1.16.1 | 3.10 | 0.3.12 | Alpine upgrade to 3.10, PHP 7.3.9 and nginx 1.16.1 upgrades |
+| 1.8.1 | 7.3.9 |1.16.1 | 3.10 | 0.3.12 | started python upgrade |
 
 These tags will be created on GitLab and as tags in docker hub.
 
