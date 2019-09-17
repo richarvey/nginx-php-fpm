@@ -172,9 +172,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     imap-dev \
     openssl-dev \
     git \
-    python \
-    python-dev \
-    py-pip \
+    python3 \
+    python3-dev \
     augeas-dev \
     libressl-dev \
     ca-certificates \
@@ -213,10 +212,10 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
     rm composer-setup.php && \
-    pip install -U pip && \
-    pip install -U certbot && \
+    pip3 install -U pip && \
+    pip3 install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
-    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev make autoconf
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python3-dev make autoconf
 #    apk del .sys-deps
 #    ln -s /usr/bin/php7 /usr/bin/php
 
