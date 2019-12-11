@@ -211,6 +211,18 @@ if [[ "$RUN_SCRIPTS" == "1" ]] ; then
   fi
 fi
 
+# Run from docker custom scripts
+if [[ "$RUN_SCRIPTS_FROM_DOCKER" == "1" ]] ; then
+  if [ -d "/scripts/" ]; then
+    # make scripts executable incase they aren't
+    chmod -Rf 750 /scripts/*; sync;
+    # run scripts in number order
+    for i in `ls /scripts/`; do /scripts/$i ; done
+  else
+    echo "Can't find script directory"
+  fi
+fi
+
 if [ -z "$SKIP_COMPOSER" ]; then
     # Try auto install for composer
     if [ -f "/var/www/html/composer.lock" ]; then
