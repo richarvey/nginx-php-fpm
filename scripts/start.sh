@@ -171,9 +171,16 @@ if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
         else
             echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > $XdebugFile # Note, single arrow to overwrite file.
             echo "xdebug.remote_enable=1 "  >> $XdebugFile
+            echo "xdebug.remote_autostart=1"  >> $XdebugFile
+            echo "xdebug.profiler_output_dir = '/tmp'"  >> $XdebugFile
+            echo "xdebug.profiler_enable = 1"  >> $XdebugFile
+            echo "xdebug.default_enable=1"  >> $XdebugFile
+            echo "xdebug.remote_port=9001"  >> $XdebugFile
+            echo "xdebug.idekey='VSCODE'"  >> $XdebugFile
+            echo "xdebug.remote_connect_back=1"  >> $XdebugFile
             echo "xdebug.remote_host=host.docker.internal" >> $XdebugFile
             echo "xdebug.remote_log=/tmp/xdebug.log"  >> $XdebugFile
-            echo "xdebug.remote_autostart=false "  >> $XdebugFile # I use the xdebug chrome extension instead of using autostart
+            echo "xdebug.remote_autostart=false"  >> $XdebugFile # I use the xdebug chrome extension instead of using autostart
             # NOTE: xdebug.remote_host is not needed here if you set an environment variable in docker-compose like so `- XDEBUG_CONFIG=remote_host=192.168.111.27`.
             #       you also need to set an env var `- PHP_IDE_CONFIG=serverName=docker`
         fi
@@ -226,4 +233,3 @@ fi
 
 # Start supervisord and services
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
-
