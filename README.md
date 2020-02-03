@@ -12,7 +12,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 ### Versioning
 | Docker Tag | Git Release | Nginx Version | PHP Version | Alpine Version |
 |-----|-------|-----|--------|--------|
-| latest/1.8.2 | Master Branch |1.16.1 | 7.3.9 | 3.10 |
+| latest/1.9.0 | Master Branch |1.16.1 | 7.4.2 | 3.11 |
 
 For other tags please see: [versioning](https://gitlab.com/ric_harvey/nginx-php-fpm/blob/master/docs/versioning.md)
 
