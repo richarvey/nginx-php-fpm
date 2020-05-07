@@ -81,7 +81,7 @@ kind: Service
 metadata:
   namespace: example
   name: example-app
-  spec:
+spec:
   type: ClusterIP
   ports:
     - protocol: TCP

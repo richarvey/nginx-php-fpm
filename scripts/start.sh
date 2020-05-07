@@ -24,6 +24,12 @@ else
  webroot=/var/www/html
 fi
 
+# Enables 404 pages through php index
+if [ ! -z "$PHP_CATCHALL" ]; then
+ sed -i 's#try_files $uri $uri/ =404;#try_files $uri $uri/ /index.php?$args;#g' /etc/nginx/sites-available/default.conf
+fi
+
+
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
  git config --global user.email "$GIT_EMAIL"
@@ -58,6 +64,12 @@ if [ ! -d "/var/www/html/.git" ]; then
     fi
    fi
    ${GIT_COMMAND} /var/www/html || exit 1
+   if [ ! -z "$GIT_TAG" ]; then
+     git checkout ${GIT_TAG} || exit 1
+   fi
+   if [ ! -z "$GIT_COMMIT" ]; then
+     git checkout ${GIT_COMMIT} || exit 1
+   fi
    if [ -z "$SKIP_CHOWN" ]; then
      chown -Rf nginx.nginx /var/www/html
    fi
@@ -86,9 +98,9 @@ fi
 
 # Display PHP error's or not
 if [[ "$ERRORS" != "1" ]] ; then
- echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = off >> /usr/local/etc/php-fpm.d/www.conf
 else
- echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.conf
+ echo php_flag[display_errors] = on >> /usr/local/etc/php-fpm.d/www.conf
 fi
 
 # Display Version Details or not
@@ -117,7 +129,10 @@ if [ -f /etc/nginx/sites-available/default-ssl.conf ]; then
  fi
 fi
 
-#Display errors in docker logs
+# Set the desired timezone
+echo date.timezone=$(cat /etc/TZ) > /usr/local/etc/php/conf.d/timezone.ini
+
+# Display errors in docker logs
 if [ ! -z "$PHP_ERRORS_STDERR" ]; then
   echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-vars.ini
   echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/docker-vars.ini
@@ -156,6 +171,7 @@ if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
         else
             echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > $XdebugFile # Note, single arrow to overwrite file.
             echo "xdebug.remote_enable=1 "  >> $XdebugFile
+            echo "xdebug.remote_host=host.docker.internal" >> $XdebugFile
             echo "xdebug.remote_log=/tmp/xdebug.log"  >> $XdebugFile
             echo "xdebug.remote_autostart=false "  >> $XdebugFile # I use the xdebug chrome extension instead of using autostart
             # NOTE: xdebug.remote_host is not needed here if you set an environment variable in docker-compose like so `- XDEBUG_CONFIG=remote_host=192.168.111.27`.
