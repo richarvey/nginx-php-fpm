@@ -3,11 +3,8 @@ FROM richarvey/nginx-php-fpm:1.8.2
 LABEL maintainer="Maria Fisher <maria.fisher@thinkshout.com>"
 
 # Bring in our nginx customizations
-RUN ls -altrh ~
 COPY conf/nginx-site.conf /etc/nginx/sites-available/default.conf
-COPY conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-
 
 # TS Customizations
 RUN apk add --no-cache mysql-client \
