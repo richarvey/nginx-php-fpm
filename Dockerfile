@@ -34,5 +34,8 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
 RUN apk add --no-cache openjdk8-jre \
     patch
 
+# Add an extension for commerce.
+RUN apk add php-bcmath
+
 # Get Google Chrome (well, chromium)
 RUN apk add -U --no-cache --allow-untrusted chromium
