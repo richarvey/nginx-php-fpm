@@ -31,7 +31,8 @@ RUN export PATH="~/.composer/vendor/bin:$PATH" && \
     && chmod +x drupal.phar \
     && mv drupal.phar /usr/local/bin/drupal
 # Get java for Behat/selenium/chromedriver tests
-RUN apk add --no-cache openjdk8-jre
+RUN apk add --no-cache openjdk8-jre \
+    patch
 
 # Get Google Chrome (well, chromium)
 RUN apk add -U --no-cache --allow-untrusted chromium
