@@ -1,0 +1,32 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build_latest
+  - build_tags
+
+before_script:
+  - echo Logging in to $CI_REGISTRY...
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+  - docker info | grep Registry
+
+build_latest:
+  stage: build_latest
+  script:
+    - echo Build started on `date` for $CI_COMMIT_REF_NAME
+    - docker build -t richarvey/nginx-php-fpm:latest .
+    - docker images
+    - docker push "$CI_REGISTRY_IMAGE":latest
+  only:
+    - master
+
+build_tags:
+  stage: build_tags
+  script:
+    - echo Build started on `date` for $CI_COMMIT_REF_NAME
+    - docker build -t richarvey/nginx-php-fpm:"$CI_COMMIT_REF_NAME" .
+    - docker images
+    - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+  only:
+    - tags
