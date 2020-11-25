@@ -178,6 +178,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     imap-dev \
     openssl-dev \
     git \
+    patch \
     python3 \
     python3-dev \
     augeas-dev \
