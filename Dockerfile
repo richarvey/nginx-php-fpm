@@ -1,4 +1,4 @@
-FROM richarvey/nginx-php-fpm:1.8.2
+FROM richarvey/nginx-php-fpm:1.9.1
 
 LABEL maintainer="Maria Fisher <maria.fisher@thinkshout.com>"
 
