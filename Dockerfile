@@ -1,15 +1,15 @@
-FROM php:7.4.5-fpm-alpine3.11
+FROM php:8.1.2-fpm-alpine3.15
 
-LABEL maintainer="Ric Harvey <ric@ngd.io>"
+LABEL maintainer="Ric Harvey <ric@squarecows.com>"
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 
-ENV NGINX_VERSION 1.16.1
+ENV NGINX_VERSION 1.21.6
 ENV LUA_MODULE_VERSION 0.10.14
-ENV DEVEL_KIT_MODULE_VERSION 0.3.0
-ENV GEOIP2_MODULE_VERSION 3.2
+ENV DEVEL_KIT_MODULE_VERSION 0.3.1
+ENV GEOIP2_MODULE_VERSION 3.3
 ENV LUAJIT_LIB=/usr/lib
 ENV LUAJIT_INC=/usr/include/luajit-2.1
 
@@ -180,6 +180,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     git \
     python3 \
     python3-dev \
+    py3-pip \
     augeas-dev \
     libressl-dev \
     ca-certificates \
@@ -201,11 +202,12 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     postgresql-dev && \
     docker-php-ext-configure gd \
       --with-freetype \
-      --with-jpeg && \
+      --with-jpeg
     #curl iconv session
     #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
-    docker-php-ext-install iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache && \
-    pecl install xdebug-2.9.2 && \
+    # docker-php-ext-install iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache && \
+RUN docker-php-ext-install iconv pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl && \
+    pecl install xdebug-3.1.2 && \
     pecl install -o -f redis && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     docker-php-source delete && \
@@ -215,8 +217,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     mkdir -p /var/log/supervisor && \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
-    rm composer-setup.php && \
-    pip3 install -U pip && \
+    rm composer-setup.php &&\
+  #  pip3 install -U pip && \
     pip3 install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python3-dev make autoconf
