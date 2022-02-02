@@ -1,4 +1,3 @@
-![pipeline status](https://gitlab.com/ric_harvey/nginx-php-fpm/badges/master/pipeline.svg)
 ![docker hub](https://img.shields.io/docker/pulls/richarvey/nginx-php-fpm.svg?style=flat-square)
 ![docker hub](https://img.shields.io/docker/stars/richarvey/nginx-php-fpm.svg?style=flat-square)
 
