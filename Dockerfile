@@ -47,5 +47,8 @@ RUN npm config set unsafe-perm=true
 ENV NODE_PATH /usr/lib/node_modules
 RUN npm install dotenv@latest --global
 RUN npm install screener-runner@latest --global
+# Install nvm
+touch /root/.bashrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 # End TS Customizations
 
