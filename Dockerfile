@@ -200,6 +200,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     sqlite-dev \
     libjpeg-turbo-dev \
     postgresql-dev && \
+    docker-php-ext-install gd && \
     docker-php-ext-configure gd \
       --with-freetype \
       --with-jpeg
@@ -242,13 +243,6 @@ ADD conf/nginx-site.conf /etc/nginx/sites-available/default.conf
 ADD conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
-## disabled due to license changes (to fix in next release)
-# Add GeoLite2 databases (https://dev.maxmind.com/geoip/geoip2/geolite2/)
-#RUN curl -fSL http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz -o /etc/nginx/GeoLite2-City.mmdb.gz \
-#    && curl -fSL http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz -o /etc/nginx/GeoLite2-Country.mmdb.gz \
-#    && gunzip /etc/nginx/GeoLite2-City.mmdb.gz \
-#    && gunzip /etc/nginx/GeoLite2-Country.mmdb.gz
-
 # tweak php-fpm config
 RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
     echo "upload_max_filesize = 100M"  >> ${php_vars} &&\
@@ -271,7 +265,11 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf}
 #    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
-#    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+	sed -i \
+	    -e "s/;opcache/opcache/g" \
+	    -e "s/;zend_extension=opcache/zend_extension=opcache/g" \
+            /usr/local/etc/php/php.ini
 
 
 # Add Scripts
