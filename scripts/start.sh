@@ -29,6 +29,10 @@ if [ ! -z "$PHP_CATCHALL" ]; then
  sed -i 's#try_files $uri $uri/ =404;#try_files $uri $uri/ /index.php?$args;#g' /etc/nginx/sites-available/default.conf
 fi
 
+# Disable opcache
+if [ ! -z "$OPcache" ]; then
+ sed -i 's#zend_extension=opcache#;zend_extension=opcache#g' /usr/local/etc/php/php.ini
+fi
 
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
