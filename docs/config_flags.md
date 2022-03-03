@@ -20,8 +20,7 @@ The following flags are a list of all the currently supported options that can b
 
 | Name                    | Description                                                                                                    |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
-| OPcache		  | Set to 1 to disable opcache (enabled by default)
-			 |
+| OPcache		  | Set to 1 to disable opcache (enabled by default)                                                               |
 | WEBROOT                 | Change the default webroot directory from `/var/www/html` to your own setting                                  |
 | ERRORS                  | Set to 1 to display PHP Errors in the browser                                                                  |
 | HIDE_NGINX_HEADERS      | Disable by setting to 0, default behaviour is to hide nginx + php version in headers                           |
