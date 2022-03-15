@@ -38,4 +38,5 @@ The following flags are a list of all the currently supported options that can b
 | REMOVE_FILES            | Use REMOVE_FILES=0 to prevent the script from clearing out /var/www/html (useful for working with local files) |
 | APPLICATION_ENV         | Set this to development to prevent composer deleting local development dependencies                            |
 | SKIP_CHOWN              | Set to 1 to avoid running chown -Rf on /var/www/html                                                           |
+| SKIP_CHMOD              | Set to 1 to avoid running chmod -Rf 750 on /var/www/html/scripts/*                                             |
 | SKIP_COMPOSER           | Set to 1 to avoid installing composer                                                                          |
