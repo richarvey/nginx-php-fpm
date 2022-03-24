@@ -17,6 +17,7 @@ The latest tag will always follow the master branch in git. the other versions w
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
+| 2.0.5 | 8.1.4 |1.21.6 | 3.15 | 0.3.15 | upgrade php to 8.1.4 |
 | 2.0.4 | 8.1.3 |1.21.6 | 3.15 | 0.3.15 | re-enable modules soap, xsl, zip .... |
 | 2.0.3 | 8.1.3 |1.21.6 | 3.15 | 0.3.15 | added disable flag for opcache |
 | 2.0.2 | 8.1.3 |1.21.6 | 3.15 | 0.3.14 | fix gd and opcache extentions |
