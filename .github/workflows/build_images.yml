@@ -24,7 +24,8 @@ jobs:
 
           # If this is git tag, use the tag name as a docker tag
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v::5}
+            SEM_TAG=${GITHUB_REF#refs/tags/v}
+            VERSION=${SEM_TAG:(-5)}
           fi
           TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${SHORTREF}"
 
