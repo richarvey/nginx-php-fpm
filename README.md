@@ -14,6 +14,8 @@ If you have improvements or suggestions please open an issue or pull request on 
 
 For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/versioning.md)
 
+__NOTE:__ From 2.0.5 onwards there are x86 and arm64 builds available
+
 ### Links
 - [https://github.com/richarvey/nginx-php-fpm](https://github.com/richarvey/nginx-php-fpm)
 - [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
