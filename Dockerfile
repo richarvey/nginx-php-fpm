@@ -173,42 +173,43 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     supervisor \
     curl \
     libcurl \
-    libzip-dev \
-    bzip2-dev \
-    imap-dev \
-    openssl-dev \
+    libpq \
     git \
     python3 \
-    python3-dev \
     py3-pip \
-    augeas-dev \
-    libressl-dev \
     ca-certificates \
     dialog \
     autoconf \
     make \
-    gcc \
+    openssl-dev \
+    libressl-dev \
+    gcc && \
+    apk add --no-cache --virtual .sys-deps \
     musl-dev \
     linux-headers \
+    augeas-dev \
     libmcrypt-dev \
     libpng-dev \
     icu-dev \
-    libpq \
     libxslt-dev \
+    python3-dev \
     libffi-dev \
     freetype-dev \
     sqlite-dev \
+    libzip-dev \
+    bzip2-dev \
+    imap-dev \
     libjpeg-turbo-dev \
     postgresql-dev && \
     docker-php-ext-install gd && \
     docker-php-ext-configure gd \
       --with-freetype \
-      --with-jpeg
-RUN pip install --upgrade pip
+      --with-jpeg && \
+     pip install --upgrade pip && \
     #curl iconv session
     #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
     # docker-php-ext-install iconv pdo_mysql pdo_sqlite pgsql pdo_pgsql mysqli gd exif intl xsl json soap dom zip opcache && \
-RUN docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
+    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
     pecl install xdebug-3.1.4 && \
     pecl install -o -f redis && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
@@ -223,8 +224,8 @@ RUN docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl
   #  pip3 install -U pip && \
     pip3 install -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
-    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python3-dev make autoconf
-#    apk del .sys-deps
+    apk del gcc musl-dev linux-headers libffi-dev augeas-dev python3-dev make autoconf && \
+    apk del .sys-deps
 #    ln -s /usr/bin/php7 /usr/bin/php
 
 ADD conf/supervisord.conf /etc/supervisord.conf
