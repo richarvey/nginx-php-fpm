@@ -17,6 +17,7 @@ The latest tag will always follow the master branch in git. the other versions w
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
+| 2.1.0 | 8.1.5 |1.21.6 | 3.15 | 0.3.16 | remove bloat and shrink image by 2/3 |
 | 2.0.7 | 8.1.5 |1.21.6 | 3.15 | 0.3.16 | upgrade xdebug to 3.1.4 |
 | 2.0.6 | 8.1.5 |1.21.6 | 3.15 | 0.3.16 | upgrade php to 8.1.5 |
 | 2.0.5 | 8.1.4 |1.21.6 | 3.15 | 0.3.16 | upgrade php to 8.1.4 add new flags |
