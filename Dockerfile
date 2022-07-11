@@ -1,4 +1,4 @@
-FROM php:8.1.6-fpm-alpine3.15
+FROM php:8.1.8-fpm-alpine3.15
 
 LABEL maintainer="Ric Harvey <ric@squarecows.com>"
 
