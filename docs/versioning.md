@@ -17,6 +17,7 @@ The latest tag will always follow the master branch in git. the other versions w
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
+| 2.1.4 | 8.1.9 |1.21.6 | 3.16 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.3 | 8.1.6 |1.22.0 | 3.15 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.2 | 8.1.6 |1.21.6 | 3.15 | 0.3.16 | mod lua upgraded to 0.10.17 |
 | 2.1.1 | 8.1.5 |1.21.6 | 3.15 | 0.3.16 | mod lua upgraded to 0.10.17 |
