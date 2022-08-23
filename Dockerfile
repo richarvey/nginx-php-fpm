@@ -199,10 +199,11 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     imap-dev \
     libjpeg-turbo-dev \
     postgresql-dev && \
-    docker-php-ext-install gd && \
     docker-php-ext-configure gd \
+      --enable-gd \
       --with-freetype \
       --with-jpeg && \
+    docker-php-ext-install gd && \
      pip install --upgrade pip && \
     #curl iconv session
     #docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
