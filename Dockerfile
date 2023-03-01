@@ -19,7 +19,7 @@ RUN apk add --no-cache nginx \
     nginx-mod-http-lua \
     nginx-mod-devel-kit
 
-RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+RUN echo @testing https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && apk upgrade &&\
     apk add --no-cache \
