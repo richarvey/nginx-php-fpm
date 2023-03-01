@@ -15,7 +15,7 @@ RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/comm
 
 
 # INstall nginx + lua and devel kit
-RUN apk add --no-cach nginx \
+RUN apk add --no-cache nginx \
     nginx-mod-http-lua \
     nginx-mod-devel-kit
 
