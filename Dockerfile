@@ -56,10 +56,9 @@ RUN apk add --no-cache --virtual .sys-deps \
     sqlite-dev \
     imap-dev \
     postgresql-dev \
-    lua-resty-core
-
-# Install PHP modules
-RUN  docker-php-ext-configure gd \
+    lua-resty-core && \
+  # Install PHP modules
+    docker-php-ext-configure gd \
       --enable-gd \
       --with-freetype \
       --with-jpeg && \
@@ -70,14 +69,10 @@ RUN  docker-php-ext-configure gd \
     pecl install -o -f redis && \ 
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/xdebug.ini && \
-    docker-php-source delete
-#    mkdir -p /etc/nginx && \
-#    mkdir -p /var/www/app && \
-#    mkdir -p /run/nginx && \
-
-
-# Install composer and certbot
-RUN mkdir -p /var/log/supervisor && \
+    docker-php-source delete && \
+    mkdir -p /var/www/app && \
+  # Install composer and certbot
+    mkdir -p /var/log/supervisor && \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
     rm composer-setup.php &&\
