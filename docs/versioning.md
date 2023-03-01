@@ -17,6 +17,7 @@ The latest tag will always follow the master branch in git. the other versions w
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
+| 3.0.1 | 8.2.3 |1.22.1 | 3.17 | 0.3.16 | no cache typo fixed |
 | 3.0.0 | 8.2.3 |1.22.1 | 3.17 | 0.3.16 | upgraded php to 8.2.3 switched to packaged nginx |
 
 #### PHP 8.1.x
