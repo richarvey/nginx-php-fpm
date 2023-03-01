@@ -40,6 +40,10 @@ RUN echo @testing https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk
     bzip2-dev \
     icu-dev \
     tzdata \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libxslt-dev \
     gcc 
 
 RUN apk add --no-cache --virtual .sys-deps \
@@ -47,14 +51,10 @@ RUN apk add --no-cache --virtual .sys-deps \
     linux-headers \
     augeas-dev \
     libmcrypt-dev \
-    libpng-dev \
-    libxslt-dev \
     python3-dev \
     libffi-dev \
-    freetype-dev \
     sqlite-dev \
     imap-dev \
-    libjpeg-turbo-dev \
     postgresql-dev \
     lua-resty-core
 
