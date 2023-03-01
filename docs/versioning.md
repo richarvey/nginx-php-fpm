@@ -20,11 +20,14 @@ The latest tag will always follow the master branch in git. the other versions w
 | 3.0.1 | 8.2.3 |1.22.1 | 3.17 | 0.3.16 | no cache typo fixed |
 | 3.0.0 | 8.2.3 |1.22.1 | 3.17 | 0.3.16 | upgraded php to 8.2.3 switched to packaged nginx |
 
+These tags will be created on GitHub and as tags in docker hub.
+
+### Unmaintained tags:
+
 #### PHP 8.1.x
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
-| 2.2.1 | 8.1.12 |1.22.1 | 3.16 | 0.3.16 | nginx upgraded to 1.22.1 php to 8.1.12 |
 | 2.1.4 | 8.1.9 |1.21.6 | 3.16 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.3 | 8.1.6 |1.22.0 | 3.15 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.2 | 8.1.6 |1.21.6 | 3.15 | 0.3.16 | mod lua upgraded to 0.10.17 |
@@ -38,10 +41,6 @@ The latest tag will always follow the master branch in git. the other versions w
 | 2.0.2 | 8.1.3 |1.21.6 | 3.15 | 0.3.14 | fix gd and opcache extentions |
 | 2.0.1 | 8.1.3 |1.21.6 | 3.15 | 0.3.14 | upgrade to PHP 8.1.3 |
 | 2.0.0 | 8.1.2 |1.21.6 | 3.15 | 0.3.14 | upgrade to PHP 8 |
-
-These tags will be created on GitHub and as tags in docker hub.
-
-### Unmaintained tags:
 
 #### PHP 7.4
 

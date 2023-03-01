@@ -39,8 +39,10 @@ RUN echo @testing https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk
     libzip-dev \
     bzip2-dev \
     icu-dev \
-    gcc && \
-    apk add --no-cache --virtual .sys-deps \
+    tzdata \
+    gcc 
+
+RUN apk add --no-cache --virtual .sys-deps \
     musl-dev \
     linux-headers \
     augeas-dev \
