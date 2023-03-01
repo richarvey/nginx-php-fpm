@@ -13,11 +13,17 @@ We will use the [semver](http://ricostacruz.com/cheatsheets/semver.html) style n
 
 The latest tag will always follow the master branch in git. the other versions will have releases attached.
 
-#### PHP 8.x
+#### PHP 8.2.x
 
 | Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
 |-----|-------|-----|--------|--------|----------|
-| 2.2.0 | 8.1.12 |1.22.1 | 3.16 | 0.3.16 | nginx upgraded to 1.22.1 php to 8.1.12 |
+| 3.0.0 | 8.2.3 |1.22.1 | 3.17 | 0.3.16 | upgraded php to 8.2.3 switched to packaged nginx |
+
+#### PHP 8.1.x
+
+| Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes |
+|-----|-------|-----|--------|--------|----------|
+| 2.2.1 | 8.1.12 |1.22.1 | 3.16 | 0.3.16 | nginx upgraded to 1.22.1 php to 8.1.12 |
 | 2.1.4 | 8.1.9 |1.21.6 | 3.16 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.3 | 8.1.6 |1.22.0 | 3.15 | 0.3.16 | nginx upgraded to 1.22.0 |
 | 2.1.2 | 8.1.6 |1.21.6 | 3.15 | 0.3.16 | mod lua upgraded to 0.10.17 |
