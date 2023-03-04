@@ -1,4 +1,4 @@
-## nginx-php-fpm - [![build](https://github.com/richarvey/nginx-php-fpm/actions/workflows/main.yml/badge.svg)](https://github.com/richarvey/aws-docker-toolkit/actions/workflows/main.yml) 
+## nginx-php-fpm - [![build](https://github.com/richarvey/nginx-php-fpm/actions/workflows/build_images.yml/badge.svg)](https://github.com/richarvey/nginx-php-fpm/actions/workflows/build_images.yml) 
 ![docker hub](https://img.shields.io/docker/pulls/richarvey/nginx-php-fpm.svg)
 ![docker hub](https://img.shields.io/docker/stars/richarvey/nginx-php-fpm.svg)
 ![Github](https://img.shields.io/github/stars/richarvey/nginx-php-fpm.svg)
