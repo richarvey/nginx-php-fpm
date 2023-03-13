@@ -16,7 +16,7 @@ __NOTE:__ From 2.0.5 onwards there are x86 and arm64 builds available
 
 ### Links
 - [https://github.com/richarvey/nginx-php-fpm](https://github.com/richarvey/nginx-php-fpm)
-- [https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/](https://registry.hub.docker.com/u/richarvey/nginx-php-fpm/)
+- [https://hub.docker.com/repository/docker/richarvey/nginx-php-fpm/general](https://hub.docker.com/repository/docker/richarvey/nginx-php-fpm/general)
 
 ## Quick Start
 To pull from docker hub:
