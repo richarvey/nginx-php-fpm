@@ -10,7 +10,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 |-----|-------|-----|--------|--------|
 | latest/3.1.1 | Main Branch |1.22.1 | 8.2.4 | 3.17 |
 
-For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/versioning.md)
+For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/versioning.md)
 
 __NOTE:__ From 2.0.5 onwards there are x86 and arm64 builds available
 
@@ -38,29 +38,29 @@ You can then browse to ```http://<DOCKER_HOST>``` to view the default install fi
 For more detailed examples and explanations please refer to the documentation.
 ## Documentation
 
-- [Building from source](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/building.md)
-- [Versioning](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/versioning.md)
-- [Config Flags](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/config_flags.md)
-- [Git Auth](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_auth.md)
-  - [Personal Access token](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_auth.md#personal-access-token)
-  - [SSH Keys](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_auth.md#ssh-keys)
-- [Git Commands](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_commands.md)
- - [Push](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_commands.md#push-code-to-git)
- - [Pull](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/git_commands.md#pull-code-from-git-refresh)
-- [Repository layout / webroot](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/repo_layout.md)
- - [webroot](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/repo_layout.md#src--webroot)
-- [User / Group Identifiers](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/UID_GID_Mapping.md)
-- [Custom Nginx Config files](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/nginx_configs.md)
- - [REAL IP / X-Forwarded-For Headers](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/nginx_configs.md#real-ip--x-forwarded-for-headers)
-- [Scripting and Templating](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/scripting_templating.md)
- - [Environment Variables](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/scripting_templating.md#using-environment-variables--templating)
-- [Lets Encrypt Support](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/lets_encrypt.md)
- - [Setup](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/lets_encrypt.md#setup)
- - [Renewal](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/lets_encrypt.md#renewal)
-- [PHP Modules](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/php_modules.md)
-- [Xdebug](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/xdebug.md)
-- [Logging and Errors](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/logs.md)
+- [Building from source](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/building.md)
+- [Versioning](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/versioning.md)
+- [Config Flags](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/config_flags.md)
+- [Git Auth](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_auth.md)
+  - [Personal Access token](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_auth.md#personal-access-token)
+  - [SSH Keys](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_auth.md#ssh-keys)
+- [Git Commands](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_commands.md)
+ - [Push](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_commands.md#push-code-to-git)
+ - [Pull](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/git_commands.md#pull-code-from-git-refresh)
+- [Repository layout / webroot](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/repo_layout.md)
+ - [webroot](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/repo_layout.md#src--webroot)
+- [User / Group Identifiers](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/UID_GID_Mapping.md)
+- [Custom Nginx Config files](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/nginx_configs.md)
+ - [REAL IP / X-Forwarded-For Headers](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/nginx_configs.md#real-ip--x-forwarded-for-headers)
+- [Scripting and Templating](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/scripting_templating.md)
+ - [Environment Variables](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/scripting_templating.md#using-environment-variables--templating)
+- [Lets Encrypt Support](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/lets_encrypt.md)
+ - [Setup](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/lets_encrypt.md#setup)
+ - [Renewal](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/lets_encrypt.md#renewal)
+- [PHP Modules](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/php_modules.md)
+- [Xdebug](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/xdebug.md)
+- [Logging and Errors](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/logs.md)
 
 ## Guides
-- [Running in Kubernetes](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/guides/kubernetes.md)
-- [Using Docker Compose](https://github.com/richarvey/nginx-php-fpm/blob/master/docs/guides/docker_compose.md)
+- [Running in Kubernetes](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/guides/kubernetes.md)
+- [Using Docker Compose](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/guides/docker_compose.md)

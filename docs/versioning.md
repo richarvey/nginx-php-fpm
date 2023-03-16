@@ -11,7 +11,7 @@ We will use the [semver](http://ricostacruz.com/cheatsheets/semver.html) style n
 
 ### Current versions and tags
 
-The latest tag will always follow the master branch in git. the other versions will have releases attached.
+The latest tag will always follow the main branch in git. the other versions will have releases attached.
 
 #### PHP 8.2.x
 
