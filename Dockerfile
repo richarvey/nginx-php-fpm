@@ -56,7 +56,13 @@ RUN apk add --no-cache --virtual .sys-deps \
     sqlite-dev \
     imap-dev \
     postgresql-dev \
-    lua-resty-core && \
+    lua-resty-core \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    zlib-dev \
+    libxpm-dev \
+    libpng \
+    libpng-dev && \
   # Install PHP modules
     docker-php-ext-configure gd \
       --enable-gd \
