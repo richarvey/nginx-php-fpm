@@ -8,7 +8,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 ### Versioning
 | Docker Tag | Git Release | Nginx Version | PHP Version | Alpine Version |
 |-----|-------|-----|--------|--------|
-| latest/![Github](https://img.shields.io/github/stars/richarvey/nginx-php-fpm.svg) ![docker version](https://img.shields.io/docker/v/richarvey/nginx-php-fpm?sort=semver)| Main Branch |1.22.1 | 8.2.4 | 3.17 |
+| latest/![docker version](https://img.shields.io/docker/v/richarvey/nginx-php-fpm?sort=semver)| Main Branch |1.22.1 | 8.2.4 | 3.17 |
 
 For other tags please see: [versioning](https://github.com/richarvey/nginx-php-fpm/blob/main/docs/versioning.md)
 
