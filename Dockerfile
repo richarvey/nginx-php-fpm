@@ -40,6 +40,7 @@ RUN echo @testing https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk
     bzip2-dev \
     icu-dev \
     tzdata \
+    libwebp-dev \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
@@ -67,7 +68,8 @@ RUN apk add --no-cache --virtual .sys-deps \
     docker-php-ext-configure gd \
       --enable-gd \
       --with-freetype \
-      --with-jpeg && \
+      --with-jpeg \
+      --with-webp && \
     docker-php-ext-install gd && \
      pip install --upgrade pip && \
     docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
