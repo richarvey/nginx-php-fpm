@@ -8,7 +8,7 @@ If you have improvements or suggestions please open an issue or pull request on 
 ### Versioning
 | Docker Tag | Git Release | Nginx Version | PHP Version | Alpine Version |
 |-----|-------|-----|--------|--------|
-| latest/![docker version](https://img.shields.io/docker/v/richarvey/nginx-php-fpm?sort=semver)| Main Branch |1.24-r6 | 8.2.7 | 3.18 |
+| latest/![docker version](https://img.shields.io/docker/v/richarvey/nginx-php-fpm?sort=semver)| Main Branch |1.28.0 | 8.4 | 3.20 |
 
 For other tags please see: [versioning](docs/versioning.md)
 
@@ -24,17 +24,19 @@ To update the PHP version
 1. **Modify the `Dockerfile`**
    Replace the base image with the desired PHP version. For example:
    ```dockerfile
-   FROM php:8.2-fpm-alpine
+   FROM --platform=linux/amd64 php:8.4-fpm-alpine3.24
+
+   ```
 
 2. ** Update [versioning](docs/versioning.md) **
 
 2. **Build the Docker image**
     ```shell
-   docker build -t 3sdockerregistry.azurecr.io/richarvey/nginx-php-fpm:3.1.7 .
+   docker build -t 3sdockerregistry.azurecr.io/richarvey/nginx-php-fpm:5.0.2 .
 
 3. **Push the image to the registry**
     ```shell
-   docker push 3sdockerregistry.azurecr.io/richarvey/nginx-php-fpm:3.1.7
+   docker push 3sdockerregistry.azurecr.io/richarvey/nginx-php-fpm:5.0.2
 
 ## Quick Start
 To pull from docker hub:
