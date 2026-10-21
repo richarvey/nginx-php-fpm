@@ -16,9 +16,10 @@ The latest tag will always follow the main branch in git. the other versions wil
 
 #### PHP 8.4.x
 
-| Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes              |
-|------------|-------------|---------------|----------------|-------------------|--------------------|
-| 5.0.0      | 8.4.16      | 1.28.0        | 3.22           | 0.3.17            | upgrade to php 8.4 |
+| Docker Tag | PHP Version | Nginx Version | Alpine Version | Container Scripts | Notes                            |
+|------------|-------------|---------------|----------------|-------------------|----------------------------------|
+| 5.0.2      | 8.4.27      | 1.28.0        | 3.24            | 0.3.17            | upgrade to php 8.4.27            |
+| 5.0.0      | 8.4.16      | 1.28.0        | 3.22           | 0.3.17            | upgrade to php 8.4               |
 | 5.0.1      | 8.4.16      | 1.28.0        | 3.22           | 0.3.17            | fix Xdebug and improve line logs |
 
 

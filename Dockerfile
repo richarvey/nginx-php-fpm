@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.4-fpm-alpine3.24
+FROM php:8.4.27-fpm-alpine3.24
 
 LABEL maintainer="Ric Harvey <ric@squarecows.com>"
 
@@ -61,26 +61,29 @@ RUN apk add --no-cache --virtual .sys-deps \
     zlib-dev \
     libxpm-dev \
     libpng \
-    libpng-dev && \
-    docker-php-ext-configure gd \
+    libpng-dev
+  # Install PHP modules
+RUN docker-php-ext-configure gd \
       --enable-gd \
       --with-freetype \
       --with-jpeg && \
     docker-php-ext-install gd && \
      pip install --break-system-packages --upgrade pip && \
-    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
-    pecl install -o -f xdebug && \
-    pecl install -o -f redis && \
-    pecl install -o -f mongodb && \
+    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip
+RUN pecl install -o -f xdebug
+RUN pecl install -o -f redis
+
+RUN pecl install -o -f mongodb && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini && \
     echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/xdebug.ini && \
-    docker-php-source delete && \
-    mkdir -p /var/www/app && \
+    docker-php-source delete
+RUN mkdir -p /var/www/app && \
+  # Install composer and certbot
     mkdir -p /var/log/supervisor && \
-    wget -O /tmp/composer-setup.php https://getcomposer.org/installer && \
-    php /tmp/composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
-    rm /tmp/composer-setup.php && \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
+    rm composer-setup.php &&\
   #  pip3 install -U pip && \
     pip3 install --break-system-packages -U certbot && \
     mkdir -p /etc/letsencrypt/webrootauth && \
