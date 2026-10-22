@@ -1,4 +1,4 @@
-FROM php:8.2.7-fpm-alpine3.18
+FROM php:8.2.35-fpm-alpine3.24
 
 LABEL maintainer="Ric Harvey <ric@squarecows.com>"
 
@@ -69,7 +69,7 @@ RUN apk add --no-cache --virtual .sys-deps \
       --with-freetype \
       --with-jpeg && \
     docker-php-ext-install gd && \
-     pip install --upgrade pip && \
+     pip install --upgrade pip --break-system-packages && \
     docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
     pecl install -o -f xdebug && \
     pecl install -o -f redis && \ 
@@ -85,7 +85,7 @@ RUN apk add --no-cache --virtual .sys-deps \
     php composer-setup.php --quiet --install-dir=/usr/bin --filename=composer && \
     rm composer-setup.php &&\
   #  pip3 install -U pip && \
-    pip3 install -U certbot && \
+    pip3 install -U certbot --break-system-packages && \
     mkdir -p /etc/letsencrypt/webrootauth && \
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python3-dev make autoconf && \
     apk del .sys-deps
@@ -124,7 +124,7 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
         -e "s/;listen.mode = 0660/listen.mode = 0666/g" \
         -e "s/;listen.owner = www-data/listen.owner = nginx/g" \
         -e "s/;listen.group = www-data/listen.group = nginx/g" \
-        -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" \
+        -e "s/;listen = .*/listen = \/var\/run\/php-fpm.sock/g" \
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf}
 #    ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
